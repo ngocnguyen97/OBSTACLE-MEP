@@ -1,0 +1,6 @@
+*
+!*/
+!*.tex
+!*.bib
+!.gitignore
+!/MDPI_template/Definitions/*.*

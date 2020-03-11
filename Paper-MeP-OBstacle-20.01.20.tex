@@ -1,0 +1,694 @@
+
+\documentclass[final]{elsarticle}
+%% \documentclass[final,times,twocolumn]{elsarticle}
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\journal{Journal of \LaTeX\ Templates}
+
+%===========----------------------Package----------------------===========
+%\usepackage{epstopdf}
+%\epstopdfsetup{outdir=./}
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\usepackage{graphicx}
+%\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{float}
+\usepackage[justification=centering, bf]{caption}
+\usepackage{textcomp}
+\usepackage[ruled, resetcount, linesnumbered]{algorithm2e}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{color}
+%\usepackage{ulem}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{array, booktabs, tabularx} 
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{rotating}
+\usepackage{longtable}
+\usepackage{verbatim}
+\modulolinenumbers[5]
+\journal{Journal of \LaTeX\ Templates}
+\newcommand{\vect}[1]{\overrightarrow{\boldsymbol{#1}}}
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{frontmatter}
+\title{A Family System based Genetic Algorithm for Obstacles-Evasion Minimal Exposure Path Problem in Wireless Sensor Networks}
+
+%% Group authors per affiliation:
+\author[ntmb]{Nguyen Thi My Binh}
+\ead{binhnt79@gmail.com}
+\author[httb]{Huynh Thi Thanh Binh\corref{cor1}}
+\ead{binhht@soict.hust.edu.vn}
+%% or include affiliations in footnotes:
+\author[httb]{Nguyen Hong Ngoc}
+\ead{ngocnguyen.nd97@gmail.com}
+%\author[dthl]{Dinh Thi Ha Ly}
+%\ead{greeny255@gmail.com }
+%\author[httb]{Nguyen Duc Nghia}
+%\ead{nghiand@soict.hust.edu.vn }
+\cortext[cor1]{Corresponding author. Tel: +84 903226786}
+\address[ntmb]{Hanoi University of Industry, Vietnam}
+\address[httb]{ Hanoi University of Science and Technology, Vietnam}
+
+%\address[dthl]{National Institute of Informatics, Tokyo, Japan}
+%\fntext[myfootnote]{Since 1880.}
+%% or include affiliations in footnotes:
+%\author[mymainaddress,mysecondaryaddress]{Nguyen Thi My Binh}
+%\ead[url]{www.elsevier.com}
+%
+%\author[mysecondaryaddress]{Hanoi University of Science and Technology \corref{mycorrespondingauthor}}
+%\cortext[mycorrespondingauthor]{Huynh Thi Thanh Binh}
+%\ead{support@elsevier.com}
+%
+%\address[mymainaddress]{Hanoi University of Science and Technology, Vietnam}
+%\address[mysecondaryaddress]{360 Park Avenue South, New York}
+%\address[mysecondaryaddress]{360 Park Avenue South, New York}
+\begin{abstract}
+Barrier coverage in WSNs is a well-known model for military security applications, which sensors are deployed to detect every movement over predefined border. The fundamental subfield of barrier coverage in WSNs is the minimal exposure path (MEP) problem. The MEP refers to worst-case coverage path which an intruder can move through the sensing field with the lowest capability to be detected. This path along with its minimal exposure value is useful for network infrastructure designers to identify the vulnerable coverage in WSNs and made necessary improvements. Most prior research focused on this problem under assumption that sensor network has an ideal environment condition without any obstacles, which causes existing gaps between theoretical and practical WSNs system. To overcome this drawback, we investigate a systematic and generic the MEP problem under real-world environment networks with presenting obstacles called OE-MEP. We propose an algorithm to create several types of obstacles inside the deployment area of WSNs. The OE-MEP problem is then converted into optimization problem with high-dimension, non-differential, non-linearity, and having constraints. Adapting its characteristics, we devise an elite algorithm namely FGA for solving the OE-MEP. An extension to a custom-made simulation environment is created that integrates a variety of network topologies as well as obstacles. Experimental results on numerous instances indicate that the proposed algorithms are suitable for the converted OE-MEP problem and perform well regarding both solution accuracy and computation time compared with existing approaches.
+  
+\end{abstract}
+\begin{keyword}
+\texttt{Minimal exposure path} \sep\texttt{Barrier coverage} \sep \texttt{Wireless sensor networks} \sep \texttt{Family system based genetic algorithm} \sep \texttt{Real-world deployment environment with presenting obstacles}
+%\texttt{elsarticle.cls}\sep \LaTeX\sep Elsevier \sep template
+%\MSC[2010] 00-01\sep  99-00
+\end{keyword}
+\end{frontmatter}
+%\linenumbers
+\section{Introduction}
+Barrier coverage in WSNs ensures the detection of objects/events happened crossing a barrier of sensors. Barrier coverage has been receiving extensive attention of the research community in recent years due to its various promise for security applications \cite{wu2016survey,wang2011coverage,b15}. In particular, lots of security applications require intruder detection by sensors which are deployed to monitor region of interest, such as critical resource protection, national border protection and disaster warning. Depending on a specific application corresponds to solving different barrier coverage problems. The coverage problem of finding penetration paths is of the essence in the intrusion detection and tracking applications. A penetration path is a crossing path being a continuous curve with arbitrary shape which enters the sensor field from one side and leaves the sensor field from the other side. The objective is to identify one crossing path with every point on it whose coverage measure satisfies a predefined coverage requirement. One of the fundamental issues in WSNs as well as barrier coverage problem is the coverage problem, which reflects how well a sensor network is monitored or tracked by sensors. In this paper, we investigates a subfield of barrier coverage problem as the path-based coverage problem which deals with the minimal exposure path (MEP) problem. Exposure value of WSNs is directly related to coverage degree of a sensor network. The aim at the MEP problem is to find out a crossing path having minimal exposure value from a source point to a destination point in the sensing field. The MEP in WSNs is a good performance metric, which can be used to measure the quality of surveillance system or coverage quality of the sensor network \cite{b13,b17}. The knowledge of MEP, the defenders can appraise vulnerabilities or worst-case coverage path of a sensor network, since objects moving cross the sensing field along this path is the most difficult to be detected. As a result, information of the MEP can be used in optimizing, managing and maintaining WSNs. Furthermore, exposure is not only useful in the WSN, but also in several other fields such as evaluating a quality of radio wave signal propagate, an efficient path-finding robot, etc.
+
+In real situations, WSNs are expected to be randomly deployed in difficult or event hostile environments and/or inaccessible areas with harsh environmental conditions, there are obstacles which could interfere with sensor nodes of the network such as trees, pool, building, etc. It is believable that the inclusion of obstacles in the deployed sensors environment has a great impact on the MEP problem formulation as well as the design, the simulation and evaluation of the performance of algorithm for solving the MEP problem. Therefore, a incorporation obstacles environment should be taken explicitly into consideration while solving MEP problem and also while designing, implementing and evaluating performance of the algorithm for MEP problem. Although the MEP problem has been extensively explored by the academic community, the majority of the MEP models used assume unobstructed areas, i.e. without any obstacles present in the network deployment area. With aiming at study the thorough MEP problem in WSNs such that suitable with real-world scenarios, to the best of our knowledge, there has not been any other studying the effect of obstacles in the MEP problem in WSNs, both by theoretical analysis and simulation. The analytical results are of high importance and useful for network designers who can apply these formulas to predict the detection performance of the sensor network without costly deployment and test. We thus investigate a systematic and generic the obstacle evasion MEP model in WSNs. With this model, the minimal exposure path is the penetration path which the capability of an object moving along that path through the sensor field is to be detected minimizing and evades the obstacles. 
+
+The main contributions of this paper are as follows:
+\begin{itemize}
+	\itemsep0em
+	\item Formulate a generic mathematical models to represent the obstacles-evasion MEP problem in WSNs, called OE-MEP and convert OE-MEP into an optimization problem.
+	%and constraints which can apply the mathematical optimization methods to solve.
+	\item Model the obstacles as convex polygons to match realistic scenarios and devise a method to randomly generate obstacles in different forms. The created data set can serve as an effective measurement for the performance of OE-MEP approaches.  
+	\item Propose a new algorithm called Family System based Genetic Algorithm (FGA) for solving OE-MEP problem efficiently. 
+	%\item Create an extension to a custom-made simulation environment that integrates , and 
+	\item Conduct a number of systematic simulations to study the performance of FGA under a variety of network topologies as well as obstacles.
+	\item Analysis the experimental results to prove that FGA adapts to the OE-MEP problem and outperforms previous approaches regarding solution quality and computational time.	
+\end{itemize}
+The rest of the paper is organized as follows. Related works are presented in Section 2. Preliminaries and formulation for the OE-MEP problem are discussed in Section 3. Section 4 introduces the proposed algorithms. Experiments results examining the proposed algorithms along with computational and comparative results are given and analyzed in Section 5. Finally, Section 6 presents conclusions and future works of the paper.
+\section{Related Works}
+The MEP problem in WSN depends on various factors such as type of sensors, deployment strategies, deployment environments, approach methods solving the problem, etc. 
+
+Regarding deployment environments where sensors are deployed, have no any obstacles, a lots of studies have focused on the MEP problem in WSNs with several approach methods: computational geography, grid-based, heuristic/metaheuristic.
+
+For the computational geography method- Voronoi diagram, in \cite{meguerdichian2001exposure}, Meguerdichian et. al. was first devise the concept "Exposure", and contended that finding the MEP in WSNs under arbitrary sensor and intensity models is very meaningful for network designs and an extremely difficult optimization task. In \cite{djidjev2010approximation}, Djidjev et al. evaluated the coverage of the sensing field for the mission of unauthorized detection. This value refers to the ability of a sensor system to detect an object moving through the sensing field. The authors proposed an algorithm to solve the MEP problem under attenuated coverage model based on the intrinsic properties of the Voronoi diagram. This method first transfers the continuous sensing field into a discrete Voronoi diagram, then the shortest path through vertices is discovered to gain the solution for the MEP problem. In \cite{megerian2005worst}, the authors introduced a very similar concept to MEP which is the maximal breach path - a path comes cross from a single source and destination point over the sensing field such that the Euclidean distance from any point on the path to the closest sensor is maximized. They then designed the Voronoi diagram based algorithm to find the maximal breach path for a given set of sensors in a given region of interest. In \cite{lee2013best}, the authors  extended the previous concept of the worst-case path-based coverage to evaluate the coverage of a given network from a global point of view, taking arbitrary paths into account from considering arbitrary source and destination pairs. They then presented centralize and distributed algorithms which used knowledge from computational geometry. To improve the quality solution, Binh et al. \cite{binh2016heuristic} proposed a heuristic algorithm to solve the maximal breach path problem in omni-directional WSN.
+
+For Voronoi diagram-based method, the algorithm computes minimum exposure paths in a sensor network with guaranteed performance characteristics, but cannot solve the MEP problem for all-sensor intensity model, which is needed to measure the exposure. Secondly,
+when the source point and destination point of the penetration
+path do not lie on the edges of Voronoi diagram, the algorithm
+will not result in the optimal solution for the MEP problem. Lastly,
+when the sensing capabilities of sensors are different or in the case of heterogeneous sensor nodes scenarios, the MEP will not lie on the segments of the edges of the Voronoi diagram.
+
+For the grid-based method, the works in \cite{meguerdichian2001exposure, veltri2003minimal,megerian2002exposure, b9, b10} successfully completed in tacking the MEP problem. Its idea is following, the continuous domain in search space of the MEP problem is transformed into a discrete one by dividing the sensing field into square grid cells, then each edge is assigned a weight corresponding to the exposure value. The MEP problem is converted to the shortest path problem on the graph of uniform grid cells and the path is found out by the Dijkstra shortest path algorithm. However, with the grid-based method, the downside comes from the size of the grid. The trade-off between grid size, which is directly proportional to the computational cost of the method, and solution accuracy is a big disadvantage in large-scale WSNs. Besides, objects can only move on the grid with fixed directions, which does not follow realistic scenarios.
+
+Because Voronoi-diagram based and grid-based method have existing big disadvantages as the mentioned above, recently, heuristic/metaheuristic methods which inspires of the process nature evolution such as particle swarm optimization (PSO) and genetic algorithm are applied to solving the MEP problem in \cite{b11,b12,b25,binh2019efficient}. These researches convert the MEP into a numerically function extreme (NFE) \cite{b8} by fixing the x-coordinate values of points on the penetration path. Then, variables in NFE are only an ordered set of corresponding y-coordinate values. However, the objective function is still highly non-linear and high dimensional, so \cite{b11} proposed a PSO algorithm and \cite {b12,b25,binh2019efficient} applied a genetic algorithm to handle MEP problem, but Binh et al. in \cite{b25} concerned on the MEP problem in mobile sensor networks. Because of the complex objective function, both algorithms result in saw-tooth solutions if they are directly applied. Therefore, \cite{b11} improved the standard PSO algorithm with a projection operator while \cite{binh2019efficient} designed a crossover based on a metric measuring the saw-tooth jumping degree and local searching to tackle this issue. The authors \cite{b12} also introduced an upside-down operator to reduce the saw-tooth jumping degree of a y-coordinate value in their genetic algorithm. However, the operator are not yet efficient since the obtained solutions still have high saw-tooth degree. Moreover, the complexity of these algorithms is quite high and the cost of computation time is not applicable in realistic large-scale WSNs. In short, the efficiency of these methods is not competent and there are still rooms for development.
+
+We have delved into the related works of the MEP problem in an ideal environmental deployment area without any obstacles. These prior researches have thoroughly examined the MEP problem under different assumptions such as homogeneous/heterogeneous and/or omni-directional/directional networks, and proposed efficient methods to tackle a specific problem. However, the MEP is a realistic optimization problem in WSNs, but simulated network environment is always assumed as an ideal without any obstacles, this causes the research results about the MEP impossible apply to real-world applications. Furthermore, sensor networks are expected to be randomly deployed in inaccessible or even hostile environments, so obstacle presence should be taken explicitly into consideration. In \cite{liu2017obstacle}, the authors were the first to suggest taking into account a realistic environment factor which is the obstacle and formed the obstacle avoidance MEP problem. After that, the authors proposed a grid-based method but with a new grid partition strategy to solve the problem. However, the obstacle model is rather simple as well as unclear without mathematical formulation and the experimented scale is too small to prove the efficiency of the algorithm. Moreover, the grid-based approach not only approximate the penetration path but also approximate the shape of the obstacle to group of squares which may affect the solution accuracy a lot.
+
+With aiming at investigating the MEP problem in WSNs with real-world deployment environment is systematic and complete, we propose fully the MEP in realistic deployment environment network model. 
+\section{Preliminaries and Problem Formulation}
+In this section, different subjects of the problem will be examined and transformed into mathematical model. The model of sensors and obstacles will be introduced and a mathematical equation for the minimal exposure path will be proposed. The problem will be then formulated under a set of input parameters and output values with specific constraints.
+\subsection{Preliminaries}
+\subsubsection{Sensor model}
+Depending upon different applications, various type sensors can be used e.g. temperature, humidity, infrared, and video etc. Sensors can also be categorized based on sensing models which are used to reflect sensing capability and quality of sensors. They are abstraction models by mathematical functions trying to quantify how well sensors can sense physical phenomena at some locations. This mathematical function is also called the coverage function of distances and angles, which is denoted as $f(s, T)$ where $ s $ is the sensor and $ T $ is the target point. Different types of sensing model can be perceived through many related researches in this field.
+
+\noindent\textbf{Coverage Model}
+
+The omni-directional sensor or the disk model is the most basic type of coverage model. An omni-directional sensor comes with a parameter called the sensing radius $r$, which stands for the radius of the sensing region. An object $ T $ is said to be covered by a omni-directional sensor $ s $ only if the Euclidean distance between the position of sensor $ s $ and target object $ T $ less than or equal the sensing radius $r$. There are two sub-models: the Boolean omni-directional model and the Attenuate omni-directional model. In the Boolean omni-directional model, $f(s, T)$ is 1 if $ T $ is covered by $ s $ and 0 otherwise. In the attenuate omni-directional model, the sensing intensity inverse proportions with the distance between sensor $ s $ and target $ T $ by the following equation:
+\begin{equation}
+\label{eq1}
+f({s},T) = \frac{C}{{{{\left[ {d(P,T)} \right]}^\lambda }}}
+\end{equation}
+where $ P $ is the position of sensor $ s $, $ d(P,T) $ is the Euclid distance from $ P $ to $ T $, $ C $ and $ \lambda $ are constants that depend on the capability of the sensor. 
+
+A variation of the omni-directional coverage model is the directional coverage model, by that, a sensor can only sense well in a direction instead of every directions. The sensors of this type often can be found in realistic deployment as security cameras or microphones. For a mathematical definition, in 2\_D dimension, the sensing area of a directional sensor $ s $ is denoted by $ P $ - the location of the sensor and $ \overrightarrow{Wd}$ - the unit vector representing the working direction of the sensor. The sensing intensity function in this case is:
+\begin{equation}
+\label{eq2}
+f({s},T) = \frac{{C{{\left\{ {\cos \left( {\frac{{\angle (\overrightarrow {PT} ,\overrightarrow {Wd}) }}{2}} \right)} \right\}}^\beta }}}{{{{\left[ {d(P,T)} \right]}^\lambda }}}
+\end{equation}
+where $\beta$ is the angle attenuation parameter that also depends on the capability of the sensor. The directional sensing capable range with different $ \beta's $ and $ \lambda's $ is illustrated in Fig. \ref{Fig.1}. \\
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\begin{tabular}{cc}
+		\includegraphics[width=0.3\linewidth]{hinh/b1y1}&\includegraphics[width=0.3\linewidth]{hinh/b1y2}\\
+		(a) $\beta =1, \lambda=1 $ &(b)$ \beta=1, \lambda=2 $\\
+		\includegraphics[width=0.3\linewidth]{hinh/b2y2}&\includegraphics[width=0.3\linewidth]{hinh/b4y1}\\
+		(c) $ \beta=2, \lambda=2 $& (d)$ \beta=4, \lambda=4 $\\
+	\end{tabular}
+	% figure caption is below the figure
+	\centering
+	\caption{Illustration attenuated directional sensing model with different $ \beta's $ and $ \lambda's $
+	}
+	\label{Fig.1}       % Give a unique label
+\end{figure*}
+
+The coverage model used in this problem is the Truncated Directional model, where the sensing area of a sensor $ s $ is a sector denoted by 4-tuple $( P, r, \overrightarrow{Wd}, \alpha )$. Where $ P $ denotes the location of the sensor, $ r $ the sensing radius, $ \overrightarrow{Wd}$ the unit vector representing the working direction and $ \alpha $ is the sensing angle. Figure \ref{Fig.2} illustrates the sensing range of a truncated directional sensor $ s $. 
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\centering
+	\includegraphics[width=0.6\textwidth]{hinh/truncate.png}
+	% figure caption is below the figure
+	\caption{Sensing capability of Truncated Directional sensor}
+	\label{Fig.2}       % Give a unique label
+\end{figure*}
+The sensing function $f(s,T)$ will be computed as Equation \ref{eq2} if target $T$ lies inside the sensing range of $s$ and equal $0$ otherwise. In other words, the sensing intensity at long range is too small and will be set to zero in order to eliminate noises and reduce errors of sampling. Especially, the sensing function $f(s,T)$ in truncated directional model is defined as following:
+\begin{equation}
+\label{eq3}
+f({s},T) = \left\{
+\begin{aligned}
+ \frac {{C{{\left\{ {\cos \left( {\frac{{\angle (\overrightarrow {PT} ,\overrightarrow {Wd}) }}{2}} \right)} \right\}}}^\beta }} {{{{\left[ {d(P,T)} \right]}^\lambda }}} \:\:\:\:\text{if} \:\:\: d(P,O) \le r \text{ or } \overrightarrow {PO} .\overrightarrow {Wd}  \ge \left\| {\overrightarrow {PO} } \right\|\cos \frac{\alpha}{2} \\
+ 0 \:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\text{if  otherwise}\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:\:
+\end{aligned}
+\right.
+\end{equation}
+
+\noindent\textbf{Accumulative Sensing Intensity}
+
+In a WSN, there are multiple sensors sensing on a target point simultaneously, thus, cumulative sensing intensity is applied. Under the truncated directional model, the accumulative sensing intensity on an target object $ T $ by all sensors $S = \left\{ {{s_1},{s_2},...,{s_N}} \right\}$ in the field can be calculated by the following
+
+\begin{equation}
+\label{eq4}
+I(S, T) = \sum\limits_{i = 1}^{N} {f({s_i},T)} 
+\end{equation}
+Where $ S $ is the sensors set, $ N $ is the number of sensors in the field and $s_i$ is the sensor at number order $ i $.
+
+\subsubsection{Obstacle Model}
+In realistic deployment environment, the region of interest often presents multiple obstacles with arbitrary shapes such as lakes, rivers, houses and trees. There are many kinds of obstacle in practical environment with different characteristics. In the OE-MEP problem, an obstacle is modeled as a polygon with ability to decrease or interrupt the sensing signal. In addition, the obstacles also restrict the movement of the intruder as well as the deployment of sensors. 
+
+For mathematical definition, obstacles are convex polygons cover the area that block the movement of the intruder, the deployment and also the sensing signal of sensors. In this paper, an obstacle $Z_O$ is represented as an ordered set of $2D$ points $ G_O = \{O_1, O_2,\ldots,O_M\}$ and an absorption coefficient $\nu$ where $\nu \in [0,1]$. The obstacle is the polygon $O_1 O_2\ldots O_M $ created by ordered connecting these points and connecting $O_M$ to $O_1$. For modeling purpose, sensors are not allowed to be deployed within the obstacles area. Similarly, the intruder is not permitted to move inside the obstacles area. The obstacles are also be able to absorb the sensing signal of sensors depended on the absorption coefficient $\nu$. To be more specific, assume that the line segment between the sensor $s_i$ and the sensing point $ P $ intersects with an obstacle $O$ having the absorption parameter of $\nu$, the sensing intensity will be reduced to: 
+\begin{equation}
+\label{eq5}
+f'(s_i,O) = f(s_i,O) * (1-\nu) 
+\end{equation}
+
+Figure \ref{Fig.12} illustrates the sensing ability of a sensor being absorbed by an obstacle where the hatched polygon is the obstacle and $ s $  is the sensor. The blue region denotes the area where sensor $ s $ can detect object with 100 \% of its capacity. In the yellow region, the object is blocked by the obstacle, thus, the sensing wave is partly absorbed and the detection ability of the sensor is weaker.
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\centering
+	\includegraphics[width=0.6\textwidth]{hinh/obs.png}
+	% figure caption is below the figure
+	\caption{Sensing ability of a sensor being absorbed by an obstacle}
+	\label{Fig.12}       % Give a unique label
+\end{figure*}
+\subsubsection{Minimal exposure path}
+Exposure of a path $ \wp $ is a measure that expresses the ability of the WSN in detecting an object traversing through the sensing field along path $ \wp $. In most common researches, the exposure value of path $ \wp $ is defined by the path integral of sensing intensity function along the penetration path $ \wp $. By that, the exposure value $  E(S,\wp ) $ of path $ \wp $ crossing the sensor field of sensors set $ S $ is:
+\begin{equation}
+\label{eq6}
+E(S,\wp ) = \int\limits_{T \in \wp }^{} {I(S, T)} ds
+\end{equation}
+
+Equation \eqref{eq6} is non-linear and non-differentiable, thus,
+it can be approximately calculated by representing the path $\wp $ as a set
+of $ K $ points ${L_\wp } = \{ {P_j}\} $ where $j = \overline {0,K} $. In which, the distance between two arbitrary consecutive points is $\Delta s$. $\Delta s$ is called subinterval and it must be small enough to ensure the accuracy of the approximation method. By that, from Equation \eqref{eq6}, $ E(S,\wp ) $, can be approximately transformed into:
+\begin{equation}
+\label{eq7}
+E(S,\wp) \approx \sum\limits_{j = 0}^K {I(S, T_j)\Delta s} 
+\end{equation}
+By combining Equation \eqref{eq4} and \eqref{eq7}, we have the final equation for the exposure value as:
+\begin{equation}
+\label{eq8}
+E(S,\wp ) \approx \sum\limits_{j = 0}^K {I(S,{T_j}} )\Delta s = \sum\limits_{j = 0}^K {\sum\limits_{i = 1}^N {f({s_i},{T_j})} } \Delta s
+\end{equation}
+
+Later in the experimental results section, the exposure function $ E(S,\wp )$ is going to calculate with different intensity functions in Equation \eqref{eq1}, \eqref{eq2} and \eqref{eq3} for the purpose of experiment respectively. 
+
+\subsection{Problem Formulation}
+The OMEP problem can be briefly described as follows: Given a set of truncated directional sensors $S = \left\{ {{s_1},{s_2},...,{s_N}} \right\}$ randomly deployed in the sensor field, a set of obstacles $Z = \left\{ {{Z_{O1}},{Z_{O2}},...,{L_{OH}}} \right\}$ and two arbitrary points on opposite sides of the field, respectively the source point and the destination point. The goal is to find out a penetration path from the beginning point $B$ to the ending point $E$ such that an object moves through along path without crossing any obstacles has minimal exposure value. More precisely, the OE-MEP problem is formulated as follows.\\
+\textbf{Input}
+\begin{itemize}
+		\itemsep-0.2em
+		\item $W$, $H$: width and the length of sensor field $\Omega$
+		\item $N$: number of sensors
+		\item The sensor $s_i$ ($ i $ = 1, 2, ..., $ N $ ):
+		\begin{itemize}
+			 \item $({x_i},y_i)$: position of sensor $ s_i $
+			 \item $\overrightarrow{Wd}_i$: working direction of sensor $s_i$
+			 \item $ r_i $: sensing radius of sensor $ s_i $
+			 \item ${\alpha _i}$: sensing angle of sensor type $ s_i $.
+		 \end{itemize}
+		 \item $H$: number of obstacles
+		 \item $Q$: the total area of the obstacles 
+		 \item The obstacle $Z_{Ol}$ ($ l $ = 1, 2,..., $H$): 
+		 \begin{itemize}
+		 	\item A list of vertex points $ G_{O_l} $ of obstacle $Z_{Ol}$
+		 	\item $ \nu_l $: the absorption coefficient of the obstacle $Z_{Ol}$
+		 \end{itemize}
+		\item $(0, y_B)$: coordinates of the beginning point $B$ of the object
+		\item $(W, y_E)$: coordinates of the ending point $E$ of the object
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+	\item A set ${L_\wp }$ of ordered points in $\Omega $ forming a path that connects $ B $ and $ E $ 
+\end{itemize}
+\textbf{Objective:}\\
+The exposure of path  $\wp $ is the smallest, i.e.
+\begin{equation}
+\label{eq9}
+{\rm E}(I,\wp )  \approx \sum\limits_{j = 0}^K {\sum\limits_{i = 1}^N {f({s_i},{T_j})} } \Delta s  \to Min
+\end{equation}
+where $ K $ is the number points included in ${L_\wp }$
+
+\textbf{Constraint:}	
+\begin{itemize}
+%	\itemsep0em	
+	\item The object always moves within the sensor field $\Omega $ from $B$ to $E$ with a upper-bounded speed (i).
+	\item The path can not cross any area of obstacles  (ii)
+\end{itemize}
+	
+The OE-MEP problem is a practical optimization, has distinctive characteristics, and its the objective function \eqref{eq9} is non-linear, high dimensional. To solve efficiently the OE-MEP problem, we devise an elite evolution algorithm based on the family system named FGA with multiple of advanced crossover and mutation techniques.
+
+\section{Proposed Algorithm}
+Evolutionary algorithms (EAs) are stochastic population-based metaheuristics that have been successfully applied to many real and complex problems. Genetic algorithms (GAs) is a very popular class of EAs. Their success in solving difficult optimization problems in various domains. Furthermore, GAs is extremely sufficient for handling noisy functions as well as large and poorly understood search spaces. Due to the chaotic situation of the system of various sensors and obstacles, the OE-MEP is exceptionally complicated and contains numerous local optima, the GA is the most suitable choice. In addition, GAs can also handle large scale and high-dimensional problems well. However, GAs as well as most of meta-heuristic algorithms have the disadvantage of having high possibility to be trapped in the local optima. To overcome this, GAs are often implemented with a larger size of population to promote diversity which also results in very high computation time. In the proposed FGA, we try our best effort to lower possibility of local optima without increasing the computation time, by adding the Family System into the population. For reason of GA to be trapped in local optima is the fixed size of population in selection step makes the population less diverse and converge fast. In other words, the selection may remove many not-yet-good individuals and keep a lot of similar nearly-local-optima ones. Applying the Family System into GA, our main idea is to create a better crossover and selection method in order to keep the population diverse as much as possible. At the same time, a new crossover operator is also proposed to overcome the challenges and drawbacks of the prior approaching.
+
+In this section, the detail setting and implementation of FGA will be introduced.
+
+\subsection{Algorithm Modeling}
+
+Before getting further into details about how our proposed algorithm works, it is essential to explain the basic models throughout the performing of the algorithm. Similar to the other GAs, our FGA works with two main model which are the $ Individual $ and the $ Population $.
+
+\subsubsection{Individual}
+
+An individual is represented with a ordered list of consequent points, starts from the source point and ends with the destination point. The number of points of an individual is dynamic and not fixed depended on the length of the path. Figure \ref{Fig.4} illustrates the individual representation in FGA, by that the individual has following attracted attributes: \\
+%insert figure below
+\begin{itemize}
+	\item The birth of an individual $Indi.Birth$ is the order number of the generation in which the individual is created. The age of an individual will be calculated as the subtraction of present generation and $Indi.Birth$.
+	\item The adult age ($Indi.A$) is the age at which the individual is adult and ready for crossover process. This condition ensure that an individual can only participate in the crossover process after it survives in the population for at least some generations. Being able to survives in the population for some generations proves that the individual is good enough to last after many selection stages. On the other hand, the individuals which are basically not good from infant, will soon be removed after some generations and will not participate in any crossover stages.
+	\item The death age ($Indi.D$) is the age at which the individual is considered to be dead and removed from the population. An individual can only participate in the crossover process for a certain number of generations until it is dead. This constraint makes the individuals that exist in the population for too long being removed so that newly born individuals may have better chance to survive and participate in crossover stage. This also help improve the diversity of the population and reduce the chance of local optima since locally good individuals will be removed eventually. Furthermore, the genetic resources of these local optima individuals are preserved by their children and decent attributes will still be kept inside the population.
+\end{itemize}
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\renewcommand{\arraystretch}{1.5}
+	\centering
+	\begin{tabular}{ >{\centering\arraybackslash} m{0.45\linewidth} >{\centering\arraybackslash} m{0.55\linewidth} }
+		\begin{tabular}{|c|c|c|c|c|c|}
+			\hline 
+			$P_0$ & $P_1$ & $P_2$ & $P_3$ & $P_4$ & $P_5$  \\
+			\hline 
+			\multicolumn{2}{|c|}{\textit{Birth}} & \multicolumn{2}{c|}{\textit{A}}  & \multicolumn{2}{c|}{\textit{D}}  \\
+			\hline
+		\end{tabular} &\includegraphics[width=0.9\linewidth]{hinh/indi.png} \\
+		(a) \textit{Mathematical representation} & (b)\textit{Geographical representation} \\
+	\end{tabular}
+	\\
+	% figure caption is below the figure
+	\caption{Illustration of the Individual representation in FGA
+	}
+	\label{Fig.4}       % Give a unique label
+\end{figure*}
+
+An individual can only represent a valid solution if it satisfy all the constraints of the problem. To satisfy the constraint (i), the distance between two consequent points is not greater than a fixed value of the length interval $\Delta s$. This parameter represent the maximum distance an intruder can move within two consequent sampling times of the sensors. To ensure the constraint (ii), the path formed can not cross any obstacles. However, this condition is very hard to maintain after crossover and mutation operators, so we proposed a method to normalize invalid individuals and create valid one. Figure \ref{Fig.6} shows an example of individual normalization. The pseudo code of normalization operator is following:
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{
+		\begin{itemize}
+			\itemsep-0.2em
+			\item The individual $indi$ \\
+		\end{itemize}}	
+	\KwOut{\\The individual after normalization $indi'$\\}
+		\Begin{
+			Remove every genes that is inside an obstacle \\
+			\ForEach{gene i of $indi$}{
+				\If{distance(gene i, gene i+1) \textgreater  $ \Delta s $}{
+					\If{path from gene i to gene i+1 cut an obstacle}{
+						connect gene i to gene i+1 using path goes along the obstacle's boundary\\
+						}
+					} 
+					\Else{connect gene i to gene i+1 directly \\}
+				}
+			Return the new individual\\
+		}
+		\caption{\textbf{Individual Normalization}} 
+		\label{alg.0}
+\end{algorithm} 
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\begin{tabular}{cc}
+		\includegraphics[width=0.5\linewidth]{hinh/normalize1}&\includegraphics[width=0.5\linewidth]{hinh/normalize2}\\
+		(a) &(b)\\
+	\end{tabular}
+	% figure caption is below the figure
+	\centering
+	\caption{Illustration of individual normalization operator
+	}
+	\label{Fig.6}       % Give a unique label
+\end{figure*}
+
+In Algorithm \ref*{alg.0}, two genes or points are connected by adding more genes between these two in order to create a consequent list of points that satisfy the constraint (i). For example, point $ I $ can be directly connected to point $ J $ by a sequence of col-linear points $\{P_1,P_2,...,P_m\}$ where $IP_1=P_1P_2=P_2P_3=....=P_{m-1}P_m=\Delta_x$ and $P_mJ \leq \Delta_x$.\\
+
+\subsubsection{Population}
+
+A population in GAs is a set of individuals we perform our algorithm on. It is expected that the best fitness of the individuals in population is constantly decreased each time a performed iteration, while the diversity (quality of a population to contain variety of non-similar individuals) is preserved. The population in FGA contains all the individuals that are currently alive and participate into the process of the algorithm. Different from GAs which using fixed population size, in FGA, the population size is dynamic and being bounded by the lower boundary $p_{min}$ and the upper boundary $p_{max}$. This allows the population to be more diverse and increase the search space without making the computation time significantly risen.
+
+Different between the standard GA and FGA, for FGA, a new concept of Family is introduced and added to the population system. A $ Family $ in the population is defined as a set of individuals which includes: a $ Mother $ individual, a $ Father $ individual and any $ Child $ individuals created from performing crossover operator between these two individuals. The $ Father $ and the $ Mother $ are denoted as a pair and will remain in this status until one of them is dead or being removed by selection operator. After each generation, paired individuals perform crossover with their own mate only and any children individuals created will be added to the corresponding $ Family $. A $ Family $ is initialized by pairing two adult individuals which are not yet paired to any individual. These individuals could be a $ Child $ of a $ Family $ which exceeds adult age, or a paired individual whose mate being dead or removed. The number of $ Families $ is controlled by a predefined parameter called the pairing rate $R_{pair}$ which equal the ratio of paired individuals to all adult individuals in the population.
+
+In traditional GAs with random crossover pairing, the searching method is usually breadth search over the genetic tree which may eliminate a lot of potentially good gene segments. The $ Family $ system is added in order to search deeper in the hierarchy tree, to increase the probability of finding out the finest solution in each genetic line. Furthermore, since the crossover operator can be badly affected by randomization, this monogamy system increase the chance of getting preferable individuals and reduce the rate of producing bad one. 
+
+
+\subsection{Algorithm Progress}
+
+The proposed FGA contains six different stages: initialization, family pairing, crossover, mutation, update and selection. The figure \ref{Fig.3} shows difference in the process of FGA and the standard GA.
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\begin{tabular}{cc}
+		\includegraphics[width=0.3\linewidth]{hinh/GAProcess}&\includegraphics[width=0.29\linewidth]{hinh/FGAProcess}\\
+		(a)  &(b) \\
+	\end{tabular}
+	% figure caption is below the figure
+	\centering
+	\caption{The algorithm process of GA (a) and FGA (b)
+	}
+	\label{Fig.3}       % Give a unique label
+\end{figure*}
+
+\subsubsection{Initialization}
+
+The population $Pop$ is initialized with the initialization size of individuals $p_{min}$. Age of each individual is set at the adult age from the beginning for the first crossover iteration. The individuals in the population are initialized using randomization method in \cite{binh2019efficient}. It can be seen that the initialized individuals may cross through the obstacles area in some cases because the initialization method can only generate forward paths and unable to generate backward paths. These individuals are later being normalized using the method mentioned above to eliminate the invalid segments.
+
+\subsubsection{Family Pairing}
+
+Families are created by randomly pairing two adult non-paired individuals in the population until it satisfies the pairing rate $R_{pair}$. These individuals are then removed from their current $ Family $, paired and establish a new $Family$. This pairing process is repeated at the start of every iteration.
+
+\subsubsection{Crossover}
+
+In the previous works, all of the algorithms have a drawback that the intruder is not allowed to move backward and can only move forward, which makes it not applicable in realistic scenarios. Besides, the obstacle model in OE-MEP often requires the intruder to move backward in many cases. To overcome this, in FGA, the Leaning crossover is used for crossover stage. The idea is simple: choose on each parent individual a random point and then connect these two point using a suitable method. As a result, the children created from this crossover operator can have backward path in many cases, thus, significantly enlarge the search space. At last, the $Child$ individual is normalized to create valid solution. Figure \ref{Fig.5} illustrates the crossover operator. The Algorithm \ref{alg.2} presents this operator as following.
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{
+		\begin{itemize}
+			\itemsep-0.2em
+			\item The father individual $(P_1^a,P_2^a,…,P_{n_a}^a)$ \\
+			\item The mother individual $(P_1^b,P_2^b,…,P_{n_b}^b)$ \\
+		\end{itemize}
+	}
+	\KwOut{
+		\\The children $child$\\}
+	\Begin{
+		Randomly generate: $k_1$ in range $ [1,n_a ]$ and $k_2$ in range $ [1,n_b ]$\\
+		$child=(P_1^a,P_2^a,\ldots,P_{k_1}^a,P_{k_2}^b,\ldots,P_{n_b}^b)$\\	
+		Normalize($ child $)\\
+		Return $ child $\\
+	}
+	\caption{\textbf{Crossover Operator}} 
+	\label{alg.2}
+\end{algorithm} 
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\begin{tabular}{cc}
+		\includegraphics[width=0.5\linewidth]{hinh/cross}&\includegraphics[width=0.5\linewidth]{hinh/cross2}\\
+		(a) & (b)\\
+	\end{tabular}
+	% figure caption is below the figure
+	\centering
+	\caption{Illustration of Leaning crossover operator
+	}
+	\label{Fig.5}       % Give a unique label
+\end{figure*}
+
+To process this stage, within each $ Family $, the $ Father $ and the $ Mother $ perform crossover operator and any $ Child $ created is added to the corresponding $ Family $.
+
+\subsubsection{Mutation}
+
+The $Child$ individuals generated above are mutated with the probability equal to the mutation rate $R_{muta}$. For the method, we proposed a new local search operator using as mutation operator called Push-Force. The idea is viewing each sensor as a push force field in which an object is being pushed away from the center with a force proportion to the sensing intensity at the object position. A gene of an individual can be pushed by multiple sensors and the total force is calculated by the sum of every push vectors. Each gene of the individual is then pushed to a new position and a new individual is created. The process is repeated until the next individual is not better than the previous one. The individual after the mutation operator is also normalized to created valid solution. The detail is described in the Algorithm \ref{alg.3} below.
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{
+		\begin{itemize}
+			\itemsep-0.2em
+			\item The individual $indi$ \\
+			\item The scale ratio  $ a_f $ \\
+		\end{itemize}
+	}
+	\KwOut{\\The mutated individual $indi'$ \\}
+	\Begin{
+		$ next := indi $ \\
+		\While{$ next.fitness \leq indi.fitness $}{
+			$ indi := next $ \\
+			\ForEach{gene i of $next$}{
+				Calculate the push force $F_i$ \\
+				gene i += $a_f * F_i$ \\
+				}
+			}
+		Normalize($ indi $) \\
+		Return $ indi $
+	}
+	\caption{\textbf{Push-Force Mutation Operator}} 
+	\label{alg.3}
+\end{algorithm} 
+
+\subsubsection{Update}
+
+In this stage, the age of each individual is calculated and its state will be updated correspondingly. If an individual with age exceed the death age $D$, it will be marked as being dead and removed from the population. Else, the individual is paired to other, it may become pairing again in the pairing stage. The best individual which has the best fitness value of the population will be preserved and can not be removed even after exceeding the death age. This condition is added to make sure that the best fitness value of the population is always better after each generation and the algorithm will eventually converge.
+
+\subsubsection{Selection}
+
+Selection stage is performed to control the size of population and triggered only when the number of individuals in $Pop$ exceed the upper bound $p_{max}$. The selection process is as follows: 
+\begin{itemize}
+	\item The individuals in the population are ordered by their fitness values. 
+	\item From the worst to the best of the fitness value, the individual will be consequently removed unless it is the last individual of its own $ Family $. 
+	\item Repeat until the best individual is considered or the population size reaches $p_{min}$ .
+\end{itemize}
+Since $Children$ usually inherit attributes from their parent, a $Family$ in FGA often contain valuable genes segments that are passed through generations. With the selection process, we want to make sure that each $ Family $ in the population has at least one individual (which is also the best individual of the $ Family $) to avoid removing potential genes segments. This strategy also helps to improve the diversity of the population and slow down the convergence speed to reduce the chance of trapping in bad local optima.
+
+\subsubsection{Family System based Genetic Algorithm}
+
+Summarize the above stages, FGA algorithm is proposed as following steps:
+
+\begin{enumerate}
+	\item \textbf{Initialization}: $P_{min}$ individuals are initialized using the randomization methods and added to the population.
+	\item \textbf{Family pairing}: Adult non-paired individuals are randomly paired to create new $ Family $ until reaching the pairing rate $R_{pair}$.
+	\item \textbf{Evolution}: Each $ Family $ performs the crossover and mutation process, created individuals are added to the corresponding $ Family $.
+	\item \textbf{Update}: The age of each individual is calculated and its state will be updated correspondingly.
+	\item \textbf{Selection}: If the size of the population is outstrip $p_{max}$ then perform the selection process.
+	\item \textbf{Terminal Condition}: If the number of generations reaches a fixed value, the algorithm is terminated and the best individual is returned as the solution. Otherwise, turn back to step 2.
+\end{enumerate}
+
+\section{Experimental results}
+In this section, experiments will be done to test the performance of devised algorithm under different conditions; comparison with prior approaches will be made to assess the effectiveness of FGA. 
+\subsection{Experiment Setting}
+\subsubsection{Dataset}
+To evaluate the performance of FGA under different scenarios, the algorithm is simulated under randomly generated datasets. These datasets must contain randomly generated obstacles and deployed sensors without violating the constraints of the OMEP model. In this paper, we propose a method to randomly generate various network scenarios based on three changeable values: the number of obstacles $H$, the total area of the obstacles $Q$ and the number of sensors $N$. The method is performed as followed: 
+
+\begin{enumerate}
+	\item Distributing the total area of obstacles $G$, by randomly generate $H$ numbers with the fixed sum of $G$.
+	\item Constructing each obstacle with fixed area by:
+	\begin{itemize}
+		\item Generating the number of vertices of the obstacle $V_o$ randomly. In here, the number of vertices is bounded in range [3,6] for the purpose of simple simulation and computation. 
+		\item Generating the angles of the obstacle. A polygon with $V_o$ vertices has angles sum up to $(V_o - 2)\pi$. Hence, this step can be done by randomly generate $V_o$ numbers with the fixed sum of $(V_o - 2)\pi$.
+		\item Generating a random ray $Ox$ as a base.
+		\item Generating each side of the obstacle one by one, with $O_x$ as the base. The angles between two consequence sides and the angle between the first side and $O_x$ are based on the output of the last step. The length of each side is in randomized [0,1]. The last side must intersect with ray $O_x$, otherwise, the process is repeated.
+		\item Resizing the obstacle to the preferred area by a homothetic transformations with a condition that the obstacle can be placed within the field $\Omega$.
+	\end{itemize}
+	\item Locating these obstacles such that they do not overlay with each other and do not exceed the sensors field by repeatedly randomization until valid.
+	\item Deploying sensors in the field $\Omega$ without any sensors placed in any generated obstacles randomly.
+\end{enumerate}
+
+In this paper, the dataset for simulation are created based upon important parameters with three changeable values setting as follows:
+\begin{itemize}
+	\item The number of obstacles $H$ : 3 , 5.
+	\item The total area of obstacles $G$: 15\%, 30\% , 50\% of the field $\Omega$.
+	\item The number of deployed sensors $N$ : 30, 60, 90.
+\end{itemize}
+With each combination of these values, we randomly generate 5 topologies using the above algorithm. In total, our dataset includes of 90 different topologies for experiment. The name of a topology is $Data\_H\_G\_N\_i$ where $ i $ is the order number from 1 to 5. With this totally randomly generated datasets, they will serve as a effective measurement for the performance of FGA for solving the OE-MEP problem. 
+
+\subsubsection{Parameters}
+Parameters of the problem:
+\begin{itemize}
+	\item The dimension of sensor field: $ W $ = 500, $ H $ =500
+	\item The source point $ B $: (0, 150) 
+	\item The destination point $ E $: (500, 350)	
+\end{itemize}
+Parameters of the proposed algorithm FGA (Table \ref{tab1}) :
+\begin{table}
+	% table caption is above the table
+	\caption{Parameters for FGA}
+	\label{tab1}       % Give a unique label
+	% For LaTeX tables use
+	\begin{center}
+		\renewcommand{\arraystretch}{1.5}
+		\begin{tabular}{lc}
+			\hline\noalign{\smallskip}
+			\multicolumn{1}{c}{\textbf{Parameter}} & \textbf{Value} \\
+			\noalign{\smallskip}\hline\noalign{\smallskip}
+			The number of running on each instance & 20 \\
+			The number of generations & 100\\
+			The lower bound of population size $ p_{min} $ & 100\\
+			The upper bound of population size $ p_{max} $ & 400\\
+			The adult age $A$ & 2 \\
+			The death age $D$ & 10 \\
+			The pairing rate $ R_{pair}$  & 100\% \\
+			The mutation rate $ R_{mutation} $ & 10\% \\
+			The path interval $\Delta_s$ & 1 \\ 
+			\noalign{\smallskip} \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+All simulations were experimented on a machine with Intel® Core™ i7-3230M 2.60 GHz with 8 GB of RAM under Windows 10, 64 bit using Java language.
+
+
+\subsection{Experimental Results}
+The performance of the algorithms can be effected in different way under different environments. In this section, various scenarios are designed and performed to give better understanding about the efficiency of FGA.
+\subsubsection{The performance of FGA when using different A and D values}
+In this scenario, the affect of changing the adult age and the death age on the performance of FGA is evaluated. For simulation, $A - D$ are changed variously while other parameters of FGA are kept the same as in table \ref{tab1}. Figure \ref{Fig.7} shows the changing on minimal exposure value \textit{\textbf{Mev}} and computational time of FGA when using different $A-D$ values with topology $Data\_5\_0.5\_60\_4$.
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	% figure caption is below the figure
+	\includegraphics[width=0.9\linewidth]{hinh/ADtestMEV.png}
+	\centering
+	\caption{The Minimal Exposure Value when using different A-D values
+	}
+	\label{Fig.7}       % Give a unique label
+\end{figure*}
+
+From observation, it can be seen that when the ratio between $D$ and $A$ is higher, the solution accuracy tend to increase as the $Mev$ gets smaller. However, the \textit{\textbf{Mev}} gets converged and minimum at a certain $D$ value then begins to rise again after that. The reason behind this is: as $D$ is higher, the individuals will have more time to exist and contribute to the population but at the same time, the chance of trapping in local optima is also risen. Furthermore, in Family system, when $D$ is higher, the families in population tend to exist longer and create more $Children $ which expand their own genetic branch. In the other words, the fact that $D$ is higher lead FGA to search deeper in the genetic tree while when $D$ is lower, it searches wider in the genetic tree. Taking a look at the computational time result, it can easily be noticed that as $D$ gets higher, the computational time is also increased accordingly. As individuals exist longer, the number of families in the population is also kept at high number which leads to more crossover operators and greater computational time. Moreover, the high reproduction rate also makes the population reach its max size more often, thus, the selection also happens more often and consumes even more computational time. Therefore, it is necessary to select a suitable $A$ and $D$ value that balance both solution accuracy and computational time, a value that the \textbf{\textit{Mev}} is already converged and the computational time is acceptable.  
+
+\subsubsection{The performance of FGA when using different $ p_{min} $ and $ p_{max} $ values}
+The affect of changing the boundary of population size on the performance of FGA is evaluated in this scenario. For this simulation, $ p_{min} $ and $ p_{max} $ are changed variously while other parameters of FGA are kept the same as in table \ref{tab1}. However, the population size is changed, thus, in this experiment, the terminate condition of FGA will be to reach a certain number of fitness-function-calculations (50000 in this case). The topology used is $ Data\_3\_0.15\_60\_2 $ and Table \ref{tab2} shows the changing on minimal exposure values and computational time of FGA when using different $ p_{min} $ and $ p_{max} $ values.
+\begin{table}
+	% table caption is above the table
+	\caption{The Minimal exposure value (\textbf{\textit{Mev}}), the computational time (sec) and the standard deviation (\textbf{\textit{Std}}) of FGA when using different $ p_{min} $ and $ p_{max} $ values with topology $ Data\_3\_0.15\_60\_2 $  }
+	\label{tab2}       % Give a unique label
+	% For LaTeX tables use
+	\begin{center}
+		\renewcommand{\arraystretch}{1.5}
+		\begin{tabular}{|c|c|c|c|c|}
+			\hline
+			\textbf{$p_{min}$} & \textbf{$p_{max}$ } & \textit{\textbf{Mev}} &\textit{ \textbf{Time (sec)}} & \textit{\textbf{Std}} \\
+			\hline
+			100 & 100 &1.804214 &228 &0.734719\\
+			\hline
+			100 & 200 &\textbf{1.459218} &\textbf{208} &0.769664\\
+			\hline
+			100 & 300 &\textbf{1.459412} &348 &0.646700\\
+			\hline
+			100 & 400 &\textbf{1.379157} &\textbf{397} &0.638892\\
+			\hline
+			100 & 500 &1.689611 &\textbf{386} &0.474236\\
+			\hline\hline
+			200 & 200 &2.121185 &425 &0.699969\\\hline
+			300 & 300 &1.901965 &383 &0.740191\\\hline
+			400 & 400 &1.819420 &427 &0.480145\\\hline
+			500 & 500 &1.635348 &440 &0.484833\\\hline
+		\end{tabular}
+	\end{center}
+\end{table}
+
+From observation, when the size of the population is larger, the \textit{\textbf{Mev}} is decreased accordingly since the search space is enlarged so the solution accuracy is better. However, an exception at the last case where $p_{min}$ = 100 and $p_{max}$ = 500, the solution is not good. A larger population size will consumes more fitness-function-calculations at one generation that may result in non-converged population at the end. Moreover, the great distance between \textbf{$p_{max}$} and $p_{min}$ would create sudden change in the population size when processing selection that may reduce the diversity of individuals. Comparing with the case when $p_{min} $ = $ p_{max} $ (fixed population size), in general, dynamic population size gives better solution. The computational time when using dynamic size is also more or less smaller than when using fixed size. However, since the number of fitness-function-calculations is the same, the time difference is not high. In conclusion, the result has proven the effectiveness of dynamic population size when compared to the traditional method of fixed population size. 
+%\subsubsection{Evaluate the effect of Family system}
+%This scenario is performed to evaluate the effect of Family system in FGA. For this simulation, FGA will be executed without Family system (only use randomly individuals selection for crossover) and the result will be compared with FGA with Family system. The crossover rate is set equal to the pairing rate $R_{pair}$ so that the number of fitness-function-calculations is the same. The two FGA versions are performed under different topologies and table \ref{tab4} shows the result of Minimal Exposure Value (MEV) and Computational Time of these two FGA version.
+%
+%From the result, the FGA with Family system seems to be better than FGA without Family system in most of the case. While in some cases, the different is not worth mentioning, there are also cases that FGA with Family system is significant better than FGA with out Family system. This outcome is expected since the Family system can improve the diversity of the population an somewhat enlarge the search space of FGA. Family system also helps search deeper in the genetic tree to find more preferable individual in each branch. Therefore, with Family system, FGA becomes more stable as well as being able to discover further areas that the normal randomly crossover can do. 
+
+\subsubsection{Comparison between FGA and previous method in OE-MEP problem}
+In order to correctly assess the efficiency of FGA, in this scenario, FGA will be taken to compare with previous approach on OE-MEP problem. To the best of our knowledge, the most well-known approach to the OE-MEP problem separately is the grid-based method \cite{liu2017obstacle}. We have implemented the grid based algorithm used in \cite{liu2017obstacle}, performed it on our built data set and compared the result with out proposed FGA. Figure \ref{Fig.8} and Figure \ref{Fig.9} shows the result of minimal exposure value and computational time correspondingly of each algorithm.
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	% figure caption is below the figure
+	\includegraphics[width=1\linewidth]{hinh/GridvsFGA.png}
+	\centering
+	\caption{The Minimal Exposure Value comparison between FGA and Grid based method on some noble topologies
+	}
+	\label{Fig.8}       % Give a unique label
+\end{figure*}
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	% figure caption is below the figure
+	\includegraphics[width=1\linewidth]{hinh/GridvsFGATime.png}
+	\centering
+	\caption{The Computational Time (sec) comparison between FGA and Grid based method on some noble topologies
+	}
+	\label{Fig.9}       % Give a unique label
+\end{figure*}
+
+From observation, FGA gives much better solution compared to the Grid-based method but at the same time, the computational time is significantly higher. From statistic, FGA is 100\% better than Grid-based method across the whole data set. This surpass is due to the reason that Grid-based method is a simple approach that treats the area as a grid and constrains the intruder to move only in that grid. This approximation can make the OE-MEP problem easier to be solved due to the small search space, however, the solution accuracy is fairly low accordingly. On the other hand, FGA searches in a much larger space, thus, gives a lots better solution as well as requires more computational time. In realistic scenarios when evaluating a deployed WSN, the solution accuracy is more important than the low computational time so FGA is preferred than Grid-based method in this comparison. 
+
+\subsubsection{Comparison between FGA and GAMEP}
+Out of OE-MEP problem separately, in the general MEP problem, there are many well-known approaches using evolutionary algorithms. GAMEP \cite{binh2019efficient} is an implementation of genetic algorithm on MEP problem that has been proven to be the best algorithm in term of performance. In this section, GAMEP will be implemented on OE-MEP and compared with our proposed FGA. Since the parameters are different between the two algorithms, thus, in this experiment, the terminate condition will be reaching a certain number of fitness-function-calculations (in this case 50000). Figure \ref{Fig.10} and Figure \ref{Fig.11} shows the result of minimal exposure value and computational time correspondingly of each algorithm.
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	% figure caption is below the figure
+	\includegraphics[width=1\linewidth]{hinh/GAMEPvsFGA.png}
+	\centering
+	\caption{The Minimal Exposure Value comparison between FGA and GAMEP on some noble topologies
+	}
+	\label{Fig.10}       % Give a unique label
+\end{figure*}
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	% figure caption is below the figure
+	\includegraphics[width=1\linewidth]{hinh/GAMEPvsFGATime.png}
+	\centering
+	\caption{The Computational Time (sec) comparison between FGA and GAMEP on some noble topologies
+	}
+	\label{Fig.11}       % Give a unique label
+\end{figure*}
+From observation, FGA gives worth mentioned better solution accuracy in most of the case compared to GAMEP. Statistically, FGA achieves better \textit{\textbf{Mev}} than GAMEP does in about 84\% of the data set. This outcome is expected because of  the following reasons.
+\begin{itemize}
+	\item Firstly, the normalization operator in FGA helps enlarge the search space. GAMEP is not designed for OE-MEP problem, thus, every time it generates an invalid individual, it will have to mark the exposure of that individual to positive infinity in order to eventually remove it in selection stage. With the normalization operator in FGA, not only we do not have to remove invalid individuals, but also search for more paths that move along the boundaries of obstacles. As a common sense, the paths along the boundaries of the obstacles often have fairly low exposure value since the sensing wave is being absorbed by obstacles. 
+	\item Secondly, the crossover operator in FGA is much more effective since it can discover individuals with backward path which significantly enlarge the search space. Since the obstacles in the region is non-cross-able, the intruder in many case will require a backward way to reach the best penetration path. In many topologies, the solution gives by FGA contains backward paths that allow the exposure value to get even lower than the one gives by GAMEP. 
+	\item Thirdly, the family system and the dynamic population size of FGA help improve the diversity of the population and reduce the chance of local optima. 
+\end{itemize}
+For the computational time comparison, GAMEP is more or less faster than FGA which is fair and reasonable due to the fact that FGA has more complex operator than GAMEP does. However, the gain on computational time is acceptable since the difference is not high. In summaries, FGA has better performance compared to GAMEP when performing on OE-MEP problem. 
+
+\section{Conclusion}
+This paper investigates the OE-MEP problem in WSN with real-world deployment area, which has significant meaning for determining the weaknesses regarding coverage level of provided sensor network. The gold of the OE-MEP problem is to find out a penetration path from the beginning point to the ending point such that an object moves through along path without crossing any obstacles has minimal exposure value. This problem is very meaningful for network designers who can apply these formulas to evaluate quality of coverage of provided WSN without costly deployment and test. The OE-MEP is formulated a generic mathematical model then converted into an optimization problem with constraints. The Family System based Genetic Algorithm is devised for solving the OE-MEP problem efficiently. Since obstacles in sensing field having arbitrary shape to match realistic scenarios, we model the obstacles as convex polygons and create data sets to measure effectively the performance of the OE-MEP approach. We then conduct number of systematic simulations to test the performance of FGA with a variety of network scenarios and obstacles. The results show that FGA is suitable for the OE-MEP problem and more efficient than prior approaches regarding solution quality and computational time. 
+\begin{landscape}
+
+\end{landscape}
+\bibliography{mybibfile}
+\end{document}

@@ -1,0 +1,1557 @@
+\documentclass[final]{elsarticle}
+%% \documentclass[final,times,twocolumn]{elsarticle}
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\journal{Journal of \LaTeX\ Templates}
+
+%===========----------------------Package----------------------===========
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\usepackage{graphicx}
+%\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[justification=centering, bf]{caption}
+\usepackage{textcomp}
+\usepackage[ruled, resetcount, linesnumbered]{algorithm2e}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{color}
+%\usepackage{ulem}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{array, booktabs, tabularx} 
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{rotating}
+\usepackage{longtable}
+\usepackage{verbatim}
+\modulolinenumbers[5]
+\journal{Journal of \LaTeX\ Templates}
+\newcommand{\vect}[1]{\overrightarrow{\boldsymbol{#1}}}
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{frontmatter}
+\title{A Family System based Genetic Algorithm for  Obstacles-Avoidance Minimal Exposure Path Problem in Wireless Sensor Networks}
+
+%%% Group authors per affiliation:
+%\author[httb]{Huynh Thi Thanh Binh}
+%\ead{binhht@soict.hust.edu.vn}
+%
+%%% or include affiliations in footnotes:
+%\author[ntmb]{Nguyen Thi My Binh\corref{cor1}}
+%\ead{binhdungminhkhue@gmail.com}
+%\author[httb]{Nguyen Hong Ngoc}
+%\ead{ngocnguyen.nd97@gmail.com}
+%\author[dthl]{Dinh Thi Ha Ly}
+%\ead{greeny255@gmail.com }
+%\author[httb]{Nguyen Duc Nghia}
+%\ead{nghiand@soict.hust.edu.vn }
+%\cortext[cor1]{Corresponding author. Tel: +84 977901599}
+%\address[httb]{ Hanoi University of Science and Technology, Vietnam}
+%\address[ntmb]{Hanoi University of Industry, Vietnam}
+%\address[dthl]{National Institute of Informatics, Tokyo, Japan}
+%\fntext[myfootnote]{Since 1880.}
+%% or include affiliations in footnotes:
+%\author[mymainaddress,mysecondaryaddress]{Nguyen Thi My Binh}
+%\ead[url]{www.elsevier.com}
+%
+%\author[mysecondaryaddress]{Hanoi University of Science and Technology \corref{mycorrespondingauthor}}
+%\cortext[mycorrespondingauthor]{Huynh Thi Thanh Binh}
+%\ead{support@elsevier.com}
+%
+%\address[mymainaddress]{Hanoi University of Science and Technology, Vietnam}
+%\address[mysecondaryaddress]{360 Park Avenue South, New York}
+%\address[mysecondaryaddress]{360 Park Avenue South, New York}
+\begin{abstract}
+Barrier coverage in wireless sensor networks has received drawing attention to the research community in recent years, due to its advantages for security applications. One of fundamental barrier coverage problems is minimal exposure path (MEP), which is the problem of finding the path across the sensor network with the lowest chance of being detected. This problem plays an important role in the applications for detecting intrusion and evaluating the effectiveness of coverage in a sensing field. However, in the majority of researches, sensors studied network were omni-directional and/or homogeneous. In contrast, this paper investigates the minimal exposure path problem in heterogeneous directional wireless sensor networks (hereinafter MEP-based-HDWSN). The MEP-based-HDWSN is more practical, meaningful and complex with the unique characteristics of directional sensor nodes. The MEP-based-HDWSN is converted into a numerically function extreme which is high dimensional, non-differentiable and non-linear. Adapting to these features, we propose two efficient meta-heuristic algorithms, HDWSN-EA and HDWSN-PSO, to solve the converted problem. HDWSN-EA is formed by the evolution algorithm with a featured individual representation and an effective combination of evolution operators while HDWSN-PSO is an improved on the characteristics of a particle swarm population. Experimental results on numerous instances indicate that the proposed algorithms are suitable for the converted MEP-based-HDWSN problem and perform well regarding both solution accuracy and computation time compared to existing approaches.
+  
+\end{abstract}
+\begin{keyword}
+\texttt{Minimal exposure path} \sep \texttt{Directional sensing coverage model} \sep \texttt{Heterogeneous directional wireless sensor network} \sep \texttt{Evolution algorithm} \sep\texttt{Particle swarm optimization algorithm}
+%\texttt{elsarticle.cls}\sep \LaTeX\sep Elsevier \sep template
+%\MSC[2010] 00-01\sep  99-00
+\end{keyword}
+\end{frontmatter}
+%\linenumbers
+\section{Introduction}
+Wireless Sensor Networks (WSNs) have drawn much attention recently because of their vast potential applications in various areas from commercials to law enforcement, from civil to military. The main application of WSNs is to monitor the sensing field and detect intrusion. The intruding object is detected when it crosses a border or penetrates a protected area. This is often referred to as coverage of intrusion path problem. This declaration, in contrast with the full coverage problem which requires coverage on every point of interested region, only consider detecting a certain intruding objects when it penetrates the sensing area. The coverage can be considered as a measure of surveillance quality as well as service efficiency that WSNs can provide. Based on coverage computation, weak points in a sensor field can be discovered, guiding to redeploy the network in the future and reconfigures schemes to improve the overall service efficiency as well as surveillance quality.
+
+Exposure, which shows how well an object traversing in an arbitrary path through the sensor network can be observed by the sensor network over a period of time, is directly related to coverage. Therefore, exposure is used as a good measure for assessing the coverage quality of the sensor network. The higher the exposure, the more consistently the sensor network can detect the intruders. The exposure of a penetration path in a sensing field is equivalent to the ability to detect a target traveling along that path. The path along which the ability to be detected is minimized, called the minimal exposure path and the problem that looks for such a path is Minimal Exposure Path (MEP) problem. The MEP offers valuable information about bad coverage paths in sensor networks. An object moving through a sensor field along the MEP is often the most difficult to be detected. The analysis of the MEP permits one to anticipate the weak points of a sensor network and propose a strategy to improve it if necessary. The MEP is not only useful to assess the service quality of WSNs, but it is also a measure of deployment effectiveness. The information of exposure can be used in managing, optimizing and maintaining the WSNs.
+
+WSNs are classified based on type of sensors such as temperature, infrared, humidity and video sensors. Different sensor types require different sensing models. A type of sensing model should be able to describe the sensitivity or the capability of the sensor \cite{b10}. Sensing model can be classified into two subcategories: mathematical and physical. The mathematical sensing model, which includes binary and probabilistic models, expresses the sensitivity of sensors; the physical sensing model provides insights into the sensing direction of the sensor node. There are two different physical sensing models: omni-directional sensing and directional sensing model. Many existing sensor node types have omni-directional model such as magnetic, temperature and humidity can sense in all direction, such model is a traditional sensing model. In contrast, a directional sensor cannot sense in all 360 degrees. A sensor network is called a directional wireless sensor network (DWSN) if all the sensors comply with directional sensing model. With advancement in multimedia technology, there are many practical applications of wireless multimedia sensor networks, in which sensors usually have a directional sensing model known as DWSNs. DWSNs have distinctive characteristics of each type. For example, camera sensors, radio sensor, ultrasound sensors, radar sensors and infrared sensors have different properties. Furthermore, DWSNs can retrieve higher levels of sensor information or richer information form such as audio, image and video, thus providing more detailed information of environment. Therefore, DWSNs have been grown in popularity, attracted increasing interest and gained much importance in recent years. However, they use a larger amount of the limited energy reserve resource available to a wireless sensor node. Also, coverage holes problem will arise in the case of the same number of directional sensors deployed in a given region. These features cause the majority of existing coverage control theories and methods to be not directly applicable to DWSNs. 
+
+Besides, in a typical target tracking scenario, moving objects tend to occur randomly and are often associated with various detectable physical signals.
+So it requires a heterogeneous directional wireless sensor networks (HDWSN). A HDWSN is a sub-class of DWSNs in which each directional sensor node may possess different computational capabilities, different energy storage devices, a different number of sensing units, and use different communication links. These characteristics make the HDWSN a very complex-to-study network, however, the real motivation behind the HDWSNs is the need to conserve energy and complex hardware embedded without reduce the overall sensing effectiveness, hence this may decrease the total cost of operating the sensor network. Therefore, specific solutions and techniques are required with a view to enhancing network efficiency, evaluating coverage quality, and increasing the performance of HDWSNs. 
+
+Unlike most existing works about the MEP problem in traditional WSN, which are based on either omnidirectional sensors and/or homogeneous network, this paper focuses on solving the MEP in HDWSNs problem, which is more valuable in practical applications. To the best of our knowledge, we are the first to investigate the MEP problem in HDWSN.
+
+The main contributions of this paper are as follows:
+\begin{itemize}
+	\itemsep0em
+	\item Establish mathematic model to represent the MEP problem in HDWSNs known as MEP-based-HDWSN.
+	\item Propose two efficient meta-heuristic algorithms, namely HDWSN-EA and HDWSN-PSO to solve the MEP-based-HDWSN. HDWSN-EA is a hybrid of evolution algorithm and local search. HDWSN-PSO is an improved particle swarm optimization, which can find out the approximate optimal solution in shorter time.
+	\item Conduct comprehensive experiments to test the efficiency of the proposed algorithms.
+	\item Compare our meta-heuristic algorithms with the state of the art approximate algorithms which could achieve the current best approximation ratio and the best meta-heuristic approximation.
+	\item Provide an analysis of the obtained results and compare with the results by existing methods. Experimental results show that our proposed algorithms outperform the classical algorithms for most cases regarding solution accuracy and computation time.	
+\end{itemize}
+
+The rest of the paper is organized as follows. Related works are presented in Section 2. Preliminaries and formulation for the MEP-based-HDWSN problem are discussed in Section 3. Section 4 introduces the proposed algorithms. Experiments results examining the proposed algorithms along with computational and comparative results are given and analyzed in Section 5. Finally, Section 6 presents conclusions and future works of the paper.
+
+\section{Related Works}
+The MEP problem in WSN depends on the approach method, which is consisted of various factors such as type of sensors, deployment strategy, problem modelling, tackling algorithm, etc. Therefore, this part briefly represents related works to MEP-based-HDWSN problem and analyses some advantages and drawbacks of each approach to the Minimal Exposure Path problem.
+
+Since Meguerdichian et al. claimed the Minimal Exposure Path problem in [1] in 2001, there have been numerous studies regarding this problem in various conditions. The article also defines the exposure of a point in a sensing field, which is a value calculated through the exposure of sensors in that field corresponding to the considered point, in 2 important models, which is the All-Sensor Field Intensity and the Closest-Sensor Field Intensity. While the first model shows the exposure as the sum of the exposure of all sensors in the field corresponding to the considered point, the second model only accounts the exposure of the nearest sensor, which is the one with highest exposure supervising the point, in the final value. While the latter model is fairly easier to find the solution, it is not as effective to present the problem in reality as the former one due to the ignorance of the cooperation of several sensors to detect an intruder, and in general, the total exposure to the considered point from the other sensors is usually larger than that from only the maximum one. Meguerdichian et al. also successfully found the precise solution to the Minimal Exposure Path problem for the field with only one sensor, which offers valuable and profound understandings in the Minimal Exposure Path problem itself.
+
+Further processes were achieved in [2] when Clouqueur et al. published the probability model to describe the Minimal Exposure Path problem as the problem of finding the path with the lowest chance of detection. In the article, the chance of detection is calculated as the probability in discrete point along the path of the moving intruder. Furthermore, the article also presents a grid-based method to find the solution to the Minimal Exposure Path problem. However, the approach shows significant mistakes. The most considerable is resulted from their misunderstanding about the concept of detection probability. Specifically, the lacking of time factor in the model cause a principal hole in the logical process from the discrete value (the detection probability at a certain point) to the continuous measure (the detection chance along the path which contains an infinite amount of distinguished points). As a result, their model is constrained with their grid arrangement method and inefficient to approach a real Minimal Exposure Path problem.
+
+The directional sensor model is first presented in [3] by Ma H. and Liu Y. The directional sensors differs from the omnidirectional ones by their different sensing values in different directions when the distances are the same. The directional sensors are described through several parameters in addition to the parameters required in an omnidirectional ones. Then, the directional sensor model is considered in the Minimal Exposure Path problem by Adriaens et al. in [4]. The articles shows a method of finding the Maximal Breach Path, which can be considered as a model for the Minimal Exposure Path problem, by using the Voronoi graph method. Despite being the first one studying the Minimal Exposure Path problem, the article uses a simple model to present the problem, which is not efficient to accurately model the real problem.
+
+In [5], Skraba and Guibas introduces the existence of obstacles inside the sensing field which can block not only the moving path but also the sensing signal of sensors. As a result, one sensor can only sense an intruder if it is inside the sensor's field of view and no obstacle appear in the straight line between the intruder and the sensor. Furthermore, the article gives a clear definition of the detection probability with the consideration of time, which clarifies the logical hole in the probability model in [2]. However, their possibility of detection comes from the chance that certain sensors are off, which means that the model is actually a binary coverage model and the probability appears only because of the lack of information about the states of the sensors.
+
+In [6], Wu and Chung introduce the heterogeneous wireless network sensor model and illustrate its exceptional advantages compared to the homogeneous one. The first upside of the heterogeneous model is the flexibility of the sensor network to adapt several environmental factors while the second advantage offers the generality which can precisely model the problem in reality. The article also analyses the detection probability correlate to the distance from the sensor and effectively change the problem from a probability perspective to a binary one. However, due to the absence of time factor, their model is more effective to analyse exposure on steady points rather than a moving object through the sensing field.
+
+In [7], Liu et al. offer an approximation algorithm to solve the Minimal Exposure Path problem regarding sensitivity model, where the exposure of a point to a sensor is evaluated taking into account the direction of the sensor and the distance between it and the considered point. They propose algorithms to solve both the All-Sensor Field Intensity and the  Maximum-Sensor Field Intensity by using a grid-based model and Djikstra's shortest path algorithm. However, since they force the object moving along the grid, the solution may be potentially inaccurate due to the limitation in moving direction compared to the situation in reality.
+
+Ye and Wang later introduce a more precise approach to the Minimal Exposure Path problem in [8]. They model a path by a set of points which has a same displacement in abscissa. With the assumption of maximum speed moving, the exposure along a small part is computed as a product of the length of each part and the exposure value at the former point on that part. The genetic algorithm is then conducted, with several optimisation to prevent parts with large length, which can cause the population trapping in a local optima and a low convergence speed. However, this model still has its own disadvantages. Firstly, the path is strict to moving forward without being able to make a turn around, which may ignore some valuable path which turn around to get away from sensors. Secondly, the fixed displacement of abscissa leads to a limit displacement of ordinate, which limit the angle at which the object can move, further reduce the possibility of finding the most preferable solution.
+
+In [9], Liu et al. give a clear definition to the Minimal Exposure Path problem with heterogeneous sensors and obstacle, the intruder has to move through the sensing field not going across existed obstacles and avoiding being detected by several sensor types. The path is presented through a system of adaptive ordered grids and the solution may converge to the optimal solution when the adaptability and order of the grid system approach infinity. However, there are still significant drawbacks. Firstly, the grid-based method limits the accuracy of the final solution, and the effort of fixing the issue using adaptive ordered cells may lead to a dramatic surge in required calculation time without achieving considerably more preferable results. Secondly, the simulation results are based on only one topology of obstacles, which may lead to untrusted results due to low-size data.
+
+\section{Preliminaries and Problem Formulation}
+
+\subsection{Preliminaries}
+	
+Based on the specific requirements, sensor nodes of different types e.g. temperature, humidity, infrared, and video etc. may be selected for the application [19]. Sensors can be categorized based on sensing model, which expresses the sensitivity or the capability of the sensor. The sensitivity is reflected by the mathematical sensing model, while the sensing direction is given by the physical sensing model.
+\subsubsection{Physical sensing model}
+In \cite{b10}, the authors defined directional sensor coverage model. In 2\_D dimension, the sensing area of a directional sensor $ s $ is a sector denoted by 4-tuple $( P, r, \overrightarrow{Wd}, \alpha )$. Where $ P $ denotes the location of the sensor, $ r $ the sensing radius, $ \overrightarrow{Wd}$ the unit vector showing working direction and $ \alpha $ the angle of view. The directional sensing capability is illustrated in Fig. \ref{Fig.1}. When $\alpha=2\pi$, the sensor is omni-directional.\\
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\centering
+	\includegraphics[width=0.4\textwidth]{mptt/sensorView}
+	% figure caption is below the figure
+	\caption{Sensing capability of directional sensor}
+	\label{Fig.1}       % Give a unique label
+\end{figure*}
+An object $ O $ is said to be covered by directional sensor $ s_i $ if and only if the following conditions are met: 
+\begin{itemize}
+	\itemsep0em
+	\item $d(P,O) \le r$ or $\left\| {\overrightarrow {PO} } \right\| \le r$, where $d(P,O)$ is the Euclidean distance between the position $ P $ of sensor $s$ and object $ O $.
+	\item The angle between $\overrightarrow{PO}$ and $\overrightarrow {Wd} $ is within $\left[ { - \frac{\alpha}{2} ,\frac{\alpha}{2} } \right]$ or $\overrightarrow {PO} .\overrightarrow {Wd}  \ge \left\| {\overrightarrow {PO} } \right\|\cos \frac{\alpha}{2} $	
+\end{itemize}
+\subsubsection{Mathematical sensing model}
+\textbf{\textit{Boolean directional sensing model}}
+
+The Boolean directional sensing function of a sensor $ s_i $ sensing an object at point $ O $ is given by:
+
+\begin{equation}
+	\label{eqfb}
+f_b({s_i},O) = \begin{cases}
+	1 & {{\rm{if}} \ d(s,O) \le r{\rm{ \ and }} \ \overrightarrow {PO} .\overrightarrow {Wd}  \ge \left\| {\overrightarrow {PO} } \right\|\cos \frac{\alpha}{2} }\\
+	0 & {\rm{otherwise}}
+\end{cases}
+\end{equation}
+
+
+\textbf{\textit{Intensity function with Boolean directional sensing model}}
+
+An object at point $ O $ may be detected by several directional sensors. In Boolean directional sensing model, the coverage of that object by all sensors in the given field $\Omega$ can be measured by accumulation of the coverage of all sensors. Thus, the sensing intensity function is defined under the following model.
+\begin{equation}
+\label{eqib}
+I_b(O) = \sum\limits_{i = 1}^N {{f_b}} ({s_i},O)
+\end{equation}
+where$ N $ is number of sensors in field $\Omega$ . 
+
+\textbf{\textit{Attenuated Directional  Sensing Model}}
+
+Even though sensors commonly have widely different theoretical and physical characteristics, most types of sensors share the following property: the closer the object, the more likely the sensor can detect or cover it. In other words, the sensitivity gradually attenuates with increasing distance. For directional sensors, the sensitivity also attenuates with increasing offset angle from the sensor direction, see Fig.\ref{Fig.2}. In the following definition, the attenuated directional sensing model is interpreted which describes the relationships among sensitivity, the distance, and the offset angle.
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\centering
+%	\includegraphics[width=0.25\textwidth]{epsfile1/b1y1 &	\includegraphics[width=0.25\textwidth]{epsfile1/b1y2
+%		&	\includegraphics[width=0.25\textwidth]{epsfile1/b2y2
+%		&	\includegraphics[width=0.25\textwidth]{epsfile1/b4y4}
+%	% figure caption is below the figure
+%	\caption{Illustration of the attenuated sensing model }
+%	\label{Fig.2}       % Give a unique label
+%\end{figure*}
+\begin{figure*}[htbp!]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\begin{tabular}{cc}
+		\includegraphics[width=0.3\linewidth]{epsfile1/b1y1}&\includegraphics[width=0.3\linewidth]{epsfile1/b1y2}\\
+		(a) $\beta =1, \lambda=1 $ &(b)$ \beta=1, \lambda=2 $\\
+		\includegraphics[width=0.3\linewidth]{epsfile1/b2y2}&\includegraphics[width=0.3\linewidth]{epsfile1/b4y1}\\
+		(c) $ \beta=2, \lambda=2 $& (d)$ \beta=4, \lambda=4 $\\
+	\end{tabular}
+	% figure caption is below the figure
+	\centering
+	\caption{Illustration attenuated directional sensing model with different $ \beta's $ and $ \lambda's $
+	}
+	\label{Fig.2}       % Give a unique label
+\end{figure*}
+As the sensing quality of a sensor decreases with the increase of distance away from the sensor, for a given directional sensor $ s $, the coverage only needs to be characterized by a 2-tuple $ (P, \overrightarrow{Wd}) $. The attenuated sensing function in the directional model of directional sensor $ s $ at position $ P $ sensing object at point $O$ is given by:
+\begin{equation}
+\label{eqfa}
+f_a({s_i},O) = \frac{{C{{\left\{ {\cos \left( {\frac{{\angle (\overrightarrow {PO} ,\overrightarrow {Wd}) }}{2}} \right)} \right\}}^\beta }}}{{{{\left[ {d(P,O)} \right]}^\lambda }}}
+\end{equation}
+where $ d(P, O) $ is the distance between $ P $ and $ O $; $ \angle (\overrightarrow {PO}; \overrightarrow {Wd})$ is the angle between $ \overrightarrow {PO} $ and $ \overrightarrow {Wd}$ , $C$ is a constant; $ \lambda,\ \beta $ are the sensibility attenuation exponents. 
+
+There may be multiple sensors covering an object. Under the attenuated directional sensing model, the coverage of an object $ O $ by all sensors in the field can be calculated by the two following sensing intensity functions for the directional sensitivity model. 
+
+\textbf{Accumulative intensity function:} the sensing intensity on a given object $ O $ is defined as sensitivity accumulation of all sensors on $ O $. We denoted the accumulative intensity function by $ I_a $.
+\begin{equation}
+\label{eqia}
+I_a(O) = \sum\limits_{i = 1}^N {f_a({s_i},O)} 
+\end{equation}
+where $ f_a $ is sensing function of a sensor given by \eqref{eqfa} and $ N $ is the number of sensors in the field.
+
+\textbf{Closest-sensing intensity function:} the sensing intensity on a given object at point $ O $ is defined as the intensity measured by the closest sensor, i.e, the sensor which has the smallest Euclidean distance from that object. We denoted closest-sensing intensity function by $ I_c $. The distance and the closest-sensing intensity function are calculated by the following equation. 
+\begin{equation}
+\label {eq6}
+{s_{\min}(O)} = \{ {s_j} \in S\left| {d({s_j},O) \le d({s_i},O) \ \forall {s_i} \in S,i = \overline {1..N} } \right.\} 
+\end{equation}
+\begin{equation}
+\label{eqic}
+I_c(O) = f_a({s_{\min }(O)},O)
+\end{equation}
+\subsubsection{Obstacle Model}
+In realistic deployment, the region of interest is often filled with multiple obstacles such as lakes, rivers, houses and trees. There are many kinds of obstacle in practical environment with different characteristics. In OMEP problem, an obstacle is modeled as a polygon with ability to decrease or interrupt the sensing signal. In addition, the obstacles also restrict the movement of the intruder as well as the deployment of sensors. 
+
+For mathematic definition, an obstacle is represented as an ordered set of $2D$ points $ L_O = \{O_1, O_2,\ldots,O_m\}$ and an absorbability parameter $\nu$ where $\nu \in [0,1]$. The obstacle is the polygon $O_1 O_2\ldots O_m $ created by ordered connecting these points and connecting $O_m$ to $O_1$. For modeling purpose, sensors are not allowed to be deployed within the obstacles area. Similarly, the intruder is not allowed to move within the obstacles area. The obstacles are also be able to absorb the sensing signal of sensors depended on the absorbability parameter $\nu$. To be more specific, if the line segment between the sensor $s_i$ and the sensing point $ P $ intersects with an obstacle $O$ having the absorbability parameter of $\nu$, the sensing intensity will be reduced to: 
+\begin{equation}
+\label{eqob}
+f'(s_i,O) = f(s_i,O) * (1-\nu)
+\end{equation}
+\subsubsection{Minimal exposure path}
+Exposure is the ability of a sensor network in detecting an object traversing through the sensing field. Therefore, under the directional sensitive model, this ability should be represented by path integral of sensing intensity function of sensor field to a unauthorized object. 
+
+On the basis of the aforementioned directional sensing models in Equation \eqref{eqfb}, \eqref{eqfa} and the corresponding sensing intensity functions $I$ i.e, $ I_b $, $ I_a $ or $ I_c $, we further formulate the exposure $ E(I,\wp )$ of a penetration path $ \wp $ from coordinates of the fixed initial position $ B $ on one side and the fixed final position $ E $ on the opposite side of the sensor field $ \Omega $ in directional sensor networks as follows:
+ \begin{equation}
+ \label{eqE}
+E(I,\wp ) = \int\limits_{\wp }^{} {I(P)} dl
+ \end{equation}
+
+Equation \eqref{eqE} is non- linear, high-dimensional and non-differentiable. Hence,
+it can be solved by partitioning the path $\wp $ into sub-intervals by a set
+of points ${L_\wp } = \{ {P_j}\} $ where $j = \overline {0,n} $ and the distance between two arbitrary consecutive points is $\Delta l_j$. Where $\Delta l_j$ is called subinterval and it should be small enough such that the value of function $ {I(P)} $ is similar for each points
+lying between those two consecutive points. In Equation \eqref{eqE}, $ E(I,\wp ) $, can be approximately transformed into:
+\begin{equation}
+\label{eqE1}
+E(I,\wp ) \approx \sum\limits_{j = 0}^n {I(P_j)\Delta l_j} 
+\end{equation}
+By combining Equation \eqref{eqib} and \eqref{eqE1}:
+\begin{equation}
+\label{eqEb}
+E(I_b,\wp ) \approx \sum\limits_{j = 0}^n {{I_b}(P_j)\Delta l_j}  = \sum\limits_{j = 0}^n {\sum\limits_{i = 1}^N {f_b(s_i,P_j)} } \Delta l_j
+\end{equation}
+By combining Equation \eqref{eqia} and \eqref{eqE1}:
+\begin{equation}
+\label{eqEa}
+E(I,\wp ) \approx \sum\limits_{j = 0}^n {I_a(P_i)\Delta l_i}  = \sum\limits_{j = 0}^n {\sum\limits_{i = 1}^N {f_a({s_i},{P_j})} } \Delta l_j
+\end{equation}
+By combining Equation \eqref{eqic} and \ref{eqE1}:
+\begin{equation}
+\label{eqEc}
+E(I_c,\wp ) \approx \sum\limits_{j = 0}^n {I_c(P_j)\Delta {l_j}}  = \sum\limits_{j = 0}^n {f_a(s_{\min }(P_j),P_j)} \Delta l_j
+\end{equation}
+ Later in the experimental results section, the exposure function $ E(I,\wp )$ is going to calculate with different intensity functions $ I_b $,  $ I_a $, $ I_c$ in Equation \eqref{eqEb}, \eqref{eqEa} and \eqref{eqEc} for the purpose of experiment respectively. In which, $ I_b $ will be used for the Boolean model and $ I_a $, $ I_c$ will be used for the Attenuated model.
+
+\subsection{Problem Formulation}
+The MEP problem under the assumption of a directional sensing coverage model, MEP-based-HDWSN, can be briefly described as follows: Given a set of heterogeneous sensors $S$ of $T$ different types, randomly deployed in the sensor field   and two arbitrary points on opposite sides of the, respectively the source point and the destination point. The goal is to find out a penetration path from the source point $B$ to the destination point $E$ such that an object moves through along path has minimal exposure value. More precisely, the MEP-based-HDWSN is formulated as follows.\\
+\textbf{Input}
+\begin{itemize}
+		\itemsep-0.2em
+		\item $W$, $H$: width and the length of sensor field $\Omega$
+		\item $N$: number of sensors
+		\item $ T $: number of sensor types
+		\item $ t_i $: number of sensors that belong to type $ i $ ($ i $ = 1, 2,..., $T$), such that:
+		 $\sum\limits_i^T {{t_i}}  = N$
+		 \item $({x_j},y{}_j)$: position of sensor $ s_j $
+		 \item $\overrightarrow{Wd}_j$: working direction of sensor $s_j$
+		 \item $ r_i $: sensing radius of type $ i $ ($ i $ = 1, 2, ..., $ T $)
+		 \item ${\alpha _i}$: sensing angle of sensor type $ i $ ($ i $ = 1, 2, ..., $ T $).
+		 \item $M$: number of obstacles
+		 \item $ L_{Oi} $: the set of points of the obstacle $O_i$ ($ i $ = 1, 2,..., $M$)
+		 \item $ \nu_i $: the absorbability parameter of the obstacle $O_i$ ($ i $ = 1, 2,..., $M$)
+		\item $(0, y_B)$: coordinates of the source point $B$ of the object
+		\item $(W, y_E)$: coordinates of the destination point $E$ of the object
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+	\item A set ${L_\wp }$ of ordered points in $\Omega $ forming a path that connects $ B $ and $ E $ 
+\end{itemize}
+\textbf{Objective:}\\
+The exposure of path  $\wp $ is the smallest, i.e.
+\begin{equation}
+\label{eqEmin}
+{\rm E}(I,\wp ) = \sum\limits_{j = 0}^n {I(P_j)\Delta l_j}  \to Min
+\end{equation}
+where $ n $ is the number points included in ${L_\wp }$
+
+\textbf{Constraint:}	
+\begin{itemize}
+%	\itemsep0em	
+	\item The object always moves within the sensor field $\Omega $ from $B$ to $E$ with a constant speed, except for the area of obstacles (*).
+	\item The sensors do not lie inside any obstacles (**)
+\end{itemize}
+The constraint (*) is to make sure that the distance between any two consecutive sampling points is always the same, which makes it possible to evaluate the average coverage degree of the WSNs.
+	
+Basically, the general MEP problem is a combinatorial optimization problems. The MEP-based-HDWSN has distinctive features, and its the objective function \eqref{eqEmin} is non-linear, high dimensional. To solve efficiently the MEP-based-HDWSN problem, we explore two metaheuristic algorithms, one is a hybrid of evolution algorithm and local search called HDWSN-EA, other is an improve particle swarm optimization known as HDWSN-PSO.
+%Therefore, after proposing two metaheuristic algorithms, the comparison between performances of the proposed algorithms will hopefully provide insights into advantages of each of the algorithms regarding solution quality and computation time and suggest recommended conditions for applying each algorithm.
+\section{Proposed Algorithms}
+%Emphasize the difference between standard and family Genetic Algorithm
+%Describe the motivation of using GA and the motivation to modify the standard GA as we perform 
+
+Without loss of generality, we can assume that the mobile object always moves at its greatest speed as the sensors system is stable, the mobile object should move as fast as possible to minimise total time of appearance in the sensor field. Hence, we can calculate the total exposure through the differentiate of not only time but also distance. %insert Appendix above
+
+Consider a path $P$, since it is impossible to calculate the exact value, and acknowledging a proper approximation of the total exposure is enough for application purposes, we will divide the path by several points into small equidistant parts that has approximately equal exposure. As a result, the total value can evaluate through the sum of the exposure in the small parts, which will later be called as $S(P)$. And we can solve the minimal exposure path problem by finding the smallest $S(P)$ possible. Furthermore, since the parts are extremely small compared to the whole path. It is suitable to substitute the distance between two consecutive points on the path by their displacement ($d = \sqrt{dx ^ 2 + dy ^ 2}$)
+
+In this section, we will introduce a Family-based Genetic Algorithm to effectively tackle this problem.
+
+Due to the chaotic situation of the system of various sensors and obstacles, this problem is exceptionally complicated and contains numerous local minima, the Genetic Algorithm is a suitable choice because the diversity of the population and the stability of complexity may improve the solution over time, avoid being trapped in local minima and get preferable result in acceptable time.
+
+From experimental result, we can see that (see Experimental Results below), despite its known power and effectiveness, the original Genetic Algorithm seems not to be able to solve the minimal exposure with obstacle problem effectively. It can come from the fact that the individuals of the population can converge comprehensively leads to its falling into a local minima with very low probability of achieving better result.
+
+Therefore, our proposed algorithm will try to find the proper paths while minimising the selection effect on the diversity of the community. Paths are constantly removed despite the total exposure along them, and the selection process only takes place when an over-population occurs. However, the algorithm also constantly stores good paths even after their elimination to archive diverse genes for future generation.
+
+\subsection{Basic definitions}
+
+Before getting further into details about our proposed algorithm, it is essential to explain the basic definitions throughout the performing of the algorithm.
+
+\subsubsection{Individual presentation}
+
+Each individual ($I$) stands for a path from the left edge to the right edge (see figure below). An individual is modelled with the list of near points on that paths (the $n^{th}$ point on $I$ is called $I_n$). An individual has 2 variance states, age and fitness, with 2 static variables, adult age and death age.
+%insert figure below
+\begin{enumerate}
+	\item The age of an individual ($t_I$) at a certain point is the number of periods has passed from its birth.
+	\item The fitness of an individual ($f_I$) is the total exposure of the small parts in its model. From the statement above, our goal is to create an individual with the lowest fitness possible.
+	\item The adult age ($t_A$) is the age at which a certain individual is ready for crossover process.
+	\item The death age ($t_D$) is the age at which an individual is considered to be dead and removed from the population.
+\end{enumerate}
+
+\subsubsection{Population}
+
+A population ($P$) is a set of individual we perform our algorithm on. It is expected that the lowest fitness of $P$ ($f(P)$) is constantly decreased each time the algorithm is performed, while the diversity, which is the number of non-similar individuals exist in the population, does not dramatically fall, in order to prevent the algorithm from falling into local minima. A population is consisted of 2 subsets (see figure below):
+\begin{enumerate}
+	\item Family ($F$) is the set of alive individuals that are partitioned into pairs and will constantly perform the crossover with its mate. The monogamy constraint increase the stability of population genes compared to random crossover situation, which will maximise the probability of getting preferable individuals and minimise the rate of producing terrible ones (details explained below).
+	\item Singled ($S$) is the set of dead or alive individuals that are not paired. As a result, they will not perform crossover and their genes are not transmitted to other individual. Taking into consideration that there are also dead individuals in the Singled set, this comes from the fact that the Selection operation does not remove the individual from the Singled set and only marked it as dead.
+	
+\end{enumerate}
+Moreover, a population contains some variables that will help the algorithm acknowledging its flow, in which there are three static variables and one variance variable:
+\begin{enumerate}
+	\item Current population ($p$) is the number of alive individuals currently appear in the population, this variable is the centre that control every activities of the algorithm.
+	\item Min population ($p_{min}$) is the infimum of the current population. The current population reaches its minimum when the population is initialised at the beginning of the algorithm or each time the Selection process is triggered. Moreover, each time after the Selection occurs, if the Singled set has more elements than $p_{min}$, this set is also selected so that only $p_{min}$ individuals left in the Singled.
+	\item Max population ($p_{max}$) is the supremum of the current population. Each time the current population exceeds this amount, a selection process occurs to remove the individuals with the highest fitness so that the population reduced to the $p_{min}$.
+	\item Pairing rate ($R_{cross}$) is the lower limit of the ratio of the number of individuals which are paired into families. If the current ratio is lower than this infimum, the pairing process will occur.
+	\item Mutation rate ($R_{mutation}$) is the rate of the individuals that are mutated each cycle of the algorithm. The mutation process helps diverse the population in order to avoid local minima and achieve preferable results. 
+\end{enumerate}
+
+\subsection{The proposed Family-based Genetic Algorithm}
+
+The proposed algorithm is based on the standard Genetic Algorithm with significant modification on the operation of crossover process in order to avoid falling into local minima and maximising the efficiency of the algorithm.
+
+A population is initially instantiated with $p_{min}$ random individuals, for convenience, all the original individuals' ages are set to $t_A$ so that the pairing and crossover processes can occur right from the beginning of the algorithm.
+
+In each period of the algorithm, the processes are triggered consecutively in the  order: Pairing, Crossover, Mutation, Selection and Time update. The Pairing operation will put $p.R_{cross}$ random individuals together into families. These families will constantly create new individuals through crossover process. Then, the mutation
+
+\subsubsection{Population initialisation}
+
+\subsubsection{Pairing}
+
+Each time the pairing process is called, it will remove several individuals in both the Single and the Death, they are putting into pairs and added to the Family. 
+
+\subsubsection{Crossover}
+
+\subsubsection{Mutation}
+
+\begin{itemize}
+	\itemsep-0.2em
+	\item Their genes always represent y-coordinates within the sensor field $ \Omega $ , i.e. y-coordinate’s domains are $ [0, H] $.
+	\item The first gene and the last gene are always $ y_B $ and $ y_E $ respectively.
+	\item The x-coordinate of the $ j $th point is fixed at $ j\Delta x $. Therefore, the constraint (**) is always satisfied regardless of the y-coordinates value.
+\end{itemize}
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\centering\includegraphics[width=0.75\textwidth]{mptt/bdct1}
+	% figure caption is below the figure
+	\caption{The genotype individual representation}
+	\label{Fig.3}       % Give a unique label
+\end{figure*}
+
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\centering\includegraphics[width=0.5\textwidth]{mptt/individual1}
+	% figure caption is below the figure
+	\caption{The phenotype individual representation}
+	\label{Fig.4}       % Give a unique label
+\end{figure*}
+
+\begin{equation}
+\label{eqy}
+{y_j} = {y_{j - 1}} + k + random( - \Delta ,\Delta )
+\end{equation}
+
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\centering
+	\includegraphics[width=0.6\textwidth]{mptt/indi_init1}
+	% figure caption is below the figure
+	\caption{Execution of creating an individual in sensor field $\Omega$}
+	\label{Fig.5}
+\end{figure*}
+The pseudo code of the random initialization method is described as follows.\\
+\begin{algorithm}[H]
+	\SetAlgoLined
+	
+	\KwIn{
+		\begin{itemize}
+			\itemsep-0.2em
+			\item The width and length of sensor field $\Omega$: $W$, $H$\\
+			\item The scale unit: $\Delta x$  \\
+			\item The coordinate of source point: $B (0, y_B)$ \\
+			\item The coordinate of destination point:  $E(W, y_E)$
+			\item The neighbor value: $ \Delta $
+	\end{itemize}}	
+	\KwOut{\\An individual $indi = (y_B, y_1,..., y_E), $ \\}
+\Begin{
+	$indi \leftarrow {y_B}$\;
+$k \leftarrow ({y_E} - {y_B})/(n - 2)$\;
+%		Let $L(x_L, y_L)$ be the latest gene added to $indi$ and $C_L$ is the right half circle centered at $L$ with radius $\Delta s$\;
+%		$indi.add(I)$\;
+%%		Generate $R(0, y_R)$ on the left boundary with $distance(I, R) \vdots \Delta s$\;
+$i \leftarrow 1$\;
+\While{$i < n$} {
+			{$deltaY \leftarrow k + random( - \Delta ,\Delta )$ }\;
+			\If {$(y + {\rm{deltaY > H }}\left\| {y + {\rm{deltaY < 0}}} \right.)$}{ deltaY = - deltaY }	
+$y \leftarrow y + deltaY$\;
+$ i\leftarrow i+1 $\;
+}
+$indi \leftarrow indi \cup y $\;
+}
+\caption{\textbf{Individual Initialization}} 
+\label{alg1}
+\end {algorithm} 
+
+The pseudo-code of the heuristic initialization method is described as follows.
+\begin{algorithm}[H]
+	\SetAlgoLined
+	
+	\KwIn{
+		\begin{itemize}
+			\itemsep-0.2em
+			\item The width and length of sensor field $\Omega$: $W$, $H$\\
+			\item The scale unit: $\Delta s$  \\
+			\item The coordinate of source point: $B (0, y_B)$ \\
+			\item The coordinate of destination point:  $E(W, y_E)$
+			\item The neighbor value: $ \Delta $
+	\end{itemize}}	
+	\KwOut{\\An individual $indi = (y_B, y_1,..., y_E), $ \\}
+\Begin{
+$k \leftarrow ({y_E} - {y_B})/(n - 2)$\;
+$ y \leftarrow random(0,H) $\;
+$indi \leftarrow indi \cup {y_B}$\;
+$indi \leftarrow indi \cup y$\;
+	$i \leftarrow 2$\;
+		\While{$i < n$} {
+			{$deltaY \leftarrow k + random( - \Delta ,\Delta )$ }\;
+			\If {$y + deltaY > H\left\| {y + deltaY < 0} \right.$}{ deltaY = - deltaY }	
+			$y \leftarrow y + deltaY$\;
+			$indi \leftarrow indi \cup y $\;
+			$ i\leftarrow i+1 $\;
+		}
+	$ y\leftarrow y_E $
+	}
+	\caption{\textbf{Heuristic Individual Initialization}} 
+	\label{alg2}
+\end {algorithm} 
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{
+		 \\ An individual $indi = (y_B, y_1,..., y_E), $\\ }	
+	\KwOut{\\Value exposure of each individual \\}
+	\Begin{
+	$ e =0 $\;
+	\ForEach{$p \in indi$ }{
+$ 	ep=0 $\;
+$dp = {\rm{distance(p, p\_next)}}$\;
+\eIf{$dp \ge 1$}
+	{${p_0} = p$\;
+	$ i=1 $\;
+	\While{$dp < 0{\rm{  \wedge  }}{p_i} \in line(p,p{\rm{\_next)  \wedge  distance(}}{{\rm{p}}_{i - 1}},{p_i}{\rm{)}} \le {\rm{delta\_d}}$}
+		{${p_i} \in line(p,p{\rm{\_next}})$\;
+		$ep +  = p * {\rm{distance(p, p\_next)}}$
+		}
+		$ep = p*{\rm{distance(p, p\_next)}}$}
+
+}
+\Return $ ep $
+	}
+	\caption{\textbf{Fitness function}} 
+	\label{alg3}
+	\end {algorithm} 
+
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\centering \includegraphics[width=0.5\textwidth]{epsfile1/Lambda}
+	% figure caption is below the figure
+	\centering \caption{Execution of $\gamma C$  crossover operator}
+	\label{Fig.7}       % Give a unique label
+\end{figure*}
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{\begin{itemize}
+						\itemsep0em
+						\item The parents: $ indi1 $, $ indi2 $
+						\item Threshold: ${\Delta _{er}}$  
+				\end{itemize}}	
+	\KwOut{\\Value exposure of each individual: $ child1 $, $ child2 $ \\}
+	\Begin{
+	Randomly generate $ idc $ that $ 0 < idc < n $\;
+	\For{$ i= 1.. n $}{$ child1[i] = indi1[i] $}
+	\While{$(i < n) \wedge (distance{\rm{ }}(child1\left[ i \right],{\rm{ }}indi2[i + 1] ) > {\Delta _{er}})$}
+		{$ child1\left[ {i + 1} \right]{\rm{ }} = {\rm{ }}\left( {{\rm{ }}child1\left[ i \right]{\rm{ }} + {\rm{ }}indi2\left[ {i + 1} \right]{\rm{ }}} \right){\rm{ }}/{\rm{ }}2 $\;
+		$ i +  + 	 $			
+		}
+	\While{$ (i < n) $}
+	{$ child1[i] = indi2[i] $\;
+	$ i++ $}
+	Randomly generate $ λ $ that $ -1 < \gamma < 2 $\;	
+	\For{$ i= 0 ... n-1 $}
+		{$ child2[i+1] =\gamma * child1[i] + (1- λ) indi2[i+1] $\;
+		\If{$ child2[i] < 0 $)} {    $ child2[i] = 0 $}
+		\If{$ (child2[i] > H) $}    {$ child2[i] = H $}			
+		}	
+\Return{$ child1 $, $ child2 $}
+	}
+	\caption{\textbf{Crossover Operations}} 
+	\label{alg4}
+\end{algorithm}	 
+\textbf{Local Search Operator:} 
+
+
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{Individual: $ indi $}	
+	\KwOut{ Mutate individual:  $indi'$}
+	\Begin{
+		\For{$ i= 0,..., n-1 $}{
+		Generate $\nu[i]  \sim N(0,{\delta ^2})$\;
+		$ indi'[i+1] = indi[i] + \nu[i]  $
+		}
+		
+		\Return{$ indi' $}
+	}
+	\caption{\textbf{Mutation operator}} 
+	\label{alg6}
+\end{algorithm}
+	
+
+
+\begin{equation}
+\label{eq15}
+V_i(t + 1) = \omega V(t) + {c_1}{r_1}(Pbest_(t) - U_i(t)) + {c_2}{r_2}(Gbest(t) - U_i(t)) + {c_3}A_i(t)
+\end{equation}
+where
+\begin{itemize}
+	\item  $V_i(t)$ is the velocity vector of the $i$-th particle (or individual) at the time $i$.
+	\item  $ {U_i}(t) $ is the location vector of the $i$-th particle in the search space at the time $i$.
+	\item $Pbest_i(t)$ is the best position that the particle had achieved until the time $i$.
+	\item $Gbest(t)$ is the best position that the particle in the swarm system that had achieved until the time $i$.
+	\item ${r_1},{r_2}$ are random numbers between $ (0,1) $ and generated at each iteration randomly for each particle.
+	\item $\omega ,{c_1},{c_2},{c_3}$ are constants, in which $ \omega $ is consider as inertial, and ${c_1},{c_2},{c_3}$ called acceleration coefficient.
+	\item ${A_i}(t)$ is the acceleration vector for the tendency of escaping sensing area of $i$-th particle at the time $i$ that is defined as follow.
+\end{itemize}
+
+\begin{figure*}[h] 
+	\centering
+	\begin{tabular}{cc}
+		\includegraphics[width=0.35\linewidth]{epsfile1/cambien1} &\includegraphics[width=0.6\linewidth]{epsfile1/cambien3}\\
+		(a)&(b)
+	\end{tabular}
+	% figure caption is below the figure
+	\caption{Illustration how to calculate accelerate parameter causing by the gravitational forces when having 1 sensor (a), 3 sensors (b)}
+	\label{Fig.8}       % Give a unique label
+\end{figure*}
+
+\begin{figure*}[h] 
+	\centering
+	\begin{tabular}{cc}
+	\includegraphics[width=0.6\linewidth]{epsfile1/cambien2th1} &\includegraphics[width=0.5\linewidth]{epsfile1/cambien2th2} \\
+	
+	\end{tabular}
+	% figure caption is below the figure
+	\caption{Illustration how to calculate accelerate parameter causing by the gravitational forces when having 2 sensor with their difference position}
+	\label{Fig.9}       % Give a unique label
+\end{figure*}
+The pseudo code for HDWSN-PSO is following:\\
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{\begin{itemize}
+			\itemsep0em
+			\item Population $P$
+			\item Personal best and velocity of each individual
+	\end{itemize}}	
+	\KwOut{New generation $ P' $ }
+	\Begin{
+		 $ gBest $ = findBestIndividual($ P $)\;
+		\ForEach{$p \in P$}{
+		Calculate the acceleration $ {a_i}^t $\;
+		Generate random ${r_1},{r_2}$ \;
+	Update velocity of the individual\;
+Update location of the individual\;}
+		}
+	\caption{\textbf{Crossover Operations}} 
+	\label{alg7}
+	\end {algorithm}
+
+\section{Experimental results}
+First, the effects of important parameters (including operators of HDWSN-EA, HDWSN-PSO) are evaluated. After that, to prove the effectiveness of the proposed algorithms, comparison between HDWSN-EA, HDWSN-PSO and existing algorithms is tested and analyzed.
+\begin{itemize}
+	\item \textbf{Topology scenarios}: using different numbers of sensor nodes with different type of sensors, and difference sensing models to delve into the effectiveness of our algorithms in different network topologies.
+	\item \textbf{Parameter trial scenarios}: experimenting different values of some important parameters to explore how the performance of proposed algorithms are affected.
+\end{itemize}
+All simulations were experimented on a machine with Intel® Core™ i5-3230M 2.60 GHz with 4 GB of RAM under Windows 10 64 bit using Java language. 
+\subsection{Experimental setting}
+\subsubsection{Datasets}
+
+In order to obtain a reasonable dataset we propose a randomised algorithm to create $W \times H$ sensoring fields with a certain number of obstacles covering a known percentage of area and a certain number of uniformly distributed censors that do not lie in any constructed obstacle.
+
+Firstly, we will construct a randomised algorithm to obtain the set of obstacles. The obstacles are convex polygons cover the area that block the moving path of object and also sensoring signal from sensors.
+\begin{enumerate}
+	\item The first step is to randomly distribute the total obstacle area into a certain number of obstacles. The method is presented as follow:
+	\begin{itemize}
+		\item Firstly, to obtain $n$ numbers with the sum of $N$, we chooses $n - 1$ uniformly distributed random numbers in the interval $[0; N]$, along with $0$ and $N$ we have an array of $n + 1$ numbers lie in the interval $[0; N]$.
+		\item Sort the obtained array in descending order.
+		\item If we continuously do a subtraction between 2 consecutive terms of the previous array, we will obtain $n$ uniformly distributed random numbers that have the sum of $N$.
+	\end{itemize}
+	As we have the random area of each obstacle, now we will construct each separately.
+	\item Consider a random known-area obstacle, firstly, we can see that in order to construct it, we can ignore the area constraint since this constrain can easily be satisfied through a homothetic transformation, and secondly, we can bounds the sides in an finite interval from 0 for the same reason. With these 2 observations, we can start constructing the polygon as follow:
+	\begin{itemize}
+		\item Choose the number of vertices of the polygon ($V$), this can be done through any randomised function. In our article, we use a quadratic equation to transform an uniform distribution into one varies from 3 to 6 with the peak at 4. Hence, the chance of the polygon to have 4 vertices is greatest.
+		\item Obtain the array of angle. It is known that a polygon with $V$ vertices has angles sum up to $(V - 2).\pi$. Hence, the problem can be done with the same method as described in 1.
+		\item Construct $V - 2$ sides of the polygon one be one, each side make a known angle with the previous side, has a random length between 0 and 1. With the exception of the first side can lie in an arbitrary angle.
+		\item The last 2 sides are constructed by the rays present the angle made by them and their neighbours. If these 2 rays intersect, the algorithm expires, return a random polygon with arbitrary area, else the previous step will be repeat until a polygon is created.
+		\item The last step of the method is a homothety to resize the polygon with the known original area. A check occurs to make sure the circumscribe rectangle of the polygon can lies inside the field, otherwise these step will repeat until a satisfied polygon is constructed.
+	\end{itemize}
+	After finishing these steps, we obtain a set of obstacles having certain areas and can lie inside the sensoring field, the last step is only to locate these obstacles such that they do not overlay with each other and do not exceed the sensoring field.
+	\item The last step of the algorithm is to randomly locate the position of the obstacles. This can again be done through trial and error method, the obstacles are repeatedly put inside the field until they are all satisfied, the obstacles construction can be redone if necessary.
+\end{enumerate}
+
+After these step we have successfully construct a random set of obstacle. It is also noticeable that this contructing algorithm can be manipulated easily to constrain the properties of the obstacles for convenience. For example, we can bound the area of obstacles such that no obstacle is too small or too big, or we can bound the angles of the obstacle to obtain a result more preferable to our application purposes.
+
+The final step of creating field data is to randomly deploy sensors inside the area. The sensors are put continuously in the field following certain distribution rules until it lies outside every obstacle exist.
+
+With this algorithm, we successfully create a total of 90 topologies, with 3 values for the number of sensors, 2 values for the number of obstacles, 3 values for the total area of obstacles covering the area of the field and 5 topologies for each combination of those parameters.
+
+The datasets used in this experiment are concluded of two sets: 
+\begin{itemize}
+	\item Set 1 comprises heterogeneous sensor nodes with Boolean directional sensing model. Each instance has four sensor types with sensing radii $ r_1 $, $ r_2 $, $ r_3 $ and $ r_4 $. The numbers of sensors of each type are $ n_1 $, $ n_2 $, $ n_3 $ and $ n_4 $. Four angle of view are $ \alpha_1 $, $ \alpha_2 $, $ \alpha_3 $ and $ \alpha_4 $. The detail of Set 1 can be found in Table \ref{tab1}.
+	\item Set 2 consists of instances in Table \ref{tab2} that are composed of homogeneous sensor nodes with attenuated directional sensing model with $C=1$, $\beta =1$, $\lambda =1$. The detail of Set 2 can be found in Table \ref{tab2}.
+\end{itemize}
+\begin{table}
+	% table caption is above the table
+	\caption{Experiment Instance for heterogeneous- Dataset 1}
+	\label{tab1}       % Give a unique label
+	% For LaTeX tables use
+	\begin{center}
+		\renewcommand{\arraystretch}{1.3}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{cccccccccccccc}
+				\hline\noalign{\smallskip}
+				Instance	&	$\alpha1$	&	r1	&	n1	&	$\alpha2$	&	r2	&	n2	&	$\alpha3$	&	r3	&	n3	&	$\alpha4$	&	r4	&	n4	&	n	\\
+				\noalign{\smallskip}\hline\noalign{\smallskip}
+				HeB1	&	15	&	50	&	10	&	30	&	60	&	8	&	45	&	70	&	8	&	60	&	80	&	4	&	30	\\
+				HeB2	&	30	&	60	&	8	&	45	&	70	&	12	&	60	&	80	&	10	&	15	&	50	&	10	&	40	\\
+				HeB3	&	45	&	70	&	12	&	60	&	80	&	10	&	15	&	50	&	15	&	30	&	60	&	13	&	50	\\
+				HeB4	&	60	&	80	&	7	&	15	&	50	&	20	&	30	&	60	&	18	&	45	&	70	&	15	&	60	\\
+				HeB5	&	15	&	50	&	15	&	30	&	60	&	15	&	45	&	70	&	20	&	60	&	80	&	10	&	70	\\
+				HeB6	&	30	&	60	&	20	&	45	&	70	&	13	&	60	&	80	&	20	&	15	&	50	&	27	&	80	\\
+				HeB7	&	45	&	70	&	25	&	60	&	80	&	25	&	15	&	50	&	20	&	30	&	60	&	20	&	90	\\
+				HeB8	&	60	&	80	&	25	&	15	&	50	&	25	&	30	&	60	&	25	&	45	&	70	&	25	&	100	\\
+				\noalign{\smallskip}\hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+\begin{table}
+	% table caption is above the table
+	\caption{Experimental instances for homogeneous network using attenuated model (Data set 2)}
+	\label{tab2}       % Give a unique label
+	% For LaTeX tables use
+	\begin{center}
+		\renewcommand{\arraystretch}{1.5}
+		\resizebox{0.5\textwidth}{!}{
+			\begin{tabular}{cc|ccc}
+				
+				\hline\noalign{\smallskip}
+				Instance	&	Num	&	C & $\beta$	& $\lambda$	\\
+				\noalign{\smallskip}\hline\noalign{\smallskip}
+				HoA1	&	30	&	\multirow{8}{*}{1}	&	\multirow{8}{*}{1}	&	\multirow{8}{*}{1}		\\
+				HoA2	&	40	&		&		&		\\
+				HoA3	&	50	&		&		&		\\
+				HoA4	&	60	&		&		&		\\
+				HoA5	&	70	&		&		&		\\
+				HoA6	&	80	&		&		&		\\
+				HoA7	&	90	&		&		&		\\
+				HoA8	&	100	&		&		&		\\
+				\noalign{\smallskip}\hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+\subsubsection{Parameters}
+\begin{itemize}
+	\item The dimension of sensor field: $ W $ = 500, $ H $ =500
+	\item Source point $ B $: (0, 150) 
+	\item Destination point $ E $: (500, 350)	
+\end{itemize}
+\subsection{Algorithm parameters trials}
+The performance of the algorithms can be effected when major parameters are set in different way. In this section, various versions of the proposed algorithms with different parameters setting will be tested to find out the best version of parameters set.
+\subsubsection{HDWSN-EA operators}
+In this part, HDWSN-EA is a hybrid genetic algorithm that combines two crossover operators and a local search which are $ LC $, $ \lambda C $ crossovers and Golden local search respectively. To demonstrate the effectiveness of combining three operators, we setup four versions of HDWSN-EA in Table 3. Each of versions of HDWSN-EA applied to some of the three operators, and is experimented to evaluate the effects of these operators on the performance of each versions of HDWSN-EA.\\
+\begin{table}
+	% table caption is above the table
+	\caption{Operators setting for four versions of HDWSN-EA}
+	\label{tab3}       % Give a unique label
+	% For LaTeX tables use
+	\begin{center}
+		\renewcommand{\arraystretch}{1.0}
+		\resizebox{0.75\textwidth}{!} {
+			\begin{tabular}{cccc}
+				\hline\noalign{\smallskip}
+				&	LC 	&	$\lambda$ C 	&	Local search	\\
+				\noalign{\smallskip}\hline\noalign{\smallskip}
+				HDWSN-EA1	&$\checkmark$	&		&$\checkmark$		\\
+				HDWSN-EA2	&		&	$\checkmark$	& $\checkmark$		\\
+				HDWSN-EA3	&	$\checkmark$		&		$\checkmark$	&	\\
+				HDWSN-EA	&	$\checkmark$	&	$\checkmark$	&	$\checkmark$	\\
+				\noalign{\smallskip} \hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+\begin{table}
+	\caption{Comparison between four HDWSN-EA versions when running on the Data set 1 (Heterogeneous, Binary) (\textit{Mev - Minimal exposure value, Time - Computation time (second)})}
+	\label{tab4}
+	\begin{center}
+		\renewcommand{\arraystretch}{1.3}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+				\hline
+				\multirow{2}{*}{\textbf{INSTANCE}} & \multicolumn{2}{|c}{\textbf{HDWSN-EA1}} & \multicolumn{2}{|c}{\textbf{HDWSN-EA2}} & \multicolumn{2}{|c}{\textbf{HDWSN-EA3}} & \multicolumn{2}{|c|}{\textbf{HDWSN-EA}} \\ 
+				\cline{2-9} 
+				& Mev &Time(s) & Mev & Time(s)& Mev & Time(s) & Mev  & Time(s) \\ \hline
+				HeB1	&  \textbf{0.0}      &  88  &  23.0	   &  154 &  \textbf{0.0}      & 31  &  \textbf{0.0}      &  62  \\ \hline
+				HeB2	&  \textbf{0.0}      &  135 &  66.0	   &  199 &  \textbf{0.0}      & 174 &  \textbf{0.0}      &  370 \\ \hline
+				HeB3	&  \textbf{0.0}      &  51  &  \textbf{0.0}	   &  75  &  \textbf{0.0}      & 23  &  \textbf{0.0}      &  47  \\ \hline
+				HeB4	&  29.0289  &  387 &  36.2228  &  306 &  30.2228  & 268 &  \textbf{28.2228}  &  562 \\ \hline
+				HeB5	&  \textbf{12.0}	    &  428 &  129.1768 &  231 &  22.0     & 210 &  \textbf{12.0}     &  541 \\ \hline
+				HeB6	&  41.4904  &  490 &  255.2272 &  301 &  18.2325  & 340 &  \textbf{8.0}      &  716 \\ \hline
+				HeB7	&  45.3412  &  559 &  292.7759 &  425 &  46.2788  & 448 &  \textbf{43.2287}  &  948 \\ \hline
+				HeB8	&  257.2335	&  556 &  541.2702 &  373 &  201.4259 & 403 &  \textbf{192.3749} &  851 \\ \hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+
+The four versions of HDWSN-EA are simulated using the data Set 1. Other parameters of the algorithm are following table 4.\\
+Table 5 compares the performances of the four algorithms in terms of solution quality and computation time. Table 5 contains minimal exposure value (Mev) and computation time (time in seconds) of HDWSN-EA1, HDSN-EA2, HDSN-EA3 and HDSN-EA.\\
+Table 5 shows that HDWSN-EA accomplishes the best balance between obtained minimal exposure value and computation time. HDWSN-EA3 obtains the second best values of Mev but the running time is shorter compared to HDWSN-EA. HDWSN-EA2 without LC has the worst minimal exposure values (Mev). HDWSN-EA1 without C obtains quite small Mev values but it is still not as good as HDSN-EA3 or HDSN-EA. Furthermore, the result in convergence level and the standard deviation shows that HDWSN-EA with Local Search has better stability and converges faster than others. For the convergence level, HDWSN-EA2 archives the fastest of all while HDWSN-EA1 tends to keep on converging after 200 generations. These results indicates that:
+\begin{itemize}
+	\item Both LC and C operators are incomplete in some ways. For LC crossover operator, it helps child individual to be able to inherit good characteristics from parent individuals, thus, obtains better Mev values after generations. For C operator, on the other hand, it exacts the similar features between the parent individuals and pass them to children. Children created from C tend to converge faster compared to when using only LC. Therefore, to archive good solution as well as high convergence level, it is necessary to combine LC and C in the evolution algorithm for MEP –based- HDWSN problem.
+	\item Local Search in this evolution algorithm can improve the solution quality by searching in the neighbor area of the individual. However, Local Search also makes HDWSN-EA running slower since the searching area is larger. In some case, without Local Search, if the MEV values is still acceptable then it can be considered to skip this operator.	
+\end{itemize}
+
+In conclusion, in term of performance on solution quality, computation time as well as standard deviation and convergence level, HDWSN-EA is the best version of all. In the next sections, this version of HDWSN-EA will be applied for simulations.
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\includegraphics[width=0.4\textwidth]{epsfile1/hoituga1}
+	% figure caption is below the figure
+	\centering	\caption{Comparison of convergence level among versions of HDWSN-EA}
+	\label{Fig.10}       % Give a unique label
+\end{figure*}
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\includegraphics[width=0.4\textwidth]{epsfile1/dlc-ga}
+	% figure caption is below the figure
+	\centering	\caption{Comparison of standard deviation degree of HDWSN-EA versions under Binary sensing coverage model}
+	\label{Fig.12}       % Give a unique label
+\end{figure*}
+\subsubsection{HDWSN-PSO parameters}
+PSO algorithms in general has performance affected a lot by the value of coefficients that we choose.
+
+Nakisa et al. [21] indicated that modifying a parameter may cause a large effect on the performance of PSO algorithms. Thus, with the purpose exploit the best suitable of HDWSN-PSO’s parameters, we tune some parameters such as acceleration coefficients that listed in Table 6.
+\begin{table}
+	% table caption is above the table
+	\caption{Parameters setting for four versions of HDWSN-PSO}
+	\label{tab5}       % Give a unique label
+	% For LaTeX tables use
+	\begin{center}
+		\renewcommand{\arraystretch}{1.5}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{|l|c|c|c|c|}
+				\hline
+				%\noalign{\smallskip}
+				\multicolumn{1}{|c|}{\textbf{Parameter}}	& \textbf{HDWSN-PSO1} & \textbf{HDWSN-PSO2} & \textbf{HDWSN-PSO3} & \textbf{HDWSN-PSO} \\ \hline
+				
+				%\noalign{\smallskip}\hline\noalign{\smallskip}
+				
+				Parameter $c_1$ & 1 & 1 & 2 & 2 \\ \hline
+				Parameter $c_2$	& 1 & 2 & 1 & 1 \\ \hline
+				Parameter $c_3$	& 1 & 1	& 0 & 1 \\ \hline
+				Parameter w	& \multicolumn{4}{c|}{0.2} \\ \hline
+				Number of running times	& \multicolumn{4}{c|}{50} \\ \hline
+				Number of generations & \multicolumn{4}{c|}{200} \\ \hline
+				Population size	& \multicolumn{4}{c|}{200} \\ \hline
+				Scale unit $\Delta_x$ & \multicolumn{4}{c|}{0.1} \\
+						\hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+Four different versions of HDWSN-PSO are implemented and simulated in this part. The parameters of HDWSN-PSO and the different values of coefficients c1, c2 and c3 among those versions are given in Table 6. All versions are simulated on the data Set 1. The number of repeated running on each instance is 50 and the population size is 20.\\
+Table 7 compares the performances of the four versions in terms of on solution quality and computation time. Table 7 contains achieved minimal exposure value (Mev) and computation time (time in seconds) of HDWSN-PSO1, HDWSN-PSO2, HDWSN-PSO3 and HDWSN-PSO.\\
+\begin{table}
+	\caption{Comparison between four versions of HDWSN-PSO when running on the Data set 3 (Heterogeneous, Binary) (\textit{Mev - Minimal exposure value, Time - Computation time (second)})}
+	\label{tab6}
+	\begin{center}
+		\renewcommand{\arraystretch}{1.3}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+				\hline
+				\multirow{2}{*}{\textbf{INSTANCE}} & \multicolumn{2}{|c}{\textbf{HDWSN-PSO1}} & \multicolumn{2}{|c}{\textbf{HDWSN-PSO2}} & \multicolumn{2}{|c}{\textbf{HDWSN-PSO3}} & \multicolumn{2}{|c|}{\textbf{HDWSN-PSO}} \\ 
+				\cline{2-9} 
+				& Mev &Time(s) & Mev & Time(s)& Mev & Time(s) & Mev  & Time(s) \\ \hline
+				HeB1	&  23.0     &  27  &  23.0     &  28  &  23.0     &  29  &  23.0     &  24  \\ \hline
+				HeB2	&  0.0      &  39  &  0.0      &  38  &  0.0      &  39  &  0.0      &  38  \\ \hline
+				HeB3	&  0.0      &  9   &  0.0      &  8   &  0.0      &  7   &  0.0      &  9   \\ \hline
+				HeB4	&  8.0      &  60  &  8.0      &  60  &  0.0      &  61  &  0.0      &  61  \\ \hline
+				HeB5	&  0.0      &  54  &  0.0      &  52  &  0.0      &  53  &  0.0      &  52  \\ \hline
+				HeB6	&  229.5763 &  70  &  240.7398 &  71  &  238.7853 &  72  &  209.6135 &	71  \\ \hline
+				HeB7	&  210.6910 &  81  &  213.5147 &  85  &  221.6155 &  81  &  197.4346 &	81  \\ \hline
+				HeB8	&  524.3729 &  90  &  579.8914 &  90  &  558.3445 &  89  &  484.2091 &	91  \\ \hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+From observation, the version HDWSN-PSO gives the best performance in term of solution quality and converges fastest among all the versions. Other factors of computation time and coverage level, the performance of all the versions is similar and there is no significant difference. From analyzing, we found that the tuning the HDWSN-PSO’s parameters have a great influence on the performance. This method adjusts dynamically with the acceleration coefficients during the optimization process.\\
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\includegraphics[width=0.4\textwidth]{epsfile1/hoitupso}
+	% figure caption is below the figure
+	\centering	\caption{Comparison of convergence level among HDWSN-PSO versions }
+	\label{Fig.11}       % Give a unique label
+\end{figure*}
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\includegraphics[width=0.4\textwidth]{epsfile1/dlc-pso}
+	% figure caption is below the figure
+	\centering	\caption{Comparison of standard deviation degree of HDWSN-PSO versions under Binary sensing coverage model}
+	\label{Fig.13}       % Give a unique label
+\end{figure*}
+In conclusion, HDWSN-PSO is the best version of all. Therefore, in the next sections, the parameters used in HDWSN-PSO will be used for simulations. 
+
+\subsection{Computational Results}
+In this section, to prove the effectiveness of the proposed algorithms,first, the proposed algorithms will be compared and evaluated. After that, the better algorithm in term of performance will be compared to another algorithm from previous research which is the HGA-NFE \cite{b18} [18]. 
+\subsubsection{The saw-tooth degree}
+All of the previous studies about this problem seem to share in common issue i.e. MEPs often have shape like a saw-tooth wave, which may be a result of random initialization method. This outcome contrasts with realistic scenarios, in which the intruder may prefer to move in a smoother and shorter path thus, has a smaller value of exposure or a better algorithms. Therefore, assessing the degree of saw-tooth is necessary to give more practical insights about algorithms performance. The smaller saw-tooth degree of the solutions means that the proposed algorithm is more suitable to realistic scenarios, thus has better accuracy. To compute the saw-tooth degree of a solution or a path, the following method is used.
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\includegraphics[width=0.7\linewidth]{epsfile1/rangcua}
+	% figure caption is below the figure
+	\centering	
+	\caption{The computation of the saw-tooth degree}
+	\label{Fig.20}       % Give a unique label
+\end{figure*}
+A solution or a path is made from an array of two-dimensional points. Figure \ref{Fig.20} illustrates the computation of the saw-tooth degree \textit{$ D_{st} $$_i$}  of the $ i $th point. The saw-tooth degree \textit{$ D_{st} $$_i$} of the $ i $th point except for the first and the last point of the array is defined as the distance from that point to the line that contains both points $ (i-1) $th and $ (i+1) $th. The saw tooth degree \textit{$ D_{st} $} of a path is defined as the average saw-tooth degree of every points on the path except for the first and the last point. Hence, it is safe to say that, the higher the saw-tooth degree of a path, the less smooth the path will be. When this measure is applied to our problem, saw-tooth degree solutions are calculated and analyzed to give some wisdom about the proposed algorithms.
+\subsubsection{Comparison between HDWSN-EA and HDWSN-PSO}
+\textbf{Heterogeneous Network with Binary Sensing Model}\\
+In this part, HDWSN-EA and HDWSN-PSO will be compared when being simulated in the heterogeneous network with binary model of Set 1. The parameters for these two algorithms are set as the best version of themselves which are showed in table 4 and table 8. In addition, the third version of HDWSN-EA will be used.
+\begin{table}
+	\caption{Comparison between HDWSN-EA and HDWSN-PSO when running on Data set 1 (Heterogeneous - Binary) (\textit{Mev - Minimal exposure value, Time - Computation time (second)})}
+	\label{tab7}
+	\begin{center}
+		\renewcommand{\arraystretch}{1.3}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				\multirow{2}{*}{\textbf{INSTANCE}} & \multicolumn{2}{|c}{\textbf{HDWSN-EA}} & \multicolumn{2}{|c|}{\textbf{HDWSN-PSO}} \\ 
+				\cline{2-5} 
+				& Mev & Time(ms) & Mev & Time(ms) \\ \hline
+				HeB1	& \textbf{0.0}      &  62  &  23.0     &  24	 \\ \hline
+				HeB2	&	\textbf{0.0}    &  370 & \textbf{0.0}      &  38	 \\ \hline
+				HeB3	& \textbf{0.0}      &  47  & \textbf{0.0}      &  9  	 \\ \hline
+				HeB4	&	28.2228  &  562 &  \textbf{0.0}      &  61  \\ \hline
+				HeB5	&	12.0     &  541 &  \textbf{0.0}      &  52 \\ \hline
+				HeB6	&	\textbf{8.0}      &  716 &  209.6135 &	71 \\ \hline
+				HeB7	&	 \textbf{43.2287}  &  948 &  197.4346 &	81 \\ \hline
+				HeB8	&	\textbf{192.3749} &  851 &  484.2091 &	91 \\ \hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+Table 9 shows the results on minimal exposure value and computation time of HDWSN-EA and HDWSN-PSO when simulated on Set 1. From observation, it can be seen that HDWSN-EA gives much better minimal exposure result in the large scale topologies (HS6 – HS8). However, for the small scale topologies (HS1 – HS5), HDWSN-PSO gives better results, especially in HS4 and HS5, HDWSN-PSO gives the optimal result with the minimal exposure value of 0 while HDWSN-EA can’t. The reason is     Furthermore, HDWSN-PSO has much smaller running time compared to HDWSN-EA, which is worth considering when dealing with extreme large sensing field. For the standard deviation results, both algorithms give the similar values in the small scale instances, while in large scale instances, HDWSN-EA archives much smaller values compared to HDWSN-PSO.
+\begin{table}
+	\caption{Comparison between HDWSN-EA and HDWSN-PSO when running on Data set 2 (Homogeneous - Attenuated) (\textit{Mev - Minimal exposure value, Time - Computation time (second)})}
+	\label{tab8}
+	\begin{center}
+		\renewcommand{\arraystretch}{1.3}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{|c|c|c|c|c|c|c|}
+				\hline
+				\multirow{2}{*}{\textbf{INSTANCE}} & \multicolumn{2}{|c}{\textbf{HDWSN-EA}} & \multicolumn{2}{|c|}{\textbf{HDWSN-PSO}} \\ 
+				\cline{2-5} 
+				& Mev & Time(ms) & Mev & Time(ms) \\ \hline
+				HoA1	&	\textbf{61.3795}	 &	80619	 &	61.4695	 &	44013	 \\ \hline
+				HoA2	&	72.9618	 &	87374	 &	\textbf{72.8976}	 &	58520	 \\ \hline
+				HoA3	&	\textbf{92.3719}	 &	122374 &	92.7531	 &	82322	 \\ \hline
+				HoA4	&	\textbf{133.9180} &	136993 &	134.6243 &	101397  \\ \hline
+				HoA5	&	\textbf{155.7870} &	178670 &	156.7831 &	106640  \\ \hline
+				HoA6	&	\textbf{142.5935} &	176942 &	143.5027 &	125953 \\ \hline
+				HoA7	&	\textbf{182.1526} &	188889 &	183.0316 &	142781 \\ \hline
+				HoA8	&	\textbf{228.8139} &	257109 &	231.3809 &	166308 \\ \hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+
+\textbf{Homogeneous Network with Attenuated Sensing Model}\\
+In this part, the data Set 2 with homogeneous network and attenuated sensing model will be used for simulation. The parameters for the two algorithm is the same as in section a. Table 10 shows the results on minimal exposure value and computation time of HDWSN-EA and HDWSN-PSO when simulated on Set 2. From observation, we can see the outcome is different this time compared to the binary model. In most of the instances regardless of scale, HDWSN-EA gives the better minimal exposure value than HDWSN-PSO. In the meanwhile, HDWSN-PSO still gives the better running time compared to HDWSN-EA. Moreover, different from the case of Boolean Model, in the Attenuated Model, the value of MEV obtained by the two algorithms is very closed and HDWSN-EA is slightly better than HDWSN-PSO. In some cases, when the solution quality doesn’t show any big difference, the shorter running time of HDWSN-PSO could be preferred. For the standard deviation, different from the binary model, HDWSN-PSO gives more stable results compared to HDWSN-EA.\\
+In conclusion, in term of solution quality, HDWSN-EA in general is better algorithm compared to HDWSN-PSO while in term of computation time and stability, HDWSN-PSO is better algorithm. In the next section, for the best solution quality, HDWSN-EA will be taken to compare with a previous approach which is HGA-NFE [18].
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\includegraphics[width=0.4\textwidth]{epsfile1/dlc-all-sensor}
+	% figure caption is below the figure
+	\centering	\caption{Comparison of standard deviation degree between HDWSN-EA and HDWS-PSO under attenuated sensing coverage model with all sensing intensity}
+	\label{Fig.14}       % Give a unique label
+\end{figure*}
+\subsubsection{Comparison between HDWSN-EA and HGA-NFE}
+The above experiment results evidence that HDWSN-EA is better than the compared algorithms in term of solution quality. In this part, we take HDWSN-EA and compare it with state of the art methods which is HGA-NFE \cite{b17}. HGA-NFE is said to be the best algorithm so far in this problem since it is proven to be better than all of the classic approaches such as Voronoi and grid-based method. The HGA-NFE method is replicated to compare with our MEP- based- HDWSN problem. To make a fair comparison, the data set of HDWSN-EA have been set up according to data set based on the parameters of HGA-NFE in \cite{b17}. Note that these parameters have been chosen so that HDWSN-EA and HGA-NFE share the same number of fitness functions and calculation. 
+\begin{table}
+	\caption{Comparison between HDWSN-HGA and HGA-NFE when using different $ \Delta_x $ values (\textit{Mev - Minimal exposure value, Time - Computation time (second)})}
+	\label{tab9}
+	\begin{center}
+		\renewcommand{\arraystretch}{1.3}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				\multirow{2}{*}{\textbf{INSTANCE}} & \multirow{2}{*}{\textbf{$\Delta_x$}} & \multicolumn{2}{c}{\textbf{HDWSN-EA}} & \multicolumn{2}{|c|}{\textbf{HGA-NFE}} \\ 
+				\cline{3-6}
+				& &  Mev & Time(ms) & Mev & Time(ms)  \\ \hline
+				data\_30 & 40  & 47.5310  & 1926  & \textbf{46.3499}  & 3462    \\ \hline
+				data\_30 & 80  & \textbf{45.6262}  & 3745  & 49.4204  & 6858   \\ \hline
+				data\_30 & 100 & 49.6727  & 4547  & \textbf{48.5669}  & 15636  \\ \hline
+				data\_40 & 40  & \textbf{48.0688}  & 2289  & 50.9290  & 15482   \\ \hline
+				data\_40 & 80  & \textbf{46.4660}  & 14861 & 66.9345  & 24975  \\ \hline
+				data\_40 & 100 & \textbf{55.7765}  & 22692 & 119.7098 & 25128  \\ \hline
+				data\_50 & 40  & \textbf{102.5744} & 18700 & 131.0987 & 8874    \\ \hline
+				data\_50 & 80  & \textbf{108.7250} & 18524 & 145.8908 & 14859  \\ \hline
+				data\_50 & 100 & \textbf{102.9296} & 11771 & 149.9032 & 19673  \\ \hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+Table 10 contents result on minimal exposure value and computation time of HDWSN-EA and HGA-NFE with ∆x varies from 40 to 100 in which ∆x is equivalent to the parameter code size in \cite{b17}.
+
+From observation, it can be seen that HDWSN-EA gives the better performance in both terms of solution quality and computation time compared to HGA-NFE, especially in the large scale instances. This result is expected since the operators of HGA-NFE is various and more complicated. Firstly, HGA-NFE uses Upside-down operator to reduce the saw tooth degree of the solution, thus, increases the computation time. On the other hand, HDWSN-EA’s crossovers already include reducing the saw tooth degree in the operation. Therefore, HDWSN-EA runs faster and obtains better solution compared to HGA-NFE. \\
+Secondly, the Local Search Operator applied in HGA-NFE requires more objective-function-calculation-times and creates more saw tooth path in the individuals compared to the Local Search in HDWSN-EA. Therefore, with the same number of objective-function-calculation-times, HDWSN-EA gives better solution compared to HGA-NFE.\\
+In conclusion, even with a shorter running time, the performance of HDWSN-EA is much better than the performance of HGA-NFE. This result proves that out proposed algorithm is better and more efficient that previous algorithms.
+
+\section{Experimental results}
+The MEP problem in HDWSN, which is the subject of investigation in this paper, has significant meaning for identifying the weaknesses in terms of coverage of HDWSNs. The knowledge of MEP is useful. A solution to the MEP problem can be used to determine the most vulnerable path in a sensor field and thereby find out how well the sensors protect the region against unauthorized intrusion. Additional sensors can then be deployed along the minimal exposure path to improve the quality of coverage and reduce the exposure of that path. Compared to homogeneous DSNs, heterogeneous ones are more practical network models, so MEP-based-HDWSN solutions will become more complicated. Two evolution algorithms proposed to solve the MEP- based- HDWSN …. Several essential parameters of the algorithms such as $\Delta s$, $ c_1 $, $ c_2 $ and $ c_3 $ are also experimented. To explore how good each proposed algorithm is, the proposed algorithms are compare together as well as the state of algorithms solving MEP problems. The experimental results show that our developed algorithms are highly suitable to the model and more effective than previous approaches. The results also prove that the solutions by HDWSN-EA are overall better than the solutions by HDWSN-PSO but with a higher cost of computation time with the same value of ∆s. Depending on our demand for the solution (better quality or less computation time), we can decide which algorithm to use. In addition, the proposed algorithms can not only improve the results and computation time but also be applied to large-scale HDWSNs. Therefore, the algorithms can produce high quality results efficiently and can be used as a performance and worst-case coverage analysis tool in HDWSNs. We have successfully solved MEP-based-HDWSN by metaheuristic algorithms, however, we will discuss ongoing research on MEP- based- HDWSN enhancement techniques in HDWSNs.
+
+
+
+
+
+
+
+%\paragraph{Selection Operator:} A special characteristic of genetic algorithms is stability of population size, i.e. the number of individuals in the population does not change over generations. However, genetic operators such as crossover and mutation add new individuals to the population. Selection operator, therefore, is required to maintain the original population size. In the GA-MEP, the fitness of each individual is calculated after reproduction. Then, only the fitness individuals are kept, and the evolution process continues until the fixed number of generation is reached.
+%\subsection{Complexity Analysis}
+%In this section, the complexity of GA-MEP will be analyzed and assumption which can made to assess the limitation of proposed algorithms. To be more specific, the complexity of GA-MEP will be evaluated by the time complexity of fitness function calculation. From the individual representation method, it extrapolates that, if the subinterval $ \Delta s $ is constant then the number of genes for each individual will be $ O(W+H) $. For each gene of an particular individual, the algorithm calculates the probability of detection for each sensor in the sensing field, so, requires $ O(N) $ where $ N $ is the number of sensors. Hence, the total time complexity for fitness function calculation of GA-MEP is $ O((W+H)*N) $.
+%
+%Based on the scale level of WSNs, we have the time complexity for fitness function calculation of GA-MEP is $ O((W+H)*N) $. Assumption that, the network analyst wants to apply GA-MEP on an extremely large WSNs, with both $ W $ and $H$ are 5000 meters and 1000 deployed sensors, the time complexity for fitness function calculation will be around $ O(10^7) $. This value means that it can calculate the fitness of 10 individuals in 1 second and of 36000 individual in 1 hour. Depending on the chosen parameters of GA-MEP, the algorithm can obtain optimal solution after a few hours.
+%\section{Experimental Results}
+%First, the effects of important parameters (including the number of sensor nodes,
+%the threshold $ A $ and the subinterval $\Delta s $) are evaluated. After that, to prove the
+%effectiveness of the proposed algorithms, comparison between GB-MEP, GA-MEP and existing algorithms is tested and analyzed.
+%\begin{itemize}
+%	\item \textbf{Topology scenarios:} using different numbers of sensor nodes with different distribution methods to delve into the effectiveness of our algorithms in different network topologies.
+%	\item \textbf{Parameter trial scenarios:} experimenting different values of some important parameters to explore how the performance of proposed algorithms are affected. 
+%\end{itemize}
+%\subsection{Experimental Setting}
+%We simulated a total of 240 topologies, divided into three different types of networks based on the way sensors are deployed, each of which contains 80 topologies. All of the sensors are deployed in the sensor field  with size of 500 x 500 by three deployment methods which are:
+%\begin{itemize}
+%	\item \textbf{Exponential distribution method:} a very simple method for generating exponential variates is based on inverse transform sampling. With $U$ as a uniform variate on $ (0, 1) $, the exponential variate $ T $ is computed by: $T = \frac{{ - \ln (U)}}{\lambda }$,	where $ \lambda $ is the rate parameter of the distribution. In here $\lambda = 1 $, $ x $-coordinate of a sensor is generated as an exponential variate within $ [0, W] $ and its $ y $-coordinate is generated as an exponential variate within $[0, H]$.
+%	\item \textbf{Uniform distribution method:} each sensor is generated by $ (x, y) $ coordinate where $ x $ is a random double in range $ [0, W] $ and $ y $ a random double in range $ [0, H] $.
+%	\item \textbf{Gaussian distribution method:} to generate a Gaussian distribution variate $ X $  ($\mu$  expectation, ${\sigma ^2}$ variance), we use the following equation: $X = \mu  + \sigma V$,
+%	where $V$ is a standard normal distribution variate (zero expectation, unit variance) generated by using Box-Muller transform \cite{b20}. In this case, $ x $-coordinate of a sensor is a Gaussian's distribution variate with $\frac{W}{2}$ expectation and ${\left( {\frac{W}{6}} \right)^2}$ variance. Note that, since 99.7\% of the variates are within $\left[ {\mu  - 3\sigma ,\mu  + 3\sigma } \right]$, $ x $-coordinate is expected to be within $ [0, W] $. Every variate outside the field will be regenerated. Similarly, $y$-coordinate of the sensor is determined.
+%\end{itemize}
+%
+%For each method listed above, 80 topologies are divided into eight sets, whose numbers of sensors deployed in the field are 30, 40, 50, 60, 70, 80, 90 and 100 respectively. For each set with these settings, we generated 10 different network topologies. Each topology is named by the following format: "$ Type\_Num\_Ord $" where $Type$ represents the topology's deployment method: "u" for Uniform distribution method, "e" for Exponential distribution method and "g" for Gaussian distribution method; $ Num $ is the number of sensors and $ Ord $ is the order of the topology in its set. 
+%
+%The source points and the destination points are fixed to $(0, 150)$ and $(500, 350)$. A probabilistic coverage model with parameters presented in Table \ref{tab:1} is applied to every sensor.
+%\begin{table}
+%	% table caption is above the table
+%	\caption{Experimental Parameters of Probabilistic coverage model}
+%	\label{tab:1}       % Give a unique label
+%	% For LaTeX tables use
+%	\begin{tabular}{ll}
+%		\hline\noalign{\smallskip}
+%		Parameter & Value  \\
+%		\noalign{\smallskip}\hline\noalign{\smallskip}
+%
+%	
+%		\noalign{\smallskip}\hline
+%	\end{tabular}
+%\end{table}
+%\label{sec:2}
+%as required. Don't forget to give each section
+%and subsection a unique label (see Sect.~\ref{sec:1}).
+%\paragraph{Paragraph headings} Use paragraph headings as needed.
+%\begin{equation}
+%a^2+b^2=c^2
+%\end{equation}
+
+% For one-column wide figures use
+
+%
+% For two-column wide figures use
+%\begin{figure*}
+%% Use the relevant command to insert your figure file.
+%% For example, with the graphicx package use
+%  \includegraphics[width=0.75\textwidth]{example.eps}
+%% figure caption is below the figure
+%\centering
+%\caption{Please write your figure caption here}
+%\label{fig:2}       % Give a unique label
+%\end{figure*}
+%
+% For tables use
+%\begin{table}
+%	% table caption is above the table
+%	\caption{Experimental parameters of probabilistic}
+%	\label{tab:1}       % Give a unique label
+%	% For LaTeX tables use
+%	\centering\begin{tabular}{ll}
+%		\hline\noalign{\smallskip}
+%		\textbf{Parameter} & \textbf{Value} \\
+%		\noalign{\smallskip}\hline\noalign{\smallskip}
+%		Threshold $ A $	&	6\\
+%		Constant $ C $	&	100\\
+%		Path attenuation exponent  	$\lambda $&	1\\
+%		Variance of noise ${\sigma ^2}$  	&	1\\
+%		Sensing radius $ r $	&	100\\
+%		\noalign{\smallskip}\hline
+%	\end{tabular}
+%\end{table}
+%\noindent Both algorithms share a parameter called the subinterval. GB-MEP only has one parameter which is $ \Delta s $. The other parameters of GA-MEP are listed in Table \ref{tab:2}.
+%\begin{table}
+%	% table caption is above the table
+%	\caption{Experimental Parameter of GA-MEP}
+%	\label{tab:2}       % Give a unique label
+%	% For LaTeX tables use
+%	\centering	\begin{tabular}{ll}
+%		\hline\noalign{\smallskip}
+%	\textbf{	Parameter} & \textbf{Value} \\
+%		\noalign{\smallskip}\hline\noalign{\smallskip}
+%		The number of running on each instance	&	50\\
+%		The number of generations	&	250\\
+%		The population size 	&	2000\\
+%		Crossover rate	&	90\%\\
+%		Mutation rate	&	10\%\\
+%		The value $ \alpha $ in ALX-$ \alpha $	&	0.5\\
+%		\noalign{\smallskip}\hline
+%	\end{tabular}
+%\end{table}
+%\begin{table}
+%	% table caption is above the table
+%	\caption{Experimental Parameter of HGA-NFE \cite{b12}}
+%	\label{tab:9}       % Give a unique label
+%	% For LaTeX tables use
+%	\centering	\begin{tabular}{ll}
+%		\hline\noalign{\smallskip}
+%	\textbf{	Parameter} & \textbf{Value} \\
+%		\noalign{\smallskip}\hline\noalign{\smallskip}
+%		The number of running on each instance	&	50\\
+%		The number of generations	&	100\\
+%		The population size 	&	200\\
+%		Crossover rate	& 50\%\\
+%		Mutation rate	&	5\%\\
+%		Codesize  & 500\\
+%		\noalign{\smallskip}\hline
+%	\end{tabular}
+%\end{table}
+%
+%All experimented were run on a machine with $\text{Intel}^{\text{\textregistered}}$ Core\texttrademark i7-4720HQ 2.60 GHz and 8 GB of RAM under Windows 10 using the Java Language. 
+%\subsection{Computation results}
+%In this part, to provide a better analysis, we proffer a special measure called the saw-tooth degree ${D_{ST}}$. After that, experiments testing different values of parameters such as subintervals and threshold $ A $ are implemented. Then, the best solution and  computation time of GB-MEP and GA-MEP for each topology found by both algorithms with the same distance between two consecutive points are compared. Finally, to examine the effectiveness of our algorithms, a comparison between GA-MEP and an existing genetic method HGA-NFE \cite{b12} has been executed. 
+%\subsubsection{The saw-tooth degree}
+%All of the previous studies about this problem seem to share same issue i.e. MEPs often have shape like a saw-tooth wave, which may be a result of random initialization method. This outcome contrasts with realistic scenarios, in which the intruder may prefer to move in a smoother and shorter path thus, has a smaller value of exposure or a better algorithms. Therefore, assessing the degree of saw-tooth is necessary to give more practical insights about algorithms performance. The smaller saw-tooth degree of the solutions means that the proposed algorithm is more suitable to realistic scenarios, thus has better accuracy. To compute the saw-tooth degree of a solution or a path, the following method is used.
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\includegraphics[width=0.7\linewidth]{epsfile/rangcua}
+%	% figure caption is below the figure
+%	\centering	
+%	\caption{The computation of the saw-tooth degree}
+%	\label{Fig.20}       % Give a unique label
+%\end{figure*}
+%A solution or a path is made from an array of two-dimensional points. Figure \ref{Fig.20} illustrates the computation of the saw-tooth degree \textit{$ D_{st} $$_i$}  of the $ i $th point. The saw-tooth degree \textit{$ D_{st} $$_i$} of the $ i $th point except for the first and the last point of the array is defined as the distance from that point to the line that contains both points $ (i-1) $th and $ (i+1) $th. The saw tooth degree \textit{$ D_{st} $} of a path is defined as the average saw-tooth degree of every points on the path except for the first and the last point. Hence, it is safe to say that, the higher the saw-tooth degree of a path, the less smooth the path will be. When this measure is applied to our problem, saw-tooth degree solutions are calculated and analyzed to give some wisdom about the proposed algorithms.
+%\subsubsection{Peformance of GB-MEP and GA-MEP by using different subintervals}
+%We experiment on different values of the subinterval $ \Delta s $ and observe how they affect the minimal exposure value of MEP, the computation time as well as the saw-tooth degrees of the two proposed algorithms. Decreasing the subinterval $ \Delta s $ increases the complexity and dimensionality of the instance.  As a result, the computation time also increases, but the obtained results are more accurate.
+%
+%For this experiment, the topology used is $r\_50\_1$, the subinterval $ \Delta s $ is set at different values which are 5, 2, 1, 0.5 and 0.2.\\
+%Table \ref{tab:3} shows the minimal exposure value, the computation time and the saw-tooth degree of the GB-MEP method in comparison to GA-MEP. Figure \ref{Fig.7}(a) presents changes in minimal exposure values, Figure \ref{Fig.7}(b) presents the computation time and Figure \ref{Fig.7}(c) presents the saw-tooth degree of the two algorithms using different values subinterval $\Delta s$.
+%\begin{table}[h]
+%	\caption{The comparison minimal exposure value, computation time and saw-tooth degree between GA-MEP and GB-MEP when using different subinterval $ \Delta s $, the topology used is \textit{u}\_50\_1 (\textit{Mev}: minimal exposure value; \textit{Time}(s): computation time per unit second; \textit{$ D_{st} $}: saw-tooth degree)}
+%	\begin{center}
+%		\renewcommand{\arraystretch}{1.3}
+%		\begin{tabular}{|c|c|c|c|c|c|c|}
+%			\hline
+%			\multirow{2}{*}{\textbf{Subinterval $ \Delta s $}}&\multicolumn{3}{c|}{\textbf{GB-MEP}}  
+%			&\multicolumn{3}{c|}{\textbf{GA-MEP}} \\
+%			\cline{2-7} 
+%			&\textbf{\textit{Mev}}& \textbf{\textit{Time(s)}}&\textbf{\textit{$ D_{st} $}}& \textbf{\textit{Mev}} &\textbf{\textit{Time(s)}}&\textbf{\textit{$ D_{st} $}}\\
+%			\hline
+%			5	&	0.112	&	0.2	&	1.36396	&	0.099	&	115.85	&	0.20582	\\ \hline
+%			2	&	0.098	&	0.8	&	0.49339	&	0.087	&	302.5	&	0.05808	\\ \hline
+%			1	&	0.094	&	4.5	&	0.25258	&	0.084	&	642.94	&	0.0106	\\ \hline
+%			0.5	&	0.093	&	47	&	0.11731	&	0.083	&	1231.6	&	0.0058	\\ \hline
+%			0.2	&	0.092	&	741.7	&	0.04333	&	0.081	&	3181.5	&	0.00212 \\\hline		
+%			\multicolumn{4}{l}{}
+%		\end{tabular}
+%		\label{tab:3}
+%	\end{center}
+%\end{table}
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\begin{tabular}{ccc}
+%		\includegraphics[width=0.31\linewidth]{epsfile/changeLenA}&\includegraphics[width=0.31\linewidth]{epsfile/changeLenB}&\includegraphics[width=0.31\linewidth]{epsfile/changeLenC} \\
+%		(a)&(b)&(c)
+%	\end{tabular}
+%	% figure caption is below the figure
+%	\centering	
+%	\caption{The chart presents the minimal exposure values, the computation times and the saw tooth degrees of GB-MEP and GA-MEP when using different subinterval $\Delta s$ values on topology $ u\_50\_1 $}
+%	\label{Fig.7}       % Give a unique label
+%\end{figure*}
+%Table \ref{tab:3} indicates that:
+%\begin{itemize}
+%	\item The exposure of MEP and the saw-tooth degree acquired by both GA-MEP and GB-MEP always improve when $\Delta s$ decreases. This result is expected since the MEP is better refined with smaller value of subinterval, thus, saw-tooth degree is reduced and the path is smoother. At the same time, the computation time increases significantly for both the algorithms when $ \Delta s $ decreases. This is also understandable since the complexity is significantly increased as well.
+%	\item The exposure values and the saw-tooth degrees acquired by GA-MEP are always better than those acquired by GB-MEP method for every value of $ \Delta s $. This indicates that GA-MEP has a higher stability. For computation time, GB-MEP is still much faster than GA-MEP. However, when the subinterval decreases, the computation time of GB-MEP increases much faster than GA-MEP does. This result shows that the complexity and dimensionality of the instance affect the performance of GB-MEP much more than they do to GA-MEP	
+%\end{itemize}
+%
+%In conclusion, for both GB-MEP and GA-MEP, using a smaller value of subinterval $ \Delta s $ will result in more accurate solutions as well as better saw-tooth degrees, but more computation time is required. 
+%\subsubsection{Exposure value when using different values of threshold A}
+%The threshold $ A $ affects not only the sensibility of the sensor network, but also the probability of false alarm. In this part, we experiment the threshold $ A $ with different values and observe its influence on the exposure value acquired by the two proposed algorithms.
+%
+%For this experiment, the topology $ {u}\_50\_1 $ is used, and the threshold $ A $ is set at different values which are 3, 4, 5, 6 and 7. 
+%Table \ref{tab:4} shows the exposure value obtained by GB-MEP and GA-MEP for each different values of threshold $ A $. Figure \ref{Fig.8} presents the changes in a minimal exposure values of the two algorithms using different values of threshold $ A $.
+%
+%Experimental results show that the smaller threshold $ A $, the higher the exposure value. This means with a smaller value of threshold $ A $, the probability of detecting an object as well as the sensibility of the sensor field are higher. On the other hand, this increases the probability of false alarm and the sensor field will be more prone to make wrong decision. This result is expected according to the realistic scenarios. Therefore, choosing a rational threshold $ A $ is essential when evaluating a wireless sensor network.
+%\begin{table}[h]
+%	% table caption is above the table
+%	\caption{ The minimal exposure value obtain from GB-MEP and the best solution of GA-MEP when threshold $ A $ varies from 3 to 7 on the topology  used is $ u\_50\_1$ (GB-Mev: the minimal exposure value obtains by GB-MEP; GA-Mev: the minimal exposure value obtains by GA-MEP) }
+%	\label{tab:4}       % Give a unique label
+%	% For LaTeX tables use
+%	\renewcommand{\arraystretch}{1.3}
+%	\centering\begin{tabular}{|c|c|c|}
+%		\hline
+%		\textbf{Threshold$ A$} &  \textbf{GB-Mev} & \textbf{GA-Mev}\\ \hline
+%		3	&	311.402	&	256.349	\\ \hline
+%		4	&	39.537	&	32.987	\\ \hline
+%		5	&	2.699	&	2.329	\\ \hline
+%		6	&	0.094	&	0.084	\\ \hline
+%		7	&	0.002	&	0.001	\\ \hline
+%		%\noalign{\smallskip}\hline\noalign{\smallskip}\noalign{\smallskip}
+%	\end{tabular}
+%	\renewcommand{\arraystretch}{1}
+%\end{table}
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\includegraphics[width=0.5\textwidth]{epsfile/changeA.eps}
+%	% figure caption is below the figure
+%	\centering	\caption{The chart presents the minimal exposure values obtained from GA-MEP when using different values of threshold $ A $ on topology $ u\_50\_1 $}
+%	\label{Fig.8}       % Give a unique label
+%\end{figure*}
+%\subsubsection{Computation time of GB-MEP in comparison to original method}
+%In order to experiment the improvement in computation time of GB-MEP compared to \cite{b18}, we apply these two methods to different complexity and dimensionality of the problem instance. As the subinterval $\Delta s$ decreases, the complexity and dimensionality of the instance also increase. While the result is more accurate, the computation time significantly increases.
+%
+%For this experiment, the topology used is $ u\_50\_1 $, the subinterval $ \Delta s $ is a set at different values which are 5, 2, 1, 0.5 and 0.2. The parameters of the probabilistic coverage model are set the same as in general experimental scenario Table\ref{tab:1}. Table \ref{tab:6} shows the computation time of the GB-MEP method in comparison to the original grid-based method namely OGB when different $ \Delta s $ values are used.
+%\begin{table}[h]
+%	% table caption is above the table
+%	\caption{Computation time comparison of OGB and GB-MEP when subinterval $\Delta s $ varies from 5 down-to 0.2 on instance $ u\_50\_1$ }
+%	\label{tab:6}       % Give a unique label
+%	% For LaTeX tables use
+%	\renewcommand{\arraystretch}{1.3}
+%	\resizebox{\textwidth}{!}{
+%		\begin{tabular}{|c|c|c|}
+%			\hline
+%			\textbf{Subinterval $ \Delta s $} &  \textbf{OGB Computation time (s)} & \textbf{GB-MEP Computation time (s)}\\ \hline
+%			5	&	0.41	&	0.2		\\ \hline
+%			2	&	1.5	&	0.8		    \\ \hline
+%			1	&	13.9	&	4.5		\\ \hline
+%			0.5	&	473.7	&	47		\\ \hline
+%			0.2	&	$ \infty $	&	741.7		\\ \hline
+%			%		\noalign{\smallskip}\hline\noalign{\smallskip}\noalign{\smallskip}
+%		\end{tabular}
+%	}
+%	\renewcommand{\arraystretch}{1}
+%\end{table}
+%
+%From observation, it can be proved that the computation time of grid-based method is significantly reduced thanks to the improvement in GB-MEP compared with the original one. This result is expected because the original grid-based method needs more time to initialize the Dijkstra table as well as to sort the priority queue. In contrast, the GB-MEP processes a much smaller priority queue that help reduce its computation time a lot.
+%\subsubsection{Performance of GA-MEP using different ratio of crossover operators}
+%In section 4, GA-MEP combines two crossover operators which are $ ALX-\alpha $ and $MSPB$ crossover. However, using different ratio of these two operators may result in different performance of GA-MEP. To determine the best ratio of the two operators for combining, we setup different versions of GA-MEP, each one uses different crossover ratio. The crossover rate remains 90\% as mentioned above, while the ratio of $ ALX-\alpha $ to MSPB is set at different values: 1.0/0.0, 0.8/0.2, 0.6/0.4, 0.4/0.6, 0.2/0.8 and 0.0/1.0.
+%
+%Each version of GA-MEP ran on fixed network topologies and hyper parameters. For this experiment, the topologies used are $ u\_30\_1 $, $ u\_40\_1 $, $ u\_50\_1 $, $ u\_60\_1 $, $ u\_70\_1 $, $ u\_80\_1 $, $u\_90\_1 $ and $ u\_100\_1 $. Table \ref{tab:5} shows the minimal exposure values, the computation time and the saw-tooth degrees of all the versions in different instances.
+%
+%From the observation, we can see that when using lower ratio of $ ALX-\alpha $ to $MSPB$, the exposure value tends to decrease while the saw-tooth degree slightly increases. For the computation time, there is no significant difference between all the versions. The performance when the ratio of $ ALX-\alpha $ to $MSPB$ is 0.2/0.8 is the best among all the versions. This result is reasonable for these following reasons:
+%\begin{itemize}
+%	\item For $ ALX-\alpha $, this operator creates a child by taking an average level between parents. If the two parents are similar to each other, it results in the child being similar to its parent but with better refinement and smoother path along the individual. Therefore, the MEP obtained is smoother and better refined, thus, its saw-tooth degree is smaller compared to the MEP of versions that use lower ratio of $ ALX-\alpha $. On the other hand, the child is always in a similar shape to its parents, so the MEP in the final is nearly straight due to the random individual initialization method. This makes the intruder is less likely capable of avoiding sensors. This is the reason for the high minimal exposure values when only using $ ALX-\alpha $. Moreover, in some case, the $ ALX-\alpha $ crossover doesn't improve the minimal exposure value after generations, results in the MEP found is one of the initialization individuals, which has abnormal high saw-tooth degree. 
+%	\item For the $MSPB$, this crossover operators is added to make the child be able to inherit good features from its parents. Moreover, two off-springs will be able to get out of their parent’s straight path and avoid sensors better. However, the MEP acquired by GA-MEP when using only MSPB is not at the best refined, as the child individuals also inherit the saw-tooth path from theirs ancestor. Therefore, the saw-tooth degree is increased when using higher ratio of $MSPB$, results in the minimal exposure value is not optimal without refinements of $ ALX-\alpha $. However, the $MSPB$ crossover operator is necessary to shape the path in flexible ways and allow the intruder to avoid the sensors better compared to $ ALX-\alpha $ crossover. At a consistent ratio of crossover operators, the MEP obtained will be both able to avoid sensors field and well refined, thus, has the optimal minimal exposure value.
+%\end{itemize}
+%
+%In conclusion, both $ ALX-\alpha $ and $MSPB$ are incomplete in some ways: in $ ALX-\alpha $, the intruder is unable to avoid sensors while in $MSPB$, the MEP has high saw-tooth degree that makes the minimal exposure value not efficient. From the result, the ratio 0.2/0.8 of $ ALX-\alpha $ to $MSPB$ results in the best performance of GA-MEP. Therefore, this ratio will be used for combining $MSPB$ and $ALX-\alpha$ in GA-MEP for the next sections.
+%\begin{table}[h]
+%	\caption{The best minimal exposure value, running time and saw-tooth degree obtained from GA-MEP1, GA-MEP2 and GA-MEP on topology $ u\_30\_1 $, $ u\_40\_1 $, $ u\_50\_1 $, $ u\_60\_1 $, $ u\_70\_1 $, $ u\_80\_1 $, $u\_90\_1 $ and $ u\_100\_1 $. (Mev: the minimal exposure value, Time: the computation time, $ D_{st} $: the saw-tooth degree of each version GA-MEP algorithms)}
+%	\begin{center}
+%		\renewcommand{\arraystretch}{1.3}
+%		\resizebox{\textwidth}{!}{
+%			\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+%				\hline
+%				\multirow{2}{*}{\textbf{Ratio of $ ALX-\alpha $ to MSPB}}& \multirow{2}{*}{\textbf{Value}}&\multicolumn{8}{c|}{\textbf{INSTANCE}} \\
+%				\cline{3-10} 
+%				&&\textbf{u\_30\_1}& \textbf{u\_40\_1}& \textbf{u\_50\_1}& \textbf{u\_60\_1} &\textbf{u\_70\_1} & \textbf{u\_80\_1}& \textbf{u\_90\_1} &\textbf{u\_100\_1} \\
+%				\hline
+%				\multirow{3}{*}{\textbf{1.0/0.0}}	&	\textbf{Mev}	&	\cellcolor{blue!20} 0.109873	&\cellcolor{blue!20}	0.256800	&\cellcolor{blue!20}	0.470097	&	\cellcolor{blue!20}1.278753	&\cellcolor{blue!20}	102.68345	&\cellcolor{blue!20}	29.463185	&\cellcolor{blue!20}	21.801215	&\cellcolor{blue!20}	8.504665
+%				\\ \cline{2-10} 
+%				&	\textbf{Time(s)}	&	522	&	681	&	644	&	843	&	1166	&	929	&	999	&	1366 \\ \cline{2-10} 
+%				& \textbf{$ D_{st} $}	&\cellcolor{green!20}	0.010275	&\cellcolor{green!20}	0.006148	&\cellcolor{green!20}	0.022221	&\cellcolor{green!20}	0.014448	&\cellcolor{green!20}	0.006420	&\cellcolor{green!20}	0.009573	&\cellcolor{green!20}	0.020363	&\cellcolor{green!20}	0.020262
+%				\\ \hline
+%				\multirow{3}{*}{\textbf{0.8/0.2}}	& \textbf{Mev}	&\cellcolor{blue!20}	0.006332	&\cellcolor{blue!20}	0.092741	&\cellcolor{blue!20}	0.086335	&\cellcolor{blue!20}	8.862282	&\cellcolor{blue!20}	14.005312	&\cellcolor{blue!20}	9.390958	&\cellcolor{blue!20}	1.125386	&\cellcolor{blue!20}	6.641975
+%				\\ \cline{2-10} 
+%				&	\textbf{Time(s)}	&	618	&	705	&	918	&	998	&	1242	&	1259	&	1294	&	1633
+%				\\ \cline{2-10} 
+%				& \textbf{$ D_{st} $}	&\cellcolor{green!20}	0.005960	&\cellcolor{green!20}	0.008624	&\cellcolor{green!20}	0.011583	&\cellcolor{green!20}	0.009281	&\cellcolor{green!20}	0.007071	&\cellcolor{green!20}	0.011419	&\cellcolor{green!20}	0.009886	&\cellcolor{green!20}	0.020286
+%				\\ \hline
+%				\multirow{3}{*}{\textbf{0.6/0.4}}	& \textbf{Mev}	&\cellcolor{blue!20}	0.006551	&\cellcolor{blue!20}	0.044655	&\cellcolor{blue!20}	0.084130	&\cellcolor{blue!20}	5.421575	&\cellcolor{blue!20}	12.335219	&\cellcolor{blue!20}	4.301196	&\cellcolor{blue!20}	0.679201	&\cellcolor{blue!20}	5.603098
+%				\\ \cline{2-10} 
+%				&	\textbf{Time(s)}	&	564	&	709	&	845	&	1019	&	1396	&	1212	&	1161	&	1579
+%				\\ \cline{2-10} 
+%				& \textbf{$ D_{st} $}	&\cellcolor{green!20}	0.005889	&\cellcolor{green!20}	0.009730	&\cellcolor{green!20}	0.018285	&\cellcolor{green!20}	0.022653	&\cellcolor{green!20}	0.010775	&\cellcolor{green!20}	0.015108	&\cellcolor{green!20}	0.012854	&\cellcolor{green!20}	0.011061
+%				\\ \hline
+%				\multirow{3}{*}{\textbf{0.4/0.6}}	& \textbf{Mev}	&	\cellcolor{blue!20} 0.004952	&\cellcolor{blue!20}	0.029753	&\cellcolor{blue!20}	0.084185	&\cellcolor{blue!20}	0.954310	&\cellcolor{blue!20}	11.635878	&\cellcolor{blue!20}	2.037081	&\cellcolor{blue!20}	0.670704	&\cellcolor{blue!20}	5.618266
+%				\\ \cline{2-10} 
+%				&	\textbf{Time(s)}	&	576	&	648	&	687	&	1060	&	1308	&	1195	&	1085	&	1637
+%				\\ \cline{2-10} 
+%				& \textbf{$ D_{st} $}	&\cellcolor{green!20}	0.005923	&\cellcolor{green!20}	0.009271	&\cellcolor{green!20}	0.018771	&\cellcolor{green!20}	0.014017	&\cellcolor{green!20}	0.015379641	&\cellcolor{green!20}	0.014363	&\cellcolor{green!20}	0.028331	&\cellcolor{green!20}	0.020853
+%				\\ \hline
+%				\multirow{3}{*}{\textbf{0.2/0.8}}	& \textbf{Mev}	&\cellcolor{blue!20}	\textbf{0.004700}	&\cellcolor{blue!20}	0.036691	&\cellcolor{blue!20}\textbf{0.084011}	&\cellcolor{blue!20}	\textbf{0.371369}	&\cellcolor{blue!20}	\textbf{5.972752}	&\cellcolor{blue!20}	\textbf{2.203550}	&\cellcolor{blue!20}	\textbf{0.667759}	&\cellcolor{blue!20}	\textbf{5.352069}
+%				\\ \cline{2-10} 
+%				&	\textbf{Time(s)}	&	575	&	595	&	614	&	819	&	1129	&	1062	&	1136	&	1486
+%				\\ \cline{2-10} 
+%				& \textbf{$ D_{st} $}	&\cellcolor{green!20}	0.008627	&\cellcolor{green!20}	0.010626	&\cellcolor{green!20}	0.011193	&\cellcolor{green!20}	0.018578	&\cellcolor{green!20}	0.010310	&\cellcolor{green!20}	0.011378	&\cellcolor{green!20}	0.014661	&\cellcolor{green!20}	0.0168078
+%				\\ \hline
+%				\multirow{3}{*}{\textbf{0.0/1.0}}	& \textbf{Mev}	&	\cellcolor{blue!20}0.005231	&\cellcolor{blue!20}	\textbf{0.028947}	&\cellcolor{blue!20}	0.084038	&\cellcolor{blue!20}	0.404075	&\cellcolor{blue!20}	8.933695	&\cellcolor{blue!20}	4.245247	&\cellcolor{blue!20}	0.668165	&\cellcolor{blue!20}	5.606589
+%				\\ \cline{2-10} 
+%				&	\textbf{Time(s)}	&	589	&	605	&	603	&	937	&	1291	&	1117	&	1175	&	1371
+%				\\ \cline{2-10} 
+%				& \textbf{$ D_{st} $}	&\cellcolor{green!20}	0.010919	&\cellcolor{green!20}	0.011914	&\cellcolor{green!20}	0.015997
+%				&\cellcolor{green!20}	0.014713	&\cellcolor{green!20}	0.012893	&\cellcolor{green!20}	0.012947	&\cellcolor{green!20}	0.018164	&\cellcolor{green!20}	0.014024
+%				\\ \hline		 
+%		\end{tabular}}	
+%		
+%		\label{tab:5}
+%	\end{center}
+%\end{table}
+%%\begin{figure*}[h]
+%%	% Use the relevant command to insert your figure file.
+%%	% For example, with the graphicx package use
+%%	\begin{tabular}{ccc}
+%%		\includegraphics[width=0.31\linewidth]{epsfile/GAcrossA.eps}&\includegraphics[width=0.31\linewidth]{epsfile/GAcrossB}&\includegraphics[width=0.31\linewidth]{epsfile/GAcrossC} \\
+%%		(a)&(b)&(c)
+%%	\end{tabular}
+%%	% figure caption is below the figure
+%%	\centering	\caption{The chart presents the minimal exposure values, the computation times and the saw-tooth degrees of GA-MEP1, GA-MEP2 and GA-MEP on topology $ u\_30\_1 $, $ u\_40\_1 $, $ u\_50\_1 $, $ u\_60\_1 $, $ u\_70\_1 $, $ u\_80\_1 $ $ u\_90\_1 $ and $ u\_100\_1 $}
+%%	\label{Fig.9}       % Give a unique label
+%%\end{figure*}
+%%\begin{figure*}[h]
+%%	% Use the relevant command to insert your figure file.
+%%	% For example, with the graphicx package use
+%%	\begin{tabular}{ccc}
+%%		\includegraphics[width=0.3\linewidth]{epsfile/ALXOnly}&\includegraphics[width=0.3\linewidth]{epsfile/OnePointOnly}&\includegraphics[width=0.3\linewidth]{epsfile/Both} \\
+%%		(a)&(b)&(c)
+%%	\end{tabular}
+%%	% figure caption is below the figure
+%%	\centering	\caption{Comparison of MEPs path when using different crossover operators, the topo used is $ u\_50\_1 $ : (a) MEP acquired by GA-MEP1; (b) MEP acquired by GA-MEP2; (c) MEP acquired by GA-MEP}
+%%	\label{Fig.10}       % Give a unique label
+%%\end{figure*}
+%\subsubsection{Comparison between GB-MEP and GA-MEP}
+%Table \ref{tab:7} provides the minimal exposure values, running time and saw-tooth degrees obtained by GB-MEP and the best minimal exposure value, average minimal exposure value, running time, standard deviation and saw-tooth degrees obtained by GA-MEP when applied to instances created using  Exponential deployment method, Uniform deployment method and Gaussian distribution deployment method. From the obtained results, it can be concluded that:
+%\begin{itemize}
+%	\item For the Exponential distribution deployment method, MEP values obtained by GA-MEP are better than those by GB-MEP on 70 out of 80 instances (87.5\% of all the instances).
+%	\item For the Uniform Random deployment method, MEP values obtained by GA-MEP are better than those by GB-MEP on 62 out of 80 instances (77.5\% of all the instances).
+%	\item For the Gaussian distribution deployment method, MEP values achieved by GA-MEP are better than those by GB-MEP on 32 out of 80 instances (40\% of all the instances).
+%\end{itemize}
+%Figure \ref{Fig.11}, \ref{Fig.12} and \ref{Fig.13} show the minimal exposure values, the computation times and the saw-tooth degrees acquired by each algorithm for Uniform deployment method, Gaussian deployment method and Exponential deployment method respectively. The results point out:
+%\begin{itemize}
+%	\item While the best solution obtained by GA-MEP method is most of the time better than that obtained by GB-MEP with the sensors field deployed by Uniform method and Exponential method, the grid-base method shows its advantage when Gaussian distribution of sensors is considered. Since the Gaussian distribution method deploys sensors centralizing (sensors are gathering toward the center of the field), the intruder tends to go backwards to avoid sensors, that is outside GA-MEP's search space. Therefore, GA-MEP seems to be less effective with sensors fields that applied in Gaussian distribution deployment method. However, in the other two methods, GA-MEP shows better precision performance. It is expected because of GA-MEP's significantly larger search space.
+%	\item  Computation time of GB-MEP is short than GA-MEP with the value of $\Delta s$. This is also expected because of GA-MEP's significantly larger search space. 
+%	\item Since the grid-based method in general is based on Dijkstra's shortest part, its standard deviation is always zero. Meanwhile, GA-MEP is an approximate algorithm, so its result is different for each run. From our observation, the standard deviation if GA-MEP is overall very small compared to the value of MEP obtained by this method. This means our algorithm is highly stable.
+%	\item The saw-tooth degree of GA-MEP's solutions is always much smaller than that of GB-MEP. This shows that GA-MEP not only gives better exposure values but also better MEP's refinement in comparison with GB-MEP. The MEPs obtained by GA-MEP are smoother than those by GB-MEP and GA-MEP produces the better exposure value.
+%\end{itemize}
+%
+%Figure \ref{Fig.14} show the MEP acquired by each algorithm for Uniform deployment method, Gaussian deployment method and Exponential deployment method respectively, each of those is a noble topology from the set 50 sensors. Through observation of these figures, it can be noticed that:
+%\begin{itemize}
+%	\item The MEPs acquired by GB-MEP and by GA-MEP are quite similar in most parts. Based on analysis of the saw-tooth degree above, it can be inferred that the MEP obtained from GB-MEP is in the form of stairs as a result of the grid approximation method, while the MEP achieved by GA-MEP is smoother. This is an advantage of GA-MEP compared to GB-MEP, since GA-MEP allows the object to move in various directions, while GB-MEP only allows it to move in four fixed directions. Therefore, even though the MEPs found by these two algorithms look quite similar, the exposure value of MEP obtained by the GA-MEP is better than GB-MEP.
+%	\item However, there are still some cases where the MEPs of two algorithms have significant difference. This may be a result of the difference between the two algorithms' search spaces. Therefore, in some cases, GB-MEP will choose to go back and avoid facing sensors, while GA-MEP will choose a shorter path and keep moving ahead. For example, in Figure \ref{Fig.14}(e)(f), GA-MEP found a shorter and better MEP that GB-MEP cannot find.
+%\end{itemize}
+%
+%Figure \ref{Fig.15} shows the convergence level of GA-MEP for Uniform, Gaussian, Exponential distribution deployment method, with each of those is a noble topology from the set 90 sensors. This figure shows that our GA-MEP converges quite fast with stable exposure value of MEP and small standard deviation. However, the MEP gets smoother in following generations due to the $ALX-\alpha $ crossover operator, so we keep GA-MEP running even after reaching an acceptable MEP to refine the MEP better.
+%
+%In conclusion, GA-MEP is generally better than GB-MEP in terms of solution accuracy and efficiency but with a higher cost of computation time. Considering these two algorithms in realistic scenarios, if the network designers need to find out the solution immediately, they had better use GB-MEP for its short computation time. However, if the network designers need more accurate solutions and can accept longer computation time, the GA-MEP comes in handy.
+%\begin{figure*}[htbp!]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\begin{tabular}{ccc}
+%		\includegraphics[width=0.3\linewidth]{epsfile/GAGBmep}&\includegraphics[width=0.3\linewidth]{epsfile/GAGBmepG}&	\includegraphics[width=0.3\linewidth]{epsfile/GAGBmepR} \\
+%		(a)&(b)&(c)
+%	\end{tabular}
+%	% figure caption is below the figure
+%	\centering
+%	\caption{Comparison of minimal exposure values between GA-MEP and GB-MEP when using: (a) Uniform distribution method, (b) Gaussian distribution method, (c) Exponential distribution method
+%	}
+%	\label{Fig.11}       % Give a unique label
+%\end{figure*}
+%\begin{figure*}[htbp!]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\begin{tabular}{ccc}
+%		\includegraphics[width=0.3\linewidth]{epsfile/GAGBtime}&\includegraphics[width=0.3\linewidth]{epsfile/GAGBtimeG}&\includegraphics[width=0.3\linewidth]{epsfile/GAGBtimeR} \\
+%		(a)&(b)&(c)
+%	\end{tabular}
+%	% figure caption is below the figure
+%	\centering
+%	\caption{Comparison of computation times between GA-MEP and GB-MEP when using: (a) Uniform distribution method, (b) Gaussian distribution method, (c) Exponential distribution method
+%	}
+%	\label{Fig.12}       % Give a unique label
+%\end{figure*}
+%
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\begin{tabular}{ccc}
+%		\includegraphics[width=0.3\linewidth]{epsfile/GAGBsaw}&\includegraphics[width=0.3\linewidth]{epsfile/GAGBsawG}&\includegraphics[width=0.3\linewidth]{epsfile/GAGBsawR} \\
+%		(a)&(b)&(c)
+%	\end{tabular}
+%	% figure caption is below the figure
+%	\centering
+%	\caption{Comparison of sawtooth degrees between GA-MEP and GB-MEP when using: (a) Uniform distribution method, (b) Gaussian distribution method, (c) Exponential distribution method
+%	}
+%	\label{Fig.13}       % Give a unique label
+%\end{figure*}
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\resizebox{1\textwidth}{!}{
+%	\begin{tabular}{ccc}
+%		\includegraphics[width=0.25\linewidth]{epsfile/e50}&\includegraphics[width=0.25\linewidth]{epsfile/g50}&\includegraphics[width=0.25\linewidth]{epsfile/r50} \\
+%		(a)&(c)&(e) \\
+%		\includegraphics[width=0.25\linewidth]{epsfile/e50B}&\includegraphics[width=0.25\linewidth]{epsfile/g50B}&\includegraphics[width=0.25\linewidth]{epsfile/r50B} \\
+%		(b)&(d)&(f)
+%	\end{tabular}
+%}
+%	% figure caption is below the figure
+%	\centering	\caption{Comparison of MEPs by  GA-MEP (a, c, e) and GB-MEP (b, d, f) for some noble topologies with different deployment distributions: ((a),(b)) Uniform; ((c),(d)) Gaussian ((e),(f)) and Exponential, the number of sensors is 50}
+%	\label{Fig.14}       % Give a unique label
+%\end{figure*}
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\includegraphics[width=0.4\textwidth]{epsfile/hoitu8}
+%	% figure caption is below the figure
+%	\centering	\caption{Comparison of convergence level of GA-MEP for for Uniform distribution deployment method, Gaussian distribution deployment method and Exponential deployment method}
+%	\label{Fig.15}       % Give a unique label
+%\end{figure*}
+%\subsubsection{Comparison between GA-MEP and HGA-NFE}
+%The above experiment results evidence that GA-MEP is better than the compared algorithms in terms of solution accuracy. In this part, we take GA-MEP and compare it with an existing meta-heuristic method which is HGA-NFE \cite{b12}. The HGA-NFE is an genetic algorithm used to solve MEP problem with a numerical functional extreme (NFE) model. Applied to PM-based-MEP, HGA-NFE method is replicated to compare with our GA-MEP algorithm.
+%
+%At first, theory analysis has been done to give a general overview about the two algorithms, due to assessing two categories as following:
+%\begin{itemize}
+%	\item The computation time needed to calculate the fitness function: GA-MEP requires more time than HGA-NFE does because the individuals of GA-MEP contain more genes compared to HGA-NFE, due to the representation. To be specific, the computation time needed to calculate the fitness function of GA-MEP's individual is around two times the one of HGA-NFE's individual, since HGA-NFE fixes the x-coordinate of genes, while GA-MEP does not.
+%	\item The number of fitness-function-calculation times: HGA-NFE spends a lot of fitness-function-calculations on local searching while GA-MEP does not require any local search operators. Therefore, with the same number of fitness-function-calculation times, GA-MEP can afford a bigger population, a greater number of generations or higher crossover ratio compared to HGA-NFE.
+%\end{itemize}
+%
+%Based on the above mention, the parameters for HGA-NFE are configured as in Table \ref{tab:9}. Since the local search operator of HGA-NFE requires multiple of fitness-function-calculations for each individual, the size of population, the number of generation and the crossover operator need to be decreased to make a fair comparison.
+%
+%The two algorithms are simulated on several topologies and being compared to each other using pairwise comparisons \cite{b23}. The Sign test for pairwise comparisons between GA-MEP and HGA-NFE are done in total of 24 topologies, include of 8 topologies (with number of sensors from 30 to 100) for each type of distribution method and the Wins/Loses result is showed in Table \ref{tab:8}.
+%\begin{table}[h]
+%	% table caption is above the table
+%	\centering
+%	\caption{Result on Sign test for pairwise comparisons between Minimal Exposure values obtained by GA-MEP and HGA-NFE (Mev: the minimal exposure value)}
+%	\label{tab:8}       % Give a unique label
+%	% For LaTeX tables use
+%	\renewcommand{\arraystretch}{1.5}
+%	\resizebox{0.6\textwidth}{!}{
+%		\begin{tabular}{|c|c|c|}
+%			\hline
+%			\textbf{Mev}&  \textbf{GA-MEP} & \textbf{HGA-NFE}\\ \hline
+%			Wins	&	24	&	0		\\ \hline
+%			Loses	&	0	&	24		    \\ \hline
+%			Detected Differences & $ \alpha $=0.05 & - \\ \hline
+%			%		\noalign{\smallskip}\hline\noalign{\smallskip}\noalign{\smallskip}
+%		\end{tabular}
+%	}
+%	\renewcommand{\arraystretch}{1}
+%\end{table}
+%
+%From the Sign test experimental results, it can be seen that GA-MEP archives $ \alpha $=0.05 levels of significance when compared to HGA-NFE according to the Sign test. For a better analysis, some more details of the result are following:
+%\begin{itemize}
+%	\item Figure \ref{Fig.16} shows minimal exposure values of GA-MEP is better than those of HGA-NFE in most of the cases. The difference between the two minimal exposure values obtained by GA-MEP and HGA-NFE is greater as the number of sensors increases. This result proves that our algorithm GA-MEP is more effective compared to HGA-NFE, especially the case with a great number of sensors.
+%	\item Not only does our algorithm give better MEPs, but the saw tooth degrees of GA-MEP's solutions is also better than those of HGA-NFE in Figure \ref{Fig.17}. The MEP obtained by GA-MEP is smoother and better refined in comparison with HGA-NFE, even though HGA-NFE used Upside-down-operator to reduce the saw tooth degree. This result means that the crossover operators in GA-MEP not only improve the minimal exposure value, but also refine the path and efficiently reduce the saw tooth degree at the same time.
+%	\item Figure \ref{Fig.18} shows that, the standard deviation of GA-MEP is also smaller than that of HGA-NFE. A blue dashed line represents the standard deviation of GA-MEP alway lies under a purple dashed line which represents the standard deviation of HGA-NFE. Specially, Figure \ref{Fig.18}(b), the standard deviation of GA-MEP almost is zero. Hence, GA-MEP is more stable than HGA-NFE. This outcome is expected, since GA-MEP can afford a much larger population size, thus, avoids local optimum and obtains more stable solution compared to HGA-NFE.
+%	\item Figure \ref{Fig.19} shows that, the computation time of GA-MEP is also shorter than the computation time of HGA-NFE. This result is expected since the operators of HGA-NFE is various and complicated. Even with shorter running time, the performance of GA-MEP is still better than the performance of HGA-NFE.
+%\end{itemize}
+%
+%The reason behind these results is that HGA-NFE uses a genetic algorithm in combination with local search operator. The local search operator requires a lot of fitness-function-calculation times for each individual, thus, significantly increases computation time of HGA-NFE. However, the local search operator is not very effective in enlarging the search space of the algorithm. On the other hand, with the same number of fitness-function-calculation times, the crossover operators of GA-MEP can search in a much larger space. Moreover, the MEP obtained by HGA-NFE is not really efficient since the saw tooth degree of these paths is often very high after local searching. In the paper \cite{b12}, HGA-NFE has applied the Up-side-down function to reduce the saw tooth degree, but the function can only improve a few points in the solution and eventually increases the cost of computation time. In GA-MEP, the crossover operators improves the saw-tooth degree of individuals after generations, without required any other refining operators, thus, make the algorithm faster and more effective compared to HGA-NFE. According to these, HGA-NFE is not as effective as GA-MEP when applying to large scale realistic scenarios with great number of sensors. Moreover, in HGA-NFE, the individual representation fixes the x-coordinates of genes and by that, certainly reduces the search space. In contrast, the new individual representation that we proposed for GA-MEP allows a much larger search space compared to HGA-NFE. For these reasons, GA-MEP gives better solutions with lower minimal exposure value and saw-tooth degree in a shorter time compared to HGA-NFE.
+%
+%In conclusion, the results proves that our GA-MEP is overall more effective compared to HGA-NFE.
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\begin{tabular}{ccc}
+%		\includegraphics[width=0.31\linewidth]{epsfile/HGA-mep_e}&\includegraphics[width=0.31\linewidth]{epsfile/HGA-mep_g}&\includegraphics[width=0.31\linewidth]{epsfile/HGA-mep_r} \\
+%		(a)&(b)&(c)
+%	\end{tabular}
+%	% figure caption is below the figure
+%	\centering
+%	\caption{Comparison of minimal exposure values between GA-MEP and HGA-NFE when using: (a) Uniform distribution method, (b) Gaussian distribution method, (c) Exponential distribution method
+%	}
+%	\label{Fig.16}       % Give a unique label
+%\end{figure*}
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\begin{tabular}{ccc}
+%		\includegraphics[width=0.31\linewidth]{epsfile/HGA-STe}&\includegraphics[width=0.31\linewidth]{epsfile/HGA-STg}&\includegraphics[width=0.31\linewidth]{epsfile/HGA-STr} \\
+%		(a)&(b)&(c)
+%	\end{tabular}
+%	% figure caption is below the figure
+%	\centering
+%	\centering	\caption{Comparison of saw-tooth degree between GA-MEP and HGA-NFE when using: (a) Uniform distribution method, (b) Gaussian distribution method, (c) Exponential distribution method
+%	}
+%	\label{Fig.17}       % Give a unique label
+%\end{figure*}
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\begin{tabular}{ccc}
+%		\includegraphics[width=0.31\linewidth]{epsfile/HGA-mep_dlce}&\includegraphics[width=0.31\linewidth]{epsfile/HGA-mep_dlcg}&\includegraphics[width=0.31\linewidth]{epsfile/HGA-mep_dlcr} \\
+%		(a)&(b)&(c)
+%	\end{tabular}
+%	% figure caption is below the figure
+%	\centering
+%	\centering	\caption{Comparison of standard deviation values between GA-MEP and HGA-NFE when using: (a) Uniform distribution method, (b) Gaussian distribution method, (c) Exponential distribution method
+%	}
+%	\label{Fig.18}       % Give a unique label
+%\end{figure*}
+%\begin{figure*}[h]
+%	% Use the relevant command to insert your figure file.
+%	% For example, with the graphicx package use
+%	\begin{tabular}{ccc}
+%		\includegraphics[width=0.31\linewidth]{epsfile/HGA_time_e}&\includegraphics[width=0.31\linewidth]{epsfile/HGA_time_g}&\includegraphics[width=0.31\linewidth]{epsfile/HGA_time_r} \\
+%		(a)&(b)&(c)
+%	\end{tabular}
+%	% figure caption is below the figure
+%	\centering	\caption{Comparison computation time between GA-MEP and HGA-NFE when using: (a) Uniform distribution method, (b) Gaussian distribution method, (c) Exponential distribution method
+%	}
+%	\label{Fig.19}       % Give a unique label
+%\end{figure*}
+%\section{Conclusions}
+%The MEP problem, which is the subject of investigation in this paper, has significant meaning for identifying the weaknesses in terms of coverage of WSNs. More importantly, the MEP problem we study takes into account environmental factors such as noise, temperature, humidity and vibration that affect the sensing ability of WSNs. This paper applies the probabilistic coverage model to the MEP problem, as knows PM-based-MEP, and converts the PM-based-MEP into a numerical function extreme problem. A Grid-based method (GB-MEP) and a new genetic algorithm (GA-MEP) is also proffered and implemented to solve the PM-based-MEP problem. Various experimental scenarios with different number of sensors as well as their deployment methods are designated for the simulations of our algorithms. The results show that our developed algorithms are highly suitable to the model and more effective than previous approaches. The experimental results also prove that the solutions by GA-MEP are overall better than the solutions by GB-MEP but with a higher cost of computation time with the same value of $ \Delta s $. Depending on our demand for the solution (better quality or less computation time), we can decide which algorithm to use. We also have successfully solved PM-based-MEP with environment factor as noises. Several essential parameters of the algorithms along with the coverage model such as subinterval $ \Delta s $ and threshold $A$ are also experimented. In addition, the proposed algorithms can not only improve the results and computation time but also be applied to the extreme case with large-scale WSNs.\\
+\textbf{Acknowledgments}\\
+This research is funded by Vietnam National Foundation for Science and Technology Development (NAFOSTED) under grant number DFG 102.01-2016.03
+
+%There are various bibliography styles available. You can select the style of your choice in the preamble of this document. These styles are Elsevier styles based on standard styles like Harvard and Vancouver. Please use Bib\TeX\ to generate your bibliography and include DOIs whenever available.
+%
+%Here are two sample references: %\cite{Feynman1963118,Dirac1953888,c1}.
+
+%\section*{References}
+%
+\bibliography{mybibfile}
+%\begin{thebibliography}{plain}
+%	\bibitem{b1} S. Meguerdichian, F. Koushanfar, M. Potkonjak, and M. Srivastava, Coverage problems in wireless ad-hoc sensor networks, pp. 1380- 1387. In Proceedings of INFOCOM (2001).
+%	\bibitem{b2} S. Meguerdichian, F. Koushanfar, G. Qu, and M. Potkonjak, Exposure in wireless ad-hoc sensor networks, pp. 139-150. In Proceedings of MOBICOM (2001).
+%	\bibitem{b3} S. Meguerdichian, S. Slijepcevic, V. Karayan, and M. Potkonjak, Localized algorithms in wireless ad-hoc networks: Location discovery and Sensor exposure, pp. 106-116. In Proceedings of MOBIHOC (2001).
+%	\bibitem{b4} Megerian. S., Koushanfar. F., Qu, G., Veltri. G., and Potkonjak. M., Exposure in wireless sensor networks: Theory and practical solutions, Wireless, Network.vol. 8, no. 5, pp. 443-454 (2002).
+%	\bibitem{b5} Seapahn Megerian, Farinaz Koushanfar, Miodrag Potkonjak, and Mani B. Srivastava, Worst and Best-Case Coverage in Sensor Networks, IEEE Transcations on Mobile Computing, Vol. 4, No. 1, pp. 84-92 (2005).
+%	\bibitem{b6} Bang Wang, Coverage problems in sensor networks: A survey, pp. 32-84. ACM Computing Surveys (CSUR), vol. 43(4) (2011).
+%	\bibitem{b7} L. Liu, X. Zhang, H. Ma, Minimal Exposure Path Algorithms for Directional Sensor Networks, pp. 1-6. Global Telecommunications Conference, GLOBECOM, IEEE (2009).
+%	\bibitem{b8}  Arfken GB, Weber HJ and Harris FE. Mathematical methods for physicists, pp.1081-1124. 7th edn. Orlando, FL: Academic Press (2013).
+%	\bibitem{b9} L. Liu, X. Zhang, and H. Ma, Percolation theory based exposure-path prevention for wireless sensor networks coverage in Internet of things, IEEE Sensors J. vol. 13, no. 10, pp. 3625-3636 (2013).
+%	\bibitem{b10} Song, Y., Liu, L., Ma, H., and Vasilakos, A. V., A Biology-Based Algorithm to Minimal Exposure Problem of Wireless Sensor Networks, IEEE Trans. Network and Service Management, 11(3), pp. 417-430 (2014).
+%	\bibitem{b11}	Miao, Y., Wang, Y., and Jing–Xuan, W., Hybrid particle swarm algorithm for minimum exposure path problem in heterogeneous wireless sensor network, International Journal of Wireless and Mobile Computing, 8(1), pp. 74-81 (2015).
+%	\bibitem{b12} Ye, M., Wang, Y., Dai, C., and Wang, X., A hybrid genetic algorithm for the minimum exposure path problem of wireless sensor networks based on a numerical functional extreme model, IEEE Transactions on Vehicular Technology, 65(10), pp. 8644-8657 (2016).
+%	\bibitem{b13} T. Clouqueur, V. Phipatanasuphorn, P. Ramanathan, and K. K. Saluja, Sensor deployment strategy for detection of targets traversing a region, Mobile Network. vol. 8, no. 4, pp. 453-461 (2003).
+%	\bibitem{b14} Ahmed, Nadeem; Kanhere, Salil S.; Jha, Sanjay, Probabilistic coverage in wireless sensor networks, pp.673-681. In: Local Computer Networks, 2005. 30th Anniversary. The IEEE Conference on. IEEE (2005).
+%	\bibitem{b15} Mulligan, R., and Ammari, H. M., Coverage in wireless sensor networks: A survey, pp. 27-53. Network protocols and algorithms, 2(2) (2010).
+%	\bibitem{b16} Ren, S., Li, Q., Wang, H., Chen, X., and Zhang, X, A study on object tracking quality under probabilistic coverage in sensor networks, ACM SIGMOBILE Mobile Computing and Communications Review, vol. 9(Number 1), pp. 73-76 (2005).
+%	\bibitem{b17} Y. Zou and K. Chakrabarty, Sensor deployment and target localization in distributed sensor networks, ACM Transactions on Embedded Computing Systems, vol. 2(3), pp. 1-29 (2003).
+%	\bibitem{b18} Clouqueur, T., Phipatanasuphorn, V., Ramanathan, P., and Saluja, K. K., Sensor deployment strategy for target detection, pp. 42-48. In Proceedings of the 1st ACM international workshop on Wireless sensor networks and applications (2002).
+%	\bibitem{b19} Clouqueur, T., Saluja, K.K. and Ramanathan, P., Fault tolerance in collaborative sensor networks for target detection, IEEE transactions on computers, vol. 53(3), pp.320-333 (2004).
+%	\bibitem{b20} Box, George EP, and Mervin E. Muller, A note on the generation of random normal deviates, pp. 610-611. The annals of mathematical statistics (1958).
+%	\bibitem{b21} Herrera, F., Lozano, M., Pérez, E., Sánchez, A. M., and Villar, P., Multiple crossover per couple with selection of the two best offspring: an experimental study with the BLX-$ \alpha $ crossover operator for real-coded genetic algorithms, pp. 392-401. In Ibero-American Conference on Artificial Intelligence, Springer, Berlin, Heidelberg (2002).
+%	
+%	% Format for books
+%	%\bibitem{RefB}
+%	%Author, Book title, page numbers. Publisher, place (year)
+%	% etc
+%\end{thebibliography}
+\begin{landscape}
+	\include{ResultsType6EUC_Exist_Alg1}
+\end{landscape}
+\end{document}

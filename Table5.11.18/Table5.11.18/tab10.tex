@@ -1,0 +1,26 @@
+\begin{table}
+	\caption{Comparison between HDWSN-HGA and HGA-NFE when using different $ \Delta_x $ values (\textit{Mev - Minimal exposure value, Time - Computation time (second)})}
+	\label{tab22}
+	\begin{center}
+		\renewcommand{\arraystretch}{1.5}
+		\resizebox{\textwidth}{!}{
+			\begin{tabular}{|c|c|c|c|c|c|}
+				\hline
+				\multirow{2}{*}{\textbf{INSTANCE}} & \multirow{2}{*}{\textbf{$\Delta_x$}} & \multicolumn{2}{c}{\textbf{HDWSN-EA}} & \multicolumn{2}{|c|}{\textbf{HGA-NFE}} \\ 
+				\cline{3-6}
+				& &  Mev & Time(ms) & Mev & Time(ms)  \\ \hline
+				data\_30 & 40  & 47.5310  & 1926  & \textbf{46.3499}  & 3462    \\ \hline
+				data\_30 & 80  & \textbf{45.6262}  & 3745  & 49.4204  & 6858   \\ \hline
+				data\_30 & 100 & 49.6727  & 4547  & \textbf{48.5669}  & 15636  \\ \hline
+				data\_40 & 40  & \textbf{48.0688}  & 2289  & 50.9290  & 15482   \\ \hline
+				data\_40 & 80  & \textbf{46.4660}  & 14861 & 66.9345  & 24975  \\ \hline
+				data\_40 & 100 & \textbf{55.7765}  & 22692 & 119.7098 & 25128  \\ \hline
+				data\_50 & 40  & \textbf{102.5744} & 18700 & 131.0987 & 8874    \\ \hline
+				data\_50 & 80  & \textbf{108.7250} & 18524 & 145.8908 & 14859  \\ \hline
+				data\_50 & 100 & \textbf{102.9296} & 11771 & 149.9032 & 19673  \\ \hline
+		\end{tabular}}
+	\end{center}
+\end{table}
+
+%Sinh du lieu ngau nhien như bai HGA-NFE voi 30 40 50 sensor
+%KQ hdsn-ga kha tot so voi hga-nfe va kha gan grib-base

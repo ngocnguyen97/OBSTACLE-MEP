@@ -1,0 +1,550 @@
+\documentclass[final]{elsarticle}
+%% \documentclass[final,times,twocolumn]{elsarticle}
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\journal{Journal of \LaTeX\ Templates}
+
+%===========----------------------Package----------------------===========
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+\usepackage{graphicx}
+%\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[justification=centering, bf]{caption}
+\usepackage{textcomp}
+\usepackage[ruled, resetcount, linesnumbered]{algorithm2e}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{color}
+%\usepackage{ulem}
+\usepackage{rotating}
+\usepackage{pdflscape}
+\usepackage{array, booktabs, tabularx} 
+\usepackage{setspace}
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{rotating}
+\usepackage{longtable}
+\usepackage{verbatim}
+\modulolinenumbers[5]
+\journal{Journal of \LaTeX\ Templates}
+\newcommand{\vect}[1]{\overrightarrow{\boldsymbol{#1}}}
+\newcommand{\uvec}[1]{\boldsymbol{\hat{\textbf{#1}}}}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{frontmatter}
+\title{A Family System based Genetic Algorithm for  Obstacles-Avoidance Minimal Exposure Path Problem in Wireless Sensor Networks}
+
+%%% Group authors per affiliation:
+%\author[httb]{Huynh Thi Thanh Binh}
+%\ead{binhht@soict.hust.edu.vn}
+%
+%%% or include affiliations in footnotes:
+%\author[ntmb]{Nguyen Thi My Binh\corref{cor1}}
+%\ead{binhdungminhkhue@gmail.com}
+%\author[httb]{Nguyen Hong Ngoc}
+%\ead{ngocnguyen.nd97@gmail.com}
+%\author[dthl]{Dinh Thi Ha Ly}
+%\ead{greeny255@gmail.com }
+%\author[httb]{Nguyen Duc Nghia}
+%\ead{nghiand@soict.hust.edu.vn }
+%\cortext[cor1]{Corresponding author. Tel: +84 977901599}
+%\address[httb]{ Hanoi University of Science and Technology, Vietnam}
+%\address[ntmb]{Hanoi University of Industry, Vietnam}
+%\address[dthl]{National Institute of Informatics, Tokyo, Japan}
+%\fntext[myfootnote]{Since 1880.}
+%% or include affiliations in footnotes:
+%\author[mymainaddress,mysecondaryaddress]{Nguyen Thi My Binh}
+%\ead[url]{www.elsevier.com}
+%
+%\author[mysecondaryaddress]{Hanoi University of Science and Technology \corref{mycorrespondingauthor}}
+%\cortext[mycorrespondingauthor]{Huynh Thi Thanh Binh}
+%\ead{support@elsevier.com}
+%
+%\address[mymainaddress]{Hanoi University of Science and Technology, Vietnam}
+%\address[mysecondaryaddress]{360 Park Avenue South, New York}
+%\address[mysecondaryaddress]{360 Park Avenue South, New York}
+\begin{abstract}
+Barrier coverage in wireless sensor networks has received drawing attention to the research community in recent years, due to its advantages for security applications. One of fundamental barrier coverage problems is minimal exposure path (MEP), which is the problem of finding the path across the sensor network with the lowest chance of being detected. This problem plays an important role in the applications for detecting intrusion and evaluating the effectiveness of coverage in a sensing field. However, in the majority of researches, sensors studied network were omni-directional and/or homogeneous. In contrast, this paper investigates the minimal exposure path problem in heterogeneous directional wireless sensor networks (hereinafter O-based-MEP). The O-based-MEP is more practical, meaningful and complex with the unique characteristics of directional sensor nodes. The O-based-MEP is converted into a numerically function extreme which is high dimensional, non-differentiable and non-linear. Adapting to these features, we propose two efficient meta-heuristic algorithms, HDWSN-EA and HDWSN-PSO, to solve the converted problem. HDWSN-EA is formed by the evolution algorithm with a featured individual representation and an effective combination of evolution operators while HDWSN-PSO is an improved on the characteristics of a particle swarm population. Experimental results on numerous instances indicate that the proposed algorithms are suitable for the converted O-based-MEP problem and perform well regarding both solution accuracy and computation time compared to existing approaches.
+  
+\end{abstract}
+\begin{keyword}
+\texttt{Minimal exposure path} \sep \texttt{Directional sensing coverage model} \sep \texttt{Heterogeneous directional wireless sensor network} \sep \texttt{Evolution algorithm} \sep\texttt{Particle swarm optimization algorithm}
+%\texttt{elsarticle.cls}\sep \LaTeX\sep Elsevier \sep template
+%\MSC[2010] 00-01\sep  99-00
+\end{keyword}
+\end{frontmatter}
+%\linenumbers
+\section{Introduction}
+Wireless Sensor Networks (WSNs) have drawn much attention recently because of their vast potential applications in various areas from commercials to law enforcement, from civil to military. The main application of WSNs is to monitor the sensing field and detect intrusion. The intruding object is detected when it crosses a border or penetrates a protected area. This is often referred to as coverage of intrusion path problem. This declaration, in contrast with the full coverage problem which requires coverage on every point of interested region, only consider detecting a certain intruding objects when it penetrates the sensing area. The coverage can be considered as a measure of surveillance quality as well as service efficiency that WSNs can provide. Based on coverage computation, weak points in a sensor field can be discovered, guiding to redeploy the network in the future and reconfigures schemes to improve the overall service efficiency as well as surveillance quality.
+
+Exposure, which shows how well an object traversing in an arbitrary path through the sensor network can be observed by the sensor network over a period of time, is directly related to coverage. Therefore, exposure is used as a good measure for assessing the coverage quality of the sensor network. The higher the exposure, the more consistently the sensor network can detect the intruders. The exposure of a penetration path in a sensing field is equivalent to the ability to detect a target traveling along that path. The path along which the ability to be detected is minimized, called the minimal exposure path and the problem that looks for such a path is Minimal Exposure Path (MEP) problem. The MEP offers valuable information about bad coverage paths in sensor networks. An object moving through a sensor field along the MEP is often the most difficult to be detected. The analysis of the MEP permits one to anticipate the weak points of a sensor network and propose a strategy to improve it if necessary. The MEP is not only useful to assess the service quality of WSNs, but it is also a measure of deployment effectiveness. The information of exposure can be used in managing, optimizing and maintaining the WSNs.
+
+WSNs are classified based on type of sensors such as temperature, infrared, humidity and video sensors. Different sensor types require different sensing models. A type of sensing model should be able to describe the sensitivity or the capability of the sensor \cite{b10}. Sensing model can be classified into two subcategories: mathematical and physical. The mathematical sensing model, which includes binary and probabilistic models, expresses the sensitivity of sensors; the physical sensing model provides insights into the sensing direction of the sensor node. There are two different physical sensing models: omni-directional sensing and directional sensing model. Many existing sensor node types have omni-directional model such as magnetic, temperature and humidity can sense in all direction, such model is a traditional sensing model. In contrast, a directional sensor cannot sense in all 360 degrees. A sensor network is called a directional wireless sensor network (DWSN) if all the sensors comply with directional sensing model. With advancement in multimedia technology, there are many practical applications of wireless multimedia sensor networks, in which sensors usually have a directional sensing model known as DWSNs. DWSNs have distinctive characteristics of each type. For example, camera sensors, radio sensor, ultrasound sensors, radar sensors and infrared sensors have different properties. Furthermore, DWSNs can retrieve higher levels of sensor information or richer information form such as audio, image and video, thus providing more detailed information of environment. Therefore, DWSNs have been grown in popularity, attracted increasing interest and gained much importance in recent years. However, they use a larger amount of the limited energy reserve resource available to a wireless sensor node. Also, coverage holes problem will arise in the case of the same number of directional sensors deployed in a given region. These features cause the majority of existing coverage control theories and methods to be not directly applicable to DWSNs. 
+
+Besides, in a typical target tracking scenario, moving objects tend to occur randomly and are often associated with various detectable physical signals.
+So it requires a heterogeneous directional wireless sensor networks (HDWSN). A HDWSN is a sub-class of DWSNs in which each directional sensor node may possess different computational capabilities, different energy storage devices, a different number of sensing units, and use different communication links. These characteristics make the HDWSN a very complex-to-study network, however, the real motivation behind the HDWSNs is the need to conserve energy and complex hardware embedded without reduce the overall sensing effectiveness, hence this may decrease the total cost of operating the sensor network. Therefore, specific solutions and techniques are required with a view to enhancing network efficiency, evaluating coverage quality, and increasing the performance of HDWSNs. 
+
+Unlike most existing works about the MEP problem in traditional WSN, which are based on either omnidirectional sensors and/or homogeneous network, this paper focuses on solving the MEP in HDWSNs problem, which is more valuable in practical applications. To the best of our knowledge, we are the first to investigate the MEP problem in HDWSN.
+
+The main contributions of this paper are as follows:
+\begin{itemize}
+	\itemsep0em
+	\item Formulate the MEP problem in HDWSNs known as O-based-MEP.
+	\item Convert the O-based-MEP into an optimization model with constraints, which allows mathematical optimization methods to be used in tackling the problem. 
+	\item Propose two efficient meta-heuristic algorithms, namely HDWSN-EA and HDWSN-PSO to solve the O-based-MEP. HDWSN-EA is a hybrid of evolution algorithm and local search. HDWSN-PSO is an improved particle swarm optimization, which can find out the approximate optimal solution in shorter time.
+	\item Conduct comprehensive experiments to test the efficiency of the proposed algorithms.
+	\item Compare our meta-heuristic algorithms with the state of the art approximate algorithms which could achieve the current best approximation ratio and the best meta-heuristic approximation.
+	\item Provide an analysis of the obtained results and compare with the results by existing methods. Experimental results show that our proposed algorithms outperform the classical algorithms for most cases regarding solution accuracy and computation time.	
+\end{itemize}
+
+The rest of the paper is organized as follows. Related works are presented in Section 2. Preliminaries and formulation for the O-based-MEP problem are discussed in Section 3. Section 4 introduces the proposed algorithms. Experiments results examining the proposed algorithms along with computational and comparative results are given and analyzed in Section 5. Finally, Section 6 presents conclusions and future works of the paper.
+
+\section{Related Works}
+The MEP problem in WSN depends on the approach method, which is consisted of various factors such as type of sensors, deployment strategy, problem modelling, tackling algorithm, etc. Therefore, this part briefly represents related works to O-based-MEP problem and analyses some advantages and drawbacks of each approach to the Minimal Exposure Path problem.
+
+Since Meguerdichian et al. claimed the Minimal Exposure Path problem in [1] in 2001, there have been numerous studies regarding this problem in various conditions. The article also defines the exposure of a point in a sensing field, which is a value calculated through the exposure of sensors in that field corresponding to the considered point, in 2 important models, which is the All-Sensor Field Intensity and the Closest-Sensor Field Intensity. While the first model shows the exposure as the sum of the exposure of all sensors in the field corresponding to the considered point, the second model only accounts the exposure of the nearest sensor, which is the one with highest exposure supervising the point, in the final value. While the latter model is fairly easier to find the solution, it is not as effective to present the problem in reality as the former one due to the ignorance of the cooperation of several sensors to detect an intruder, and in general, the total exposure to the considered point from the other sensors is usually larger than that from only the maximum one. Meguerdichian et al. also successfully found the precise solution to the Minimal Exposure Path problem for the field with only one sensor, which offers valuable and profound understandings in the Minimal Exposure Path problem itself.
+
+Further processes were achieved in [2] when Clouqueur et al. published the probability model to describe the Minimal Exposure Path problem as the problem of finding the path with the lowest chance of detection. In the article, the chance of detection is calculated as the probability in discrete point along the path of the moving intruder. Furthermore, the article also presents a grid-based method to find the solution to the Minimal Exposure Path problem. However, the approach shows significant mistakes. The most considerable is resulted from their misunderstanding about the concept of detection probability. Specifically, the lacking of time factor in the model cause a principal hole in the logical process from the discrete value (the detection probability at a certain point) to the continuous measure (the detection chance along the path which contains an infinite amount of distinguished points). As a result, their model is constrained with their grid arrangement method and inefficient to approach a real Minimal Exposure Path problem.
+
+The directional sensor model is first presented in [3] by Ma H. and Liu Y. The directional sensors differs from the omnidirectional ones by their different sensing values in different directions when the distances are the same. The directional sensors are described through several parameters in addition to the parameters required in an omnidirectional ones. Then, the directional sensor model is considered in the Minimal Exposure Path problem by Adriaens et al. in [4]. The articles shows a method of finding the Maximal Breach Path, which can be considered as a model for the Minimal Exposure Path problem, by using the Voronoi graph method. Despite being the first one studying the Minimal Exposure Path problem, the article uses a simple model to present the problem, which is not efficient to accurately model the real problem.
+
+In [5], Skraba and Guibas introduces the existence of obstacles inside the sensing field which can block not only the moving path but also the sensing signal of sensors. As a result, one sensor can only sense an intruder if it is inside the sensor's field of view and no obstacle appear in the straight line between the intruder and the sensor. Furthermore, the article gives a clear definition of the detection probability with the consideration of time, which clarifies the logical hole in the probability model in [2]. However, their possibility of detection comes from the chance that certain sensors are off, which means that the model is actually a binary coverage model and the probability appears only because of the lack of information about the states of the sensors.
+
+In [6], Wu and Chung introduce the heterogeneous wireless network sensor model and illustrate its exceptional advantages compared to the homogeneous one. The first upside of the heterogeneous model is the flexibility of the sensor network to adapt several environmental factors while the second advantage offers the generality which can precisely model the problem in reality. The article also analyses the detection probability correlate to the distance from the sensor and effectively change the problem from a probability perspective to a binary one. However, due to the absence of time factor, their model is more effective to analyze exposure on steady points rather than a moving object through the sensing field.
+
+In [7], Liu et al. offer an approximation algorithm to solve the Minimal Exposure Path problem regarding sensitivity model, where the exposure of a point to a sensor is evaluated taking into account the direction of the sensor and the distance between it and the considered point. They propose algorithms to solve both the All-Sensor Field Intensity and the  Maximum-Sensor Field Intensity by using a grid-based model and Djikstra's shortest path algorithm. However, since they force the object moving along the grid, the solution may be potentially inaccurate due to the limitation in moving direction compared to the situation in reality.
+
+Ye and Wang later introduce a more precise approach to the Minimal Exposure Path problem in [8]. They model a path by a set of points which has a same displacement in abscissa. With the assumption of maximum speed moving, the exposure along a small part is computed as a product of the length of each part and the exposure value at the former point on that part. The genetic algorithm is then conducted, with several optimisation to prevent parts with large length, which can cause the population trapping in a local optima and a low convergence speed. However, this model still has its own disadvantages. Firstly, the path is strict to moving forward without being able to make a turn around, which may ignore some valuable path which turn around to get away from sensors. Secondly, the fixed displacement of abscissa leads to a limit displacement of ordinate, which limit the angle at which the object can move, further reduce the possibility of finding the most preferable solution.
+
+In [9], Liu et al. give a clear definition to the Minimal Exposure Path problem with heterogeneous sensors and obstacle, the intruder has to move through the sensing field not going across existed obstacles and avoiding being detected by several sensor types. The path is presented through a system of adaptive ordered grids and the solution may converge to the optimal solution when the adaptability and order of the grid system approach infinity. However, there are still significant drawbacks. Firstly, the grid-based method limits the accuracy of the final solution, and the effort of fixing the issue using adaptive ordered cells may lead to a dramatic surge in required calculation time without achieving considerably more preferable results. Secondly, the simulation results are based on only one topology of obstacles, which may lead to untrusted results due to low-size data.
+
+\section{Preliminaries and Problem Formulation}
+
+In this section, different subjects of the problem will be examined and transformed into mathematical model. The model of sensor and obstacle will be introduced and a mathematical equation for the minimal exposure path will be proposed. After that, the problem will be formulated under a set of input parameters and output values with specific constraints.
+
+\subsection{Preliminaries}
+
+\subsubsection{Sensor model}
+
+Based on the case of using, there are many kinds of information that a sensor can sense e.g. temperature, humidity, infrared, and video etc. Sensors can also be categorized based on sensing model, which is a mathematical function that expresses the sensitivity or the capability of the sensor to a particular point. This mathematical function is also called the sensing intensity function of the model and often denoted as $f(s, P)$ where $ s $ is the sensor and $ P $ is the target point. Different types of sensing model can be perceived through many related researches in this field.
+
+\textbf{Coverage Model}
+
+The omni-directional sensor or the disk model is the most basic type of coverage model. An omni-directional sensor comes with a parameter called the sensing radius $r$, which stands for the radius of the sensing region. An object $ O $ is said to be covered by a omni-directional sensor $ s $ only if the Euclidean distance between the position of sensor $ s $ and target object $ T $ less than or equal the sensing radius $r$. There are two sub-models: the Boolean omni-directional model and the Attenuate omni-directional model. In the Boolean omni-directional model, $I(s, T)$ is 1 if $ T $ is covered by $ s $ and 0 otherwise. In the Attenuate omni-directional model, the sensing intensity inverse proportions with the distance between sensor $ s $ and target $ T $ by the following equation:
+\begin{equation}
+\label{eqfo}
+I({s},T) = \frac{C}{{{{\left[ {d(P,T)} \right]}^\lambda }}}
+\end{equation}
+Where $ P $ is the position of sensor $ s $, $ d(P,T) $ is the Euclid distance from $ P $ to $ T $, $ C $ and $ \lambda $ are constants that depend on the capability of the sensor. 
+
+A variation of the omni-directional coverage model is the directional coverage model, by that, a sensor can only sense well in a direction instead of every directions. The sensors of this type often can be found in realistic deployment as security cameras or microphones.  For a mathematical definition, in 2\_D dimension, the sensing area of a directional sensor $ s $ is denoted by $ P $ - the location of the sensor and $ \overrightarrow{Wd}$ - the unit vector representing the working direction of the sensor. The sensing intensity function in this case is:
+\begin{equation}
+\label{eqfd}
+I({s},T) = \frac{{C{{\left\{ {\cos \left( {\frac{{\angle (\overrightarrow {PT} ,\overrightarrow {Wd}) }}{2}} \right)} \right\}}^\beta }}}{{{{\left[ {d(P,T)} \right]}^\lambda }}}
+\end{equation}
+Where $\beta$ is the angle attenuation parameter that also depends on the capability of the sensor. The directional sensing capable range with different $ \beta's $ and $ \lambda's $ is illustrated in Fig. \ref{Fig.1}. \\
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\begin{tabular}{cc}
+		\includegraphics[width=0.3\linewidth]{epsfile1/b1y1}&\includegraphics[width=0.3\linewidth]{epsfile1/b1y2}\\
+		(a) $\beta =1, \lambda=1 $ &(b)$ \beta=1, \lambda=2 $\\
+		\includegraphics[width=0.3\linewidth]{epsfile1/b2y2}&\includegraphics[width=0.3\linewidth]{epsfile1/b4y1}\\
+		(c) $ \beta=2, \lambda=2 $& (d)$ \beta=4, \lambda=4 $\\
+	\end{tabular}
+	% figure caption is below the figure
+	\centering
+	\caption{Illustration attenuated directional sensing model with different $ \beta's $ and $ \lambda's $
+	}
+	\label{Fig.1}       % Give a unique label
+\end{figure*}
+
+The coverage model used in this problem is the Truncated Directional model, where the sensing area of a sensor $ s $ is a sector denoted by 4-tuple $( P, r, \overrightarrow{Wd}, \alpha )$. Where $ P $ denotes the location of the sensor, $ r $ the sensing radius, $ \overrightarrow{Wd}$ the unit vector representing the working direction and $ \alpha $ is the sensing angle. Figure \ref{Fig.2} illustrates the sensing range of a truncated directional sensor $ s $. 
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\centering
+	\includegraphics[width=0.4\textwidth]{mptt/sensorView}
+	% figure caption is below the figure
+	\caption{Sensing capability of directional sensor}
+	\label{Fig.2}       % Give a unique label
+\end{figure*}
+The sensing intensity $I(s,T)$ will be computed as Equation \ref{eqfd} if target T lies inside the sensing range of $s$ and equal 0 otherwise. In another way of saying, the sensing intensity at long range is too small and will be set to zero in order to eliminate noises and reduce errors of sampling. To be more specific, the sensing intensity function $I(s,T)$ in Truncated Directional model is defined as following:
+\begin{equation}
+I({s},T) = \left\{
+\begin{aligned}
+ \frac {{C{{\left\{ {\cos \left( {\frac{{\angle (\overrightarrow {PT} ,\overrightarrow {Wd}) }}{2}} \right)} \right\}}}^\beta }} {{{{\left[ {d(P,T)} \right]}^\lambda }}} \:\:\:\:\text{if} \:\:\: d(P,O) \le r \text{ or } \overrightarrow {PO} .\overrightarrow {Wd}  \ge \left\| {\overrightarrow {PO} } \right\|\cos \frac{\alpha}{2} \\
+ 0 \:\:\:\:\text{if  otherwise}
+\end{aligned}
+\right.
+\end{equation}
+
+\textbf{Accumulative Sensing Intensity}
+
+In a WSN, there are multiple sensors sensing on a target point simultaneously, thus, cumulative sensing intensity is applied. Under the Truncated Directional model, the accumulative sensing intensity on an target object $ T $ by all sensors in the field can be calculated by the following Accumulative Intensity function: 
+\begin{equation}
+\label{eqia}
+I_{sum}(S, T) = \sum\limits_{i = 1}^{N_s} {f({s_i},T)} 
+\end{equation}
+Where $ S $ is the sensors set,$ N_s $ is the number of sensors in the field and $s_i$ is the sensor at number order $ i $.
+
+\subsubsection{Obstacle Model}
+In realistic deployment, the region of interest is often filled with multiple obstacles such as lakes, rivers, houses and trees. There are many kinds of obstacle in practical environment with different characteristics. In O-based-MEP problem, an obstacle is modeled as a polygon with ability to decrease or interrupt the sensing signal. In addition, the obstacles also restrict the movement of the intruder as well as the deployment of sensors. 
+
+For mathematic definition, obstacles are convex polygons cover the area that block the movement of the intruder, the deployment and also the sensing signal of sensors. In this paper, an obstacle is represented as an ordered set of $2D$ points $ L_O = \{O_1, O_2,\ldots,O_m\}$ and an absorbability parameter $\nu$ where $\nu \in [0,1]$. The obstacle is the polygon $O_1 O_2\ldots O_m $ created by ordered connecting these points and connecting $O_m$ to $O_1$. For modeling purpose, sensors are not allowed to be deployed within the obstacles area. Similarly, the intruder is not allowed to move within the obstacles area. The obstacles are also be able to absorb the sensing signal of sensors depended on the absorbability parameter $\nu$. To be more specific, assume that the line segment between the sensor $s_i$ and the sensing point $ P $ intersects with an obstacle $O$ having the absorbability parameter of $\nu$, the sensing intensity will be reduced to: 
+\begin{equation}
+\label{eqob}
+f'(s_i,O) = f(s_i,O) * (1-\nu) 
+\end{equation}
+
+Figure \ref{Fig.12} illustrates the sensing ability of a sensor being absorbed by an obstacle where the hatched polygon is the obstacle and $ S $  is the sensor. The blue region denotes the area where sensor $ S $ can detect object with 100 \% of its capacity. In the yellow region, the object is blocked by the obstacle, thus, the sensing wave is partly absorbed and the detection ability of the sensor is weaker.
+\begin{figure*}[h]
+	% Use the relevant command to insert your figure file.
+	% For example, with the graphicx package use
+	\centering
+	\includegraphics[width=0.4\textwidth]{epsfile1/obs.eps}
+	% figure caption is below the figure
+	\caption{Sensing ability of a sensor being absorbed by an obstacle}
+	\label{Fig.12}       % Give a unique label
+\end{figure*}
+\subsubsection{Minimal exposure path}
+Exposure of a path $ \wp $ is a measure that expresses the ability of the WSN in detecting an object traversing through the sensing field along path $ \wp $. In most common researches, the exposure value of path $ \wp $ is defined by the path integral of sensing intensity function along the penetration path $ \wp $. By that, the exposure value $  E(S,\wp ) $ of path $ \wp $ crossing the sensor field of sensors set $ S $ is:
+\begin{equation}
+\label{eqE}
+E(S,\wp ) = \int\limits_{T \in \wp }^{} {I(S, T)} ds
+\end{equation}
+
+Equation \eqref{eqE} is non-linear and non-differentiable, thus,
+it can be approximately calculated by representing the path $\wp $ as a set
+of $ m $ points ${L_\wp } = \{ {P_j}\} $ where $j = \overline {0,m} $. In which, the distance between two arbitrary consecutive points is $\Delta s$. $\Delta s$ is called subinterval and it must be small enough to ensure the accuracy of the approximation method. By that, from Equation \eqref{eqE}, $ E(S,\wp ) $, can be approximately transformed into:
+\begin{equation}
+\label{eqE1}
+E(S,\wp) \approx \sum\limits_{j = 0}^m {I_{sum}(T_j)\Delta s} 
+\end{equation}
+By combining Equation \eqref{eqia} and \eqref{eqE1}, we have the final equation for the exposure value as:
+\begin{equation}
+\label{eqEa}
+E(S,\wp) \approx \sum\limits_{j = 0}^m {I_{sum}(S,T_i)\Delta s}  = \sum\limits_{j=0}^m {\sum\limits_{i=1}^{N_s} {I({s_i},{T_j})}} \Delta s
+\end{equation}
+
+Later in the experimental results section, the exposure function $ E(I,\wp )$ is going to calculate with different intensity functions $ I_b $,  $ I_a $, $ I_c$ in Equation \eqref{eqEb}, \eqref{eqEa} and \eqref{eqEc} for the purpose of experiment respectively. In which, $ I_b $ will be used for the Boolean model and $ I_a $, $ I_c$ will be used for the Attenuated model.
+
+\subsection{Problem Formulation}
+The OMEP problem can be briefly described as follows: Given a set of truncated directional sensors $S$ randomly deployed in the sensor field, a set of convex polygon obstacles and two arbitrary points on opposite sides of the field, respectively the source point and the destination point. The goal is to find out a penetration path from the source point $B$ to the destination point $E$ such that an object moves through along path without crossing any obstacles has minimal exposure value. More precisely, the OMEP is formulated as follows.\\
+\textbf{Input}
+\begin{itemize}
+		\itemsep-0.2em
+		\item $W$, $H$: width and the length of sensor field $\Omega$
+		\item $N_s$: number of sensors
+		\item The sensor $s_i$ ($ i $ = 1, 2, ..., $ N_s $ ):
+		\begin{itemize}
+			 \item $({x_i},y_i)$: position of sensor $ s_i $
+			 \item $\overrightarrow{Wd}_i$: working direction of sensor $s_i$
+			 \item $ r_i $: sensing radius of sensor $ s_i $
+			 \item ${\alpha _i}$: sensing angle of sensor type $ s_i $.
+		 \end{itemize}
+		 \item $N_o$: number of obstacles
+		 \item The obstacle $O_j$ ($ j $ = 1, 2,..., $N_o$): 
+		 \begin{itemize}
+		 	\item A list of vertex points $ L_{O_j} $ of obstacle $O_j$
+		 	\item $ \nu_j $: the absorbability parameter of obstacle $O_j$
+		 \end{itemize}
+		\item $(0, y_B)$: coordinates of the source point $B$ of the object
+		\item $(W, y_E)$: coordinates of the destination point $E$ of the object
+\end{itemize}
+\textbf{Output:}
+\begin{itemize}
+	\item A set ${L_\wp }$ of ordered points in $\Omega $ forming a path that connects $ B $ and $ E $ 
+\end{itemize}
+\textbf{Objective:}\\
+The exposure of path  $\wp $ is the smallest, i.e.
+\begin{equation}
+\label{eqEmin}
+{\rm E}(I,\wp ) = \sum\limits_{j = 0}^n {I(P_j)\Delta l_j}  \to Min
+\end{equation}
+where $ n $ is the number points included in ${L_\wp }$
+
+\textbf{Constraint:}	
+\begin{itemize}
+%	\itemsep0em	
+	\item The object always moves within the sensor field $\Omega $ from $B$ to $E$ with a upper-bounded speed (*).
+	\item The path can not cross any area of obstacles  (**)
+\end{itemize}
+	
+The O-based-MEP has distinctive features, and its the objective function \eqref{eqEmin} is non-linear, high dimensional. To solve efficiently the OMEP problem, we explored a new Evolution Algorithm based on the family system as well as multiple of advanced crossover and mutation techniques. The proposed algorithm is named the Family System based Evolution Algorithm or FEA for short.
+
+\section{Proposed Algorithm}
+
+Evolutionary algorithm (EA) is a population-based metaheuristic optimization algorithm, and a subset of evolutionary computation. EA is extremely sufficient for handling noisy functions as well as large and poorly understood search spaces. Due to the chaotic situation of the system of various sensors and obstacles, the O-based-MEP is exceptionally complicated and contains numerous local optima, the EA is the most suitable choice. In addition, EA can also handle large scale and high-dimensional problems well. However, EA as well as most of meta-heuristic algorithms have the disadvantage of having high possibility to be trapped in the local optima. To overcome this, EA is often implemented with a larger size of population to improve the diversity of the population which also results in very high computation time. In the new proposed FEA, we try to lower possibility of local optima without increasing the computation time, by adding the Family System into the population. The reason of EA to be trapped in local optima is the fixed size of population in selection step makes the population less diverse and converge fast. In other words, the selection mays remove many not-yet-good individuals and keep a lot of similar nearly-local-optima individuals. Applying the Family System into EA, our main idea is to create a better crossover and selection method in order to keep the population diverse as much as possible. At the same time, a new crossover operator is also proposed to overcome the challenges and the drawbacks of the previous approaching.
+
+In this section, the detail setting and implementation of FEA will be introduced.
+
+\subsection{Algorithm Modeling}
+
+Before getting further into details about how our proposed algorithm works, it is essential to explain the basic models throughout the performing of the algorithm. Similar to the other EAs, our FEA works with two main model which are the $ Individual $ and the $ Population $.
+
+\subsubsection{Individual}
+
+An individual is represented with a ordered list of consequent points, starts from the source point and ends with the destination point. The number of points of an individual is dynamic and not fixed depended on the length of the path. An individual also has some attracted attributes as following: \\
+%insert figure below
+\begin{itemize}
+	\item The birth of the individual $Indi.birth$ is the order number of the generation in which the individual is created. The age of the individual will be calculated as the subtraction of the present generation and $Indi.birth$.
+	\item The adult age ($Indi.A$) is the age at which the individual is adult and ready for crossover process. This condition ensure that an individual can only participate in the crossover process after it survives in the population for at least some generations. Being able to survives in the population for some generations proves that the individual is good enough to last after many selection stages. Furthermore, the individuals which are basically not good from infant will soon be removed after some generations and will not participate in any crossover stages.
+	\item The death age ($Indi.D$) is the age at which the individual is considered to be dead and removed from the population. An individual can only participate in the crossover process for a certain number of generations until it is dead. This constraint makes the individuals that exist in the population for too long being removed so that newly born individuals may have better chance to survive and participate in crossover stage. This also help improve the diversity of the population and reduce the chance of local optima since locally good individuals will be removed eventually. On the other hand, the genetic resources of these local optima individuals are preserved by their children and their decent attributes will still be kept inside the population.
+\end{itemize}
+
+An individual can only represent a valid solution if it satisfy all the constraints of the problem. To ensure the constraint (*), the distance between two consequent points is not greater than a fixed value of $\Delta s$ named the length interval. This parameter represent the maximum distance the intruder can move within two consequent sampling times of the sensors. To ensure the constraint (**), the path formed can not cross any obstacles. However, this condition is very hard to maintain after crossover and mutation operators, so we proposed a method to normalize invalid individuals and create valid one. The pseudo code of normalization operator is following:
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{
+		\begin{itemize}
+			\itemsep-0.2em
+			\item The individual $indi$ \\
+		\end{itemize}}	
+	\KwOut{\\The individual after normalization $indi'$\\}
+		\Begin{
+			Remove every genes that is inside an obstacle \\
+			\ForEach{gene i of $indi$}{
+				\If{distance(gene i, gene i+1) >$  \Delta s $}{
+					\If{path from gene i to gene i+1 cut an obstacle}{
+						connect gene i to gene i+1 using path goes along the obstacle's boundary\\
+						}
+					} 
+					\Else{connect gene i to gene i+1 directly \\}
+				}
+			Return the new individual\\
+		}
+		\caption{\textbf{Individual Normalization}} 
+		\label{alg.0}
+\end{algorithm} 
+Where in the pseudo code, two genes or two points are connected by adding more genes between these two in order to create a consequent list of points that satisfy the constraint (*). For example, point $ E $ can be directly connected to point $ F $ by a sequence of collinear points $\{P_1,P_2,...,P_m\}$ where $EP_1=P_1P_2=P_2P_3=....=P_{m-1}P_m=\Delta_x$ and $P_mF \leq \Delta_x$.\\
+
+\subsubsection{Population}
+
+A population in EA is a set of individuals we perform our algorithm on. It is expected that the best fitness of the individuals in the population is constantly decreased each time an iteration is performed, while the diversity (the quality of a population to contain variety of non-similar individuals) is preserved. The population in FEA contains all the individuals that are currently alive and participate into the process of the algorithm. Different from EA which using fixed population size, in FEA, the population size is dynamic and being bounded by lower boundary $p_{min}$ and upper boundary $p_{max}$. This allows the population to be more diverse and increase the search space without making the computation time significantly risen.
+
+Different from the standard EA, in FEA, a new concept of Family is introduced and added to the population system. A $ Family $ in the population is defined as a set of individuals which includes: a $ Mother $ individual, a $ Father $ individual and any $ Child $ individuals created from performing crossover operator between these two individuals. The $ Father $ and the $ Mother $ are notated as a pair and will remain in this status until one is dead or being removed by selection operator. After each generation, paired individuals perform crossover with their own mate only and any children individuals created will be added to the corresponding $ Family $ . A $ Family $ is initialized by pairing two adult individuals which are not yet paired to any individual. These individuals could be a $ Child $ of a $ Family $ which exceeds adult age, or a paired individual whose mate being dead or removed. The number of $ Families $ is controlled by a predefined parameter called the pairing rate $R_{pair}$ which equal the ratio of paired individuals to all adult individuals in the population.
+
+In traditional EA with random crossover pairing, the searching method is usually breadth search over the genetic tree which may eliminate a lot of potentially good gene segments. The $ Family $ system is added in order to search deeper in the hierarchy tree, to increase the probability of finding out the finest solution in each genetic line. Furthermore, since the crossover operator can be badly affected by randomization, this monogamy system increase the chance of getting preferable individuals and reduce the rate of producing bad one. 
+
+
+\subsection{Algorithm Progress}
+
+The proposed FEA contains six different stages: Initialization, Family Pairing, Crossover, Mutation, Update and Selection. The figure ... shows the difference between FEA and the standard EA. In the following, each stages will be introduced and analyzed.
+
+\subsubsection{Initialization}
+
+The population $Pop$ is initialized with the initialization size of $p_{min}$ individuals. Age of each individual is set at the adult age from the beginning for the first crossover iteration. The individuals in the population are initialized using randomization method in []. It can be seen that the initialized individuals may cross through the obstacles area in some cases because the initialization method can only generate forward paths and unable to generate backward paths. These individuals are later being normalized using the method mentioned above to eliminate the invalid segments.
+
+\subsubsection{Family Pairing}
+
+Families are created by randomly pairing two adult non-paired individuals in the population until it satisfies the pairing rate $R_{pair}$. These individuals are then removed from their current $ Family $, paired and establish a new $Family$. This pairing process is repeated at the start of every iteration.
+
+\subsubsection{Crossover}
+
+In the previous works, all of the algorithms have a drawback that the intruder is not allowed to move backward and can only move forward, which makes it not applicable in realistic scenarios. Besides, the obstacle model in OMEP often requires the intruder to move backward in many cases. To overcome this, in FEA, the Leaning Crossover is used for crossover stage. The idea is simple: choose on each parent individual a random point and then connect these two point using a suitable method. As a result, the children created from this crossover operator can have backward path in many cases, thus, significantly enlarge the search space. At last, the $Child$ individual is normalized to create valid solution. The pseudo code of this operator is following.
+
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{
+		\begin{itemize}
+			\itemsep-0.2em
+			\item The father individual $(P_1^a,P_2^a,…,P_{n_a}^a)$ \\
+			\item The mother individual $(P_1^b,P_2^b,…,P_{n_b}^b)$ \\
+		\end{itemize}
+	}
+	\KwOut{
+		\\The children $child$\\}
+	\Begin{
+		Randomly generate: $k_1$ in range $ [1,n_a ]$ and $k_2$ in range $ [1,n_b ]$\\
+		$child=(P_1^a,P_2^a,\ldots,P_{k_1}^a,P_{k_2}^b,\ldots,P_{n_b}^b)$\\	
+		Normalize($ child $)\\
+		Return $ child $\\
+	}
+	\caption{\textbf{Crossover Operator}} 
+	\label{alg.2}
+\end{algorithm} 
+
+To process this stage, within each $ Family $, the $ Father $ and the $ Mother $ perform crossover operator and any $ Child $ created is added to the corresponding $ Family $.
+
+\subsubsection{Mutation}
+
+The $Child$ individuals generated above are mutated with the probability equal to the mutation rate $R_{muta}$. For the method, we proposed a new local search operator using as mutation operator called Push-Force Mutation. The idea is viewing each sensor as a push force field in which an object is being pushed away from the center with a force proportion to the sensing intensity at the object position. A gene of an individual can be pushed by multiple sensors and the total force is calculated by the sum of every push vectors. Each gene of the individual is then pushed to a new position and a new individual is created. The process is repeated until the next individual is not better than the previous one. The individual after the mutation operator is also normalized to created valid solution. The detail is described in the pseudo code below.
+\begin{algorithm}[H]
+	\SetAlgoLined
+	\KwIn{
+		\begin{itemize}
+			\itemsep-0.2em
+			\item The individual $indi$ \\
+			\item The scale ratio  $ a_f $ \\
+		\end{itemize}
+	}
+	\KwOut{\\The mutated individual $indi'$ \\}
+	\Begin{
+		$ next := indi $ \\
+		\While{$ next.fitness \leq indi.fitness $}{
+			$ indi := next $ \\
+			\ForEach{gene i of $next$}{
+				Calculate the push force $F_i$ \\
+				gene i += $a_f * F_i$ \\
+				}
+			}
+		Normalize($ indi $) \\
+		Return $ indi $
+	}
+	\caption{\textbf{Push-Force Mutation Operator}} 
+	\label{alg.3}
+\end{algorithm} 
+
+\subsubsection{Update}
+
+In this stage, the age of each individual is calculated and its state will be updated correspondingly. Individuals with age surpass the death age $D$ will be marked as being dead and removed from the population. If this individual is paired to another, the other individual will become able to be paired again in the Pairing stage. The best individual (the individual with the best fitness value) of the population will be preserved and can not be removed even after surpass the death age. This condition is added to make sure that the best fitness value of the population is always better after each generation and the algorithm will eventually converge.
+
+\subsubsection{Selection}
+
+Selection stage is performed in order to control the size of the population and triggered only when the number of individuals in $Pop$ surpass the upper bound $p_{max}$. The selection process is following: 
+\begin{itemize}
+	\item The individuals in the population are ordered by their fitness values. \\
+	\item From the worst to the best, the individual will be consequently removed unless it is the last individual of its own $ Family $. \\
+	\item Repeat until the best individual is considered or the population size reaches $p_{min}$ .\\
+\end{itemize}
+Since $Children$ usually inherit attributes from their parent, a Family in FEA often contain valuable genes segments that are passed through generations. With the selection process, we want to make sure that each $ Family $ in the population has at least one individual (which is also the best individual of the $ Family $) to avoid removing potential genes segments. This strategy also help improve the diversity of the population and slow down the convergence speed to reduce the chance of trapping in bad local optima.
+
+\subsubsection{Family System based Evolution Algorithm}
+
+Summarize the above stages, FEA algorithm is proposed as following steps:
+
+\begin{enumerate}
+	\item \textbf{Initialization}: $P_{min}$ individuals are initialized using the randomization methods and added to the population.
+	\item \textbf{Family pairing}: Adult non-paired individuals are randomly paired to create new $ Family $ until reaching the pairing rate $R_{pair}$.
+	\item \textbf{Evolution}: Each $ Family $ performs the crossover and mutation process, created individuals are added to the corresponding $ Family $.
+	\item \textbf{Update}: The age of each individual is calculated and its state will be updated correspondingly.
+	\item \textbf{Selection}: If the size of the population is over $p_{max}$ then perform the selection process.
+	\item \textbf{Terminal Condition}: If the number of generations reaches a fixed value, the algorithm is terminated and the best individual is returned as the solution. Otherwise, back to step 2.
+\end{enumerate}
+
+\section{Experimental results}
+In this section, experiments will be done in order to acknowledgement the performance of proposed algorithm under different conditions; comparison with previous approaches will be made to assess the effectiveness of FEA. 
+\subsection{Experiment Setting}
+\subsubsection{Dataset}
+In order to evaluate the performance of FEA under different scenarios, the algorithm is simulated under a randomly generated dataset. A randomly generated dataset must contain randomly generated obstacles and randomly deployed sensors without violating the constraints of the OMEP model. In this paper, we propose a method to randomly generate topologies based on three changeable values: the number of obstacles $n_o$, the total area of obstacles $S_o$ and the number of sensors $n_s$. The method perform following steps: 
+
+\begin{enumerate}
+	\item Distribute the total area of obstacles $S_o$, by randomly generate $n_o$ numbers with the fixed sum of $S_o$.
+	\item Construct each obstacle with fixed area by:
+	\begin{itemize}
+		\item Randomly generate the number of vertices of the obstacle $V_o$ . In here, the number of vertices is bounded in range [3,6] for the purpose of simple simulation and computation. After that, generate the angles of the obstacle 
+		\item Generate the angles of the obstacle. A polygon with $V_o$ vertices has angles sum up to $(V_o - 2).\pi$. Hence, this step can be done by randomly generate $V_o$ numbers with the fixed sum of $(V_o - 2).\pi$.
+		\item Generate a random ray $Ox$ as a base.
+		\item Generate each side of the obstacle one by one, with $O_x$ as the base. The angles between two consequence sides and the angle between the first side and $O_x$ are based on the output of the last step. The length of each side is randomized between [0,1]. The last side must intersect with ray $O_x$, otherwise, the process is repeated.
+		\item Resize the obstacle to the preferred area by a homothetic transform with a condition that the obstacle can be placed within the field $\Omega$.
+	\end{itemize}
+	\item Locate these obstacles such that they do not overlay with each other and do not exceed the sensors field by repeatedly randomization until valid.
+	\item Randomly deploy sensors in the field $\Omega$ without any sensors placed in any generated obstacles.
+\end{enumerate}
+
+In this paper, the dataset for simulation are created with three changeable values setting as following:
+\begin{itemize}
+	\item The number of obstacles $n_o$ : 3 , 5.
+	\item The total area of obstacles $S_o$: 15\%, 30\% , 50\% of the field $\Omega$.
+	\item The number of deployed sensors $n_s$ : 30, 60, 90.
+\end{itemize}
+With each combination of these values, we randomly generate 5 topologies using the above algorithm. In total, our dataset includes of 90 different topologies for experiment. The name of a topology is $Data\_n_o\_S_o\_n_s\_i$ where $ i $ is the order number from 1 to 5.
+
+\subsubsection{Parameters}
+Parameters of the problem:
+\begin{itemize}
+	\item The dimension of sensor field: $ W $ = 500, $ H $ =500
+	\item Source point $ B $: (0, 150) 
+	\item Destination point $ E $: (500, 350)	
+\end{itemize}
+Parameter of the proposed algorithm FEA (Table \ref{tab1}) :
+\begin{table}
+	% table caption is above the table
+	\caption{Parameters for FEA}
+	\label{tab1}       % Give a unique label
+	% For LaTeX tables use
+	\begin{center}
+		\renewcommand{\arraystretch}{1.5}
+		\begin{tabular}{lc}
+			\hline\noalign{\smallskip}
+			\multicolumn{1}{c}{\textbf{Parameter}} & \textbf{Value} \\
+			\noalign{\smallskip}\hline\noalign{\smallskip}
+			The number of running on each instance & 20 \\
+			The number of generations & 100\\
+			The lower bound of population size $ p_{min} $ & 100\\
+			The upper bound of population size $ p_{max} $ & 400\\
+			The adult age A & 2 \\
+			The death age D & 7 \\
+			The pairing rate $ R_{pair}$  & 100\% \\
+			The mutation rate $ R_{mutation} $ & 10\% \\
+			The path interval $\Delta_s$ & 1 \\ 
+			\noalign{\smallskip} \hline
+		\end{tabular}
+	\end{center}
+\end{table}
+All simulations were experimented on a machine with Intel® Core™ i7-3230M 2.60 GHz with 8 GB of RAM under Windows 10 64 bit using Java language.
+
+
+\subsection{Experimental Results}
+The performance of the algorithms can be effected in different way under different environments. In this section, various scenarios are designed and performed to give better understanding about the efficiency of FEA.
+\subsubsection{The performance of FEA when using different A and D values}
+In this scenario, the affect of changing the adult age and the death age on the performance of FEA is evaluated. For simulation, A - D are changed variously while other parameters of FEA are kept the same as in table \ref{tab1}. The topology used is $ Data\_3\_0.15\_60\_2 $. Table \ref{tab2} shows the changing on Minimal Exposure Value (MEV) and Computational Time of FEA when using different A-D values.
+
+From observation, it can be seen that when the ratio between D and A is higher, the solution accuracy tend to increase and so as the computational time. However, the solution accuracy gets converged and maximum at a certain D value then begins to fall down after that. This rule is also apply for the standard deviation. The reason behind this is: as D is higher, the individuals will have more time to exist and contribute to the population but at the same time, the chance of trapping in local optima is also risen. In Family system, when D is higher, Families in the population tend to exist longer and create more Children. In another way of saying, the fact that D is higher lead FEA to search deeper in the genetic tree and when D is lower, it searches wider in the genetic tree. Therefore, it is necessary to select a suitable A and D value that balance both solution accuracy, computational time and standard deviation.  
+
+\subsubsection{The performance of FEA when using different $ p_{min} $ and $ p_{max} $ values}
+The affect of changing the boundary of population size on the performance of FEA is evaluated in this scenario. For this simulation, $ p_{min} $ and $ p_{max} $ are changed variously while other parameters of FEA are kept the same as in table \ref{tab1}. However, the population size is changed, thus, in this experiment, the terminate condition of FEA will be reaching a certain number of fitness-function-calculations (in this case 10000). The topology used is also $ Data\_3\_0.15\_60\_2 $. Table \ref{tab3} shows the changing on Minimal Exposure Value (MEV) and Computational Time of FEA when using different $ p_{min} $ and $ p_{max} $ values.
+
+\subsubsection{Evaluate the effect of Family system}
+This scenario is performed to evaluate the effect of Family system in FEA. For this simulation, FEA will be executed without Family system (only use randomly individuals selection for crossover) and the result will be compared with FEA with Family system. The crossover rate is set equal to the pairing rate $R_{pair}$ so that the number of fitness-function-calculations is the same. The two FEA versions are performed under different topologies and table \ref{tab4} shows the result of Minimal Exposure Value (MEV) and Computational Time of these two FEA version.
+
+From the result, the FEA with Family system seems to be better than FEA without Family system in most of the case. While in some cases, the different is not worth mentioning, there are also cases that FEA with Family system is significant better than FEA with out Family system. This outcome is expected since the Family system can improve the diversity of the population an somewhat enlarge the search space of FEA. Family system also helps search deeper in the genetic tree to find more preferable individual in each branch. Therefore, with Family system, FEA becomes more stable as well as being able to discover further areas that the normal randomly crossover can do. 
+
+\subsubsection{Comparison between FEA and previous approaches}
+In order to correctly assess the efficiency of FEA, in this scenario, FEA will be taken to compare with multiple previous approaches on this problem. Since the parameters are different between each algorithms, thus, in this experiment, the terminate condition will be reaching a certain number of fitness-function-calculations (in this case 10000).  Table \ref{tab5} shows the result of Minimal Exposure Value (MEV) and Computational Time of each algorithm.
+
+From observation, FEA gives better solution in the same amount of time compared to GAMEP. 
+
+\section{Conclusion}
+
+\begin{landscape}
+
+\end{landscape}
+\end{document}
